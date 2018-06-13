@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+<div style="width:100%;height:800px;"></div>
+
+
+
+<script src="../js/angular2.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+
+    app.config(function(b1Provider){
+        console.log(b1Provider);
+    });
+
+    app.controller('con',function($scope,b1){
+        console.log(b1.name);
+    });
+
+    app.service('myService',function(){
+        this.name='allen';
+    });
+    app.constant('a1',{name:'allen'});
+
+    app.provider('b1',function(){
+        this.age=18;
+        this.she='she';
+        this.$get=function(){
+            var fac={};
+            fac.name='kkk';
+            return fac;
+        }
+
+    });
+</script>
+</body>
+</html>

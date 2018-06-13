@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+<script>
+    /*function fn(num){
+        if(num<=1){
+            return 1;
+        }else{
+            return num+arguments.callee(num-1); //可以调用函数自己的一个方法
+        }
+    }
+    alert(fn(4));*/
+
+   /* function obj(a1,b1,c1,d1){
+
+    }
+    alert(obj.length) //这样可以打印出obj里传的参数的个数 */
+
+    function box(num1,num2){
+        return num1+num2;
+    }
+     function desk(num1,num2){
+       return box.apply(this,[num1,num2])    //return box.call(this,num1,num2) 两种对象冒充的方法 apply后面传递的参数可以用arguments来代替
+     }
+    alert(desk(10,10));
+</script>
+</body>
+</html>

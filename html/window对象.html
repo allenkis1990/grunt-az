@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+      <input type="button" value="click me"/>
+
+        <div class="odiv"></div>
+
+      <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+      <script>
+
+          (function($){
+              $.fn.extend({
+                  myfun:function(po){
+                      if(po.a1=="left"){}
+                      $(".odiv").html("kkk");
+                  },
+                  mybox:function(po){
+                      if(po.a2=="right"){
+                          $(".odiv").html("www");
+                      }
+                  }
+              });
+
+          })(jQuery);
+
+
+          $(".odiv").myfun({"a1":"left"});
+      </script>
+
+</body>
+</html>

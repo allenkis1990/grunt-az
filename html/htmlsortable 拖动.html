@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .main{width:1000px;height:500px; border:5px solid deepskyblue; margin:50px auto;}
+        .divItem{border:1px solid #666; cursor:pointer; margin-right:10px; margin-bottom:10px; float:left; width:150px; height:150px; background:#ffff00; color:#000;font-size:50px; line-height:150px; text-align:center;}
+        .clear{clear:both;_zoom:1;}
+        .clear:after,.clear:before{display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden;}
+
+
+        .connected, .sortable, .exclude, .handles {
+            margin: auto;
+            padding: 0;
+            width: 310px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .connected .divItem, .sortable .divItem, .exclude .divItem, .handles .divItem {
+            list-style: none;
+            border: 1px solid #CCC;
+            background: #F6F6F6;
+            font-family: "Tahoma";
+            color: #1C94C4;
+            margin: 5px;
+            padding: 5px;
+            height: 22px;
+        }
+        .handles span {
+            cursor: move;
+        }
+        .divItem.disabled {
+            opacity: 0.5;
+        }
+
+
+        .sortable-placeholder {
+            border: 1px dashed #fff;
+            background: none;
+            cursor:pointer; margin-right:10px; margin-bottom:10px; float:left; width:150px; height:150px; color:#000;font-size:50px; line-height:150px; text-align:center;
+        }
+    </style>
+</head>
+<body>
+<div class="main clear">
+    <div class="divItem item">1</div>
+    <div class="divItem item">2</div>
+    <div class="divItem item">3</div>
+    <div class="divItem item">4</div>
+    <div class="divItem item">5</div>
+    <div class="divItem item">6</div>
+    <div class="divItem item">7</div>
+    <div class="divItem item">8</div>
+    <div class="divItem item">9</div>
+    <div class="divItem item">10</div>
+    <div class="divItem item">11</div>
+    <div class="divItem item">12</div>
+</div>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery.sortable.js"></script>
+
+<script>
+    $('.main').sortable({
+        items: '.item'
+    }).bind('sortupdate',function(data,data2,data3){
+        //console.log($('.main').html());
+    });
+    $('.divItem').click(function(){
+        alert(111);
+    });
+</script>
+</body>
+</html>

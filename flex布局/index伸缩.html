@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0;padding:0;}
+        body,html{width:100%;height:100%;}
+
+        .main{
+            height:100px;
+            width:100%;
+            display:-webkit-box;/*写在flex前面*/
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            }
+
+
+
+        .item{
+            box-sizing:border-box;
+            background:#666;
+            color:#fff;
+            flex-grow: 1;
+        }
+
+        /*flex第一个值是伸张 第二个是缩 第三个是伸缩前的宽度*/
+
+        /*第一个盒子占70%其他盒子自动填满*/
+        .item:nth-child(1){
+            flex:0 0 70%;
+        }
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+
+    <div class="main">
+        <div class="item">111</div>
+        <div class="item">222</div>
+        <div class="item">333</div>
+    </div>
+
+
+
+
+</body>
+</html>

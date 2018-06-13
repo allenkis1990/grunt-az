@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script>
+
+    var obj={
+        close:function(){
+            alert('sss');
+        },
+        click:function(options,str){
+
+            var that=this;
+            options && options.fn && typeof options.fn==='function' && options.fn({
+                close:function(){
+                    that.close();
+                    alert(str);
+                }
+            });
+            //this.close();
+        }
+    }
+
+    obj.click({
+        fn:function(opt){
+            //opt.close();
+            alert(1);
+        }
+
+    });
+</script>
+</body>
+</html>

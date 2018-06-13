@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="myctrl">
+
+<div id="template1" ng-cloak>{{ 'hello' }}</div>
+<div id="template2" ng-cloak class="ng-cloak" ng-copy="fn()">{{ 'hello IE7' }}</div>
+<input type="text" ng-paste="fn()" />
+<input type="text" ng-readonly="true" />
+<select ng-model="model" ng-options="item.id as item.name group by item.main for item in arr"></select>
+
+<select ng-model="model" ng-options="item.id as item.name for item in arr">
+    <option value="">--请选择--</option>
+</select>
+<a href="javascript:void(0)" ng-click="model=''">click</a>
+<img ng-src="../images/afei.jpg" />
+<img ng-srcset="http://www.gravatar.com/avatar/{{hash}} 2x"/>
+<div ng-style="{width:'100px',height:'100px',background:'blue'}"></div>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+   var app= angular.module("myapp",[]);
+    app.controller("myctrl",function($scope,$cacheFactory){
+        console.log($cacheFactory);
+        $scope.style={background:"red",width:"300px",height:"300px"}
+        $scope.fn=function(e){
+            alert(11);
+        }
+        $scope.arr=[
+            {id:1,name:"allen1",main:"哈哈哈"},
+            {id:2,name:"allen2",main:"哈哈哈"},
+            {id:3,name:"allen3",main:"哈哈哈"},
+            {id:4,name:"allen4",main:"呵呵呵"},
+            {id:5,name:"allen5",main:"呵呵呵"}
+        ];
+        $scope.model=1;
+
+    });
+</script>
+</body>
+</html>

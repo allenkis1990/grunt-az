@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var arr=[1,2,3,4,5];
+
+    function map(){
+        var mapArr=arr.map(function(item,index,arr){
+            return item*10;
+        });
+        //原数组不变 返回一个全部都乘以10后的数组
+        //console.log(Object.prototype.toString.call(mapArr));
+        console.log(mapArr);
+    }
+    map();//[10,20,30,40,50]
+
+
+    function filter(){
+        var filterArr=arr.filter(function(item,index,arr){
+            return item<4;
+        });
+        console.log(filterArr);
+    }
+    filter();//[1,2,3]
+
+
+    //前后两两相加 最后输出最后结果
+    function reduce(){
+        var result=arr.reduce(function(result,item,index,arr){
+            return result*item;
+        });
+        console.log(result);
+    }
+    reduce();
+
+    //找数组里有没有等于5的找到返回true否则false  (只要有一项匹配就是true)
+    function some(){
+        var bol=arr.some(function(item,index,arr){
+            return item===5;
+        })
+        console.log(bol);
+    }
+    some();
+
+
+    //遍历每一项 如果数组每一项都匹配就返回 true 只要有一项不匹配就返回false
+    function every(){
+        var bol=arr.every(function(item,index,arr){
+            return item>0
+        })
+        console.log(bol);
+    }
+    every();
+
+
+    //生成一个由键生成的数组
+    function objectKeys(){
+        //var arr=[{a:1}];
+        var obj={name:'allen',age:18};
+        var keys=Object.keys(obj);//[name,age]
+        console.log(keys);
+    }
+    objectKeys();
+
+
+
+    //把obj1合到obj2里去 obj1不变 obj2发生改变 两个有相同的键则会被obj1里的c覆盖
+    function objectAssign(){
+        var obj1={a:1,b:2,c:100};
+        var obj2={c:3,d:4};
+        Object.assign(obj2,obj1);
+        console.log(obj2);
+
+    }
+    objectAssign();
+
+
+</script>
+
+</body>
+</html>

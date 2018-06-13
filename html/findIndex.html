@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+<script type="text/javascript" src="../js/lodash.min.js"></script>
+<script>
+    var arr=[{name:'allen'},{name:'tom'},{name:'haha'},{name:'hehe'}];
+    var arrSm=[{name:'allen'},{name:'hehe'}];
+    function findIndex(arr,obj){
+        var index=_.findIndex(arr,function(item){
+            return item.name==obj.name;
+        });
+        return index;
+    }
+
+    for(var i=0;i<arrSm.length;i++){
+        var index2=findIndex(arr,arrSm[i]);
+        console.log(index2);
+    }
+
+</script>
+</body>
+</html>

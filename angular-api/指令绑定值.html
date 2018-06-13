@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+
+<input placeholder="******"  />
+
+<div mydir aaa="mydata"></div>
+
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/angular2.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope,$timeout){
+
+        $scope.content=null;
+
+        $timeout(function(){
+
+            $scope.mydata='666';
+
+        },3000);
+
+
+    });
+
+    app.directive('mydir',function($timeout){
+        return {
+            replace:true,
+
+            link:function($scope,ele,attr){
+
+                $scope.$watch('aaa',function(val){
+                    if(val){
+                        console.log(val);
+
+                    }
+                });
+
+                //console.log($scope.aaa);
+
+
+            },
+
+            scope:{
+                aaa:'='
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.dataviz.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.dataviz.default.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.mobile.all.min.css">
+    <style>
+        .btn-style{background:deepskyblue;color:#fff;}
+        .btn-style:hover{background:red;}
+    </style>
+</head>
+<body ng-controller="mycon">
+
+<div kendo-grid="node.grid" k-options="ui.options"></div>
+
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/angular-min.js"></script>
+<script type="text/javascript" src="js/kendo.js"></script>
+<script id="detail-template">
+    <div>
+    Name: #: name #
+    </div>
+    <div>
+    Age: #: age #
+    </div>
+    <div>
+    Love: #: love #
+    </div>
+    <div>
+    A1: #: a1 #
+    </div>
+</script>
+<script>
+    var app=angular.module("myapp",["kendo.directives"],function(){});
+    app.controller("mycon",function($scope){
+        var createTpl = '<button ng-click="events.toAddNameServer($event)" class="k-button k-primary">创建</button>';
+
+        $scope.ui={
+            options:{
+                toolbar: [
+                    {template: kendo.template(createTpl)} //BTN按钮 顶部toolbar按钮
+                ],
+                columns:[
+                    {field:"id",hidden:true},//隐藏
+                    {width:200,field:"name",title:"姓名",attributes: {style: "text-align: right; font-size: 14px;color:red"},
+                        headerTemplate: '<input type="checkbox" id="check-all" /><label for="check-all">Check All</label>'},
+                    {field:"age",title:"年龄",footerTemplate: "Total: #: data.age ? sum: 0 #"},// 计算总共
+
+                    {field:"love",title:"爱好",filterable: {multi:true,checkAll: false},headerAttributes: {//设置表头的样式
+                        "class": "table-header-cell",
+                        style: "text-align: center; background:blue;"
+                    },template: function(dataItem) {
+                        return "<strong>" + kendo.htmlEncode(dataItem.name) + "</strong>";
+                    }}, //点击过滤 checkAll: false去掉全选
+
+
+                    {field:"job",title:"工作",columns:[{field:"a1"},{field:"a2"}]},
+
+                    {command:[{text:"删除",className:"btn-style",click:function(e){
+                        //alert(111);
+                        console.log($scope.node.grid.dataItem($(e.target).closest("tr")).name);
+                    }}]}, //可以给按钮加样式
+                    { command: [{name:"edit",text:"编辑"},{text:" BTN"}] }//command: ["edit", "destroy"]
+                    /*{ command: [
+                     {
+                     name: "details",
+                     click: function(e) {
+                     // command button click handler
+                     $(".aa").css("margin-left","200px");
+                     }
+                     },
+                     { name: "destroy" } // built-in "destroy" command
+                     自定义功能按钮
+                     editable: {
+                     confirmation: "Are you sure that you want to delete this record?"
+                     }删除后面跟着的信息
+                     */
+
+                ],
+                columnMenu: {
+                    messages: {
+                        filter: "Apply filter",
+                        sortAscending: "升序 (asc)",
+                        sortDescending: "升序 (desc)",
+                        columns: "请选择模块"
+                    }
+                },
+                dataSource: {
+                    data: [{id:1,name: "allenkis", age: 25, love: "sport", a1: "223", a2: "331"},//{ name: "<div style='color:red'>Jane Doe</div>" }
+                        {id:2,name: "allenkis1", age: 23, love: "sport1", a1: "222", a2: "332"},
+                        {id:3,name: "allenkis2", age: 26, love: "sport2", a1: "221", a2: "333"}
+                    ],
+                    aggregate: [
+                        { field: "age", aggregate: "sum" }//计算总共
+                    ],
+                    //group: [{field: "age"}],
+                    pageSize: 10 //把页数设置成10条数据每页
+                },
+                filterable: true,//过滤
+                sortable: true,
+                /***
+                 如果dataSource里面有多个属性就是dataSource：{data:[{name:"xxx"},{name:"xxx"}]}
+                 ****/
+                allowCopy: false,//不允许复制
+                selectable: "multiple cell",//每个td选中的效果
+                groupable: true,
+                //editable: true,//可编辑
+                editable: {
+                    mode: "popup",
+                    window: {
+                        title: "编辑信息",
+                        animation: false,
+                        open: fn
+                    }
+                },
+                pageable: true,//显示页数
+                detailTemplate: kendo.template($("#detail-template").html())//由表格每个项组成的详细内容模板
+
+            }
+
+
+
+        };
+
+        //console.log($scope.node.grid.dataItem("tr:eq(1)").name);
+
+        function fn(){
+            alert(111);
+        }
+
+
+//<h3>Edit Person</h3>
+
+    })
+</script>
+</body>
+</html>

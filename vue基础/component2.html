@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <haha :aa='arr' :fn="afn">
+        </haha>
+
+        <!--<component :is="who"></component>
+        <button @click="fn('a1')">a1</button>
+        <button @click="fn('a2')">a2</button>
+        <button @click="fn('a3')">a3</button>-->
+    </div>
+
+
+
+    <script>
+
+        //局部注册组件
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                arr:[1,2,3],
+                who:''
+            },
+            methods:{
+                fn:function(type){
+                    this.who=type;
+                },
+
+                afn:function(){
+                    alert(1);
+                }
+            },
+            components:{
+                'haha':{
+                    template:'<div>hahaha {{aa}}<fuck></fuck><button @click="shitFn">haha</button></div>',
+                    mounted:function(){
+                        this.aa.push(6);
+                        console.log(this.fn);
+                        this.fn();
+                    },
+                    methods:{
+                        shitFn:function(){
+                            alert('hahahah');
+                        }
+                    },
+                    data:function(){
+                        return {
+                            bbb:{name:'allen'}
+                        }
+                    },
+                    components:{
+                        'fuck':{template:'<div>fuck</div>'}
+                    },
+                    //props:['aa']
+                    props:['aa','fn']
+                },
+
+                'a1':{template:'<div>this is a1</div>'},
+                'a2':{template:'<div>this is a2</div>'},
+                'a3':{template:'<div>this is a3</div>'}
+            }
+        });
+    </script>
+</body>
+</html>

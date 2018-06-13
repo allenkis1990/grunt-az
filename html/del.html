@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="mycon">
+
+<form name="myForm">
+    <input type="text" ng-model="data.even" name="myText" even/>
+    <div ng-show="myForm.myText.$error.even">错误</div>
+</form>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",["$scope",function($scope){
+         //$scope.data={};
+    }]);
+    app.directive("even",function(){
+        return {
+            require:"ngModel",
+            link:function(scope,ele,attr,ngModelCtrl){
+                ngModelCtrl.$parsers.push(function(viewValue){
+                  if(viewValue%2===0){
+                      ngModelCtrl.$setValidity("even",true);
+                  }else{
+                      ngModelCtrl.$setValidity("even",false);
+                  }
+                    return viewValue;
+                    //ngModelCtrl.$setViewValue("111");
+                });
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        @keyframes uptodown {
+            from{transform:translateY(-100px)}
+            to{transform:translateY(0px)}
+        }
+        @keyframes downtoup {
+            from{transform:translateY(100px)}
+            to{transform:translateY(0px)}
+        }
+        .uptodown{animation:uptodown 1.5s;}
+        .downtoup{animation:downtoup 1.5s;}
+        .main{width:1000px;margin:200px auto;}
+        .item{ width:200px;height:200px;background:cornflowerblue;float:left;margin-left:20px;}
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="uptodown item"></div>
+    <div class="downtoup item"></div>
+    <div class="uptodown item"></div>
+    <div class="downtoup item"></div>
+</div>
+</body>
+</html>

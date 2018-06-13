@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<div ng-controller="mycon">{{a1}}</div>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/angular.min.js"></script>
+<script>
+var app=angular.module("myapp",[],function(){});
+
+var html=document.getElementsByTagName("html")[0];
+angular.element().ready(function(){
+    angular.bootstrap(html,["myapp"]);
+});
+
+app.controller("mycon",["$scope",function($scope){
+    $scope.a1="111";
+}]);
+</script>
+</body>
+</html>

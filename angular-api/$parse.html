@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+
+    <input type="text" ng-model="aaa" lwhtest />
+    <a href="javascript:void(0)">X</a>
+
+
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/angular2.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope){
+
+        $scope.aaa='xxxxxx';
+
+    });
+
+    app.directive('lwhtest',function($parse){
+        return {
+            require:'ngModel',
+            link:function($scope,ele,attr,ngModel){
+
+                $(ele).next('a').click(function(){
+                    //alert(11);
+                    $scope.$apply(function(){
+                        //console.log(attr.ngModel);
+                        //console.log($parse(attr.ngModel).assign($scope,''));
+                        $parse(attr.ngModel).assign($scope,'');
+                    });
+                });
+
+            }
+        }
+    });
+</script>
+</body>
+</html>

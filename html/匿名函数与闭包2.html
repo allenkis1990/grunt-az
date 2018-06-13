@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+<script>
+    var user="jack";
+    var obj={
+        user:"allenkis",
+        fun:function(){
+            return function(){
+                return this.user;
+            };
+        }
+    };
+    alert(obj.fun().call(obj)); //访问闭包里的为了不让他指向WINDOW必须要对象冒充一下 或者存一下第一层function的THIS
+</script>
+</body>
+</html>

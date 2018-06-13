@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            padding: 50px 0px 0px 100px;
+        }
+
+        * {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        textarea {
+            width: 300px;
+            height: 70px;
+            resize: none;
+        }
+
+        input[type="checkbox"] {
+            vertical-align: 32px;
+        }
+
+        .ml-1 {
+            margin-left: 10px;
+        }
+
+        .mt-1 {
+            margin-top: 10px;
+        }
+
+        .mb-1 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body ng-controller="myctrl">
+<button ng-click="isCheckboxShow=!isCheckboxShow" class="mb-1">批量管理</button>
+<div ng-show="isCheckboxShow"><input type="checkbox" ng-click="checkAll()" style="vertical-align:0px;" /> 全选</div>
+
+
+<ul manydelete>
+    <li ng-if="!item.undeleted" ng-repeat="item in data" class="item-zj" ng-init="parsindex=$index">
+        <div>
+            <h2>
+                <input ng-checked="item.ischecked" style="vertical-align:0px;" ng-click="checkItem(item,$index,data)" type="checkbox" ng-show="isCheckboxShow"/>
+                第<span>{{item.zj}}</span>章
+            </h2>
+        </div>
+        <ul class="ks-ul" style="margin-left:10px;">
+            <li ng-if="!itemerzi.undeleted" class="parentitem" ng-repeat="itemerzi in item.zjitem" ng-init="parindex=$index">
+                <div class="mt-1">
+                    <input ng-checked="itemerzi.ischecked" style="vertical-align:0px;" ng-click="checkSubitem(itemerzi,$index,item.zjitem)" type="checkbox" ng-show="isCheckboxShow"/>
+                    第{{itemerzi.ks}}课时</div>
+                <ul class="mt-1 item-list" style="margin-left:10px;">
+                    <li class="mt-1" ng-repeat="itemsunzi in itemerzi.info" editdiv ng-if="!itemsunzi.undeleted">
+                        <input ng-model="itemsunzi.ischecked"
+                               ng-click="checkIt(itemerzi.info,$index,itemerzi)"
+                               type="checkbox"
+                               ng-checked="itemsunzi.ischecked"
+                               ng-show="isCheckboxShow"/>
+                        <textarea readonly>{{itemsunzi.info}}</textarea>
+                        <a href="javascript:void(0)" class="edit">编辑</a>
+                        <a href="javascript:void(0)" ng-click="delete(itemerzi.info,$index)">删除</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<button ng-click="manyDelete()" class="mt-1 many-del">批量删除！</button>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app = angular.module("myapp", []);
+    app.controller("myctrl", function ($scope, $timeout) {
+        $scope.data = [
+            {
+                ischecked:false,
+                arr:[],
+                zj: 1, zjitem: [
+                {
+                    ks: 1.1,
+                    ischecked:false,
+                    arr:[],
+                    info: [{id: "item1-1-1", ischecked: false, time: "xxx", info: "第1章第1课时第1笔记"}, {
+                        id: "item1-1-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第1章第1第2笔记"
+                    }]
+                },
+                {
+                    ks: 1.2,
+                    ischecked:false,
+                    arr:[],
+                    info: [{id: "item1-2-1", ischecked: false, time: "xxx", info: "第1章第2课时第1笔记"}, {
+                        id: "item1-2-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第1章第2课时第2笔记"
+                    }]
+                },
+
+                {
+                    ks: 1.3,
+                    ischecked:false,
+                    arr:[],
+                    info: [{id: "item1-3-1", ischecked: false, time: "xxx", info: "第1章第3课时第1笔记"}, {
+                        id: "item1-3-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第1章第3课时第2笔记"
+                    }]
+                }
+            ]
+            },
+
+            {
+                ischecked:false,
+                arr:[],
+                zj: 2, zjitem: [
+                {
+                    ks: 2.1,
+                    ischecked:false,
+                    arr:[],
+                    info: [{id: "item2-1-1", ischecked: false, time: "xxx", info: "第2章第1课时第1笔记"}, {
+                        id: "item2-1-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第2章第1第2笔记"
+                    }]
+                },
+                {
+                    ks: 2.2,
+                    ischecked:false,
+                    arr:[],
+                    info: [{id: "item2-2-1", ischecked: false, time: "xxx", info: "第2章第2课时第1笔记"}, {
+                        id: "item2-2-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第2章第2课时第2笔记"
+                    }]
+                },
+                {
+                    ks: 2.3,
+                    ischecked:false,
+                    arr:[],
+                    info: [{id: "item2-3-1", ischecked: false, time: "xxx", info: "第2章第3课时第1笔记"}, {
+                        id: "item2-3-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第2章第3课时第2笔记"
+                    }]
+                }
+            ]
+            },
+
+            {
+                ischecked:false,
+                arr:[],
+                zj: 3, zjitem: [
+                {
+                    ks: 3.1,
+                    ischecked:false,
+                    arr:[],
+                    info: [{id: "item3-1-1", ischecked: false, time: "xxx", info: "第3章第1课时第1笔记"}, {
+                        id: "item3-1-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第3章第1第2笔记"
+                    }]
+                },
+                {
+                    ks: 3.2,
+                    ischecked:false,
+                    arr:[],
+                    info: [{id: "item3-2-1", ischecked: false, time: "xxx", info: "第3章第2课时第1笔记"}, {
+                        id: "item3-2-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第3章第2课时第2笔记"
+                    }]
+                },
+                {
+                    ks: 3.3,
+                    ischecked:false,
+                    arr:[],
+                    info: [{id: "item3-3-1", ischecked: false, time: "xxx", info: "第3章第3课时第1笔记"}, {
+                        id: "item3-3-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第3章第3课时第2笔记"
+                    }]
+                }
+            ]
+            }
+        ];
+
+
+        $scope.console = function (item) {
+            $timeout(function () {
+                console.log(item);
+            })
+
+        }
+        $scope.delete = function (arr, index) {//arr是直接把外面的数组传进来  单个删除
+            arr.splice(index, 1);
+        }
+
+        $scope.isCheckboxShow = false;//checkbox是否显示
+
+
+        $scope.checkIt = function (arr, index ,subArr) { //点击checkbox切换true和false
+            arr[index].ischecked = !arr[index].ischecked;
+            if(arr[index].ischecked==true){
+                subArr.arr.push(arr[index]);
+            }else{
+                subArr.arr.splice(0,1);
+            }
+           // console.log(subArr.arr);
+            if(subArr.arr.length!==subArr.info.length){
+                subArr.ischecked=false;
+            }else{
+                subArr.ischecked=true;
+            }
+        }
+
+        $scope.checkSubitem = function (arr, index ,subarr) { //点击checkbox切换true和false
+
+            /*angular.forEach(arr.info,function(item){
+                item.ischecked=!item.ischecked;
+            });*/
+            subarr[index].ischecked=!subarr[index].ischecked
+            //console.log(subarr[index]);
+            if(subarr[index].ischecked==false){
+                angular.forEach(subarr[index].info,function(item){
+                    item.ischecked=false;
+                });
+                arr.arr=[];
+            }else{
+                angular.forEach(subarr[index].info,function(item){
+                    item.ischecked=true;
+                });
+                arr.arr=angular.copy(subarr[index].info);
+            }
+
+            /*if(arr.ischecked==true){
+                subarr[index].arr.push(arr);
+            }else{
+                subarr[index].arr.splice(0,1);
+            }
+            // console.log(subArr.arr);
+            if(subarr[index].arr.length!==subarr[index].info.length){
+                subarr[index].ischecked=false;
+            }else{
+                subarr[index].ischecked=true;
+            }*/
+
+
+        }
+        $scope.checkItem=function(arr,index,data){
+            data[index].ischecked=!data[index].ischecked;
+            if(data[index].ischecked==false){
+                angular.forEach(data[index].zjitem,function(item){
+                    item.ischecked=false;
+                    angular.forEach(item.info,function(grandItem){
+                        grandItem.ischecked=false;
+                    });
+                    item.arr=[];
+                });
+                data[index].arr=[];
+            }else{
+                angular.forEach(data[index].zjitem,function(item){
+                    item.ischecked=true;
+                    angular.forEach(item.info,function(grandItem){
+                        grandItem.ischecked=true;
+                    });
+                    item.arr=angular.copy(item.info);
+                });
+                data[index].arr=angular.copy(data[index].zjitem);
+            }
+            /*angular.forEach(data[index].zjitem,function(item){
+                item.ischecked=!item.ischecked;
+                angular.forEach(item.info,function(grandItem){
+                    grandItem.ischecked=!grandItem.ischecked;
+                });
+            });*/
+        }
+        $scope.checkAll=function(){
+            angular.forEach($scope.data,function(item){
+                item.ischecked=!item.ischecked;
+                angular.forEach(item.zjitem,function(subItem){
+                    subItem.ischecked=!subItem.ischecked;
+                    angular.forEach(subItem.info,function(grandItem){
+                        grandItem.ischecked=!grandItem.ischecked;
+                    });
+                });
+            });
+        }
+
+
+        $scope.manyDelete = function () { //批量删除选中的
+            angular.forEach($scope.data, function (item) {
+                if(item.arr.length==item.zjitem.length){
+                    item.undeleted=true;
+                    item.ischecked=true;
+                }
+                //item.arr=[];
+                angular.forEach(item.zjitem, function (subItem) {
+                    if(subItem.arr.length==subItem.info.length){//临时数组的长度如果和实际数组的长度一样 说明实际数组的ischecked全是true
+                        subItem.undeleted=true;//当ischecked全为true了 触发ng-if
+                        subItem.ischecked=true;
+                    }
+
+                    if(subItem.ischecked==true){
+                        item.arr.push(subItem);
+                    }
+                    //subItem.arr=[];
+                    angular.forEach(subItem.info, function (grandItem) {
+                            if (grandItem.ischecked==true) {//如果ischecked等于true,把等于true的子项插入到临时数组
+                                subItem.arr.push(grandItem);
+                                grandItem.undeleted = true;
+                            }
+
+
+
+                    })
+                })
+            });
+            console.log($scope.data);
+
+//            $scope.data = $scope.copydata;
+            //console.log($scope.deleteArr);
+            // console.log($scope.data);
+        }
+    });
+
+
+    app.directive("editdiv", function () { //toggle编辑状态  可编辑/不可编辑
+        return {
+            restrict: "A",
+            link: function (scope, ele, attr) {
+                var edit = $(ele);
+                var mark = true;
+                edit.find(".edit").click(function () {
+                    var par = $(this).parent();
+                    //var index=par.index();
+                    var isTrue = par.find("textarea").attr("readonly");
+                    if (mark) {
+                        $(this).html("取消编辑");
+                        if (isTrue) {
+                            par.find("textarea").removeAttr("readonly").focus();
+                            //alert(1);
+                        }
+                        mark = false;
+                    } else {
+                        $(this).html("编辑");
+                        if (!isTrue) {
+                            par.find("textarea").attr("readonly", "readonly").blur();
+                        }
+
+                        mark = true;
+                    }
+
+                });
+            }
+        }
+    });
+
+
+    /*app.directive("manydelete",function(){ //toggle编辑状态  可编辑/不可编辑
+     return {
+     restrict:"A",
+     link:function(scope,ele,attr){
+     $(".many-del").click(function(){
+     var deleteLi=$(ele).find(".item-list").find("li");
+     var deleteErziUl=$(ele).find(".item-list");
+     var deleteZj=$(ele).find(".ks-ul");
+     deleteLi.each(function(){
+     if($(this).attr("ischeck")=='true'){
+     $(this).remove();
+     }
+     });
+     deleteErziUl.each(function(){ //length为0时连带课时也删除
+     if($(this).children().length==0){
+     $(this).parents(".parentitem").remove();
+     }
+     });
+
+     deleteZj.each(function(){//length为0时连带章节也删除
+     if($(this).children().length==0){
+     $(this).parents(".item-zj").remove();
+     }
+     });
+
+
+     });
+     }
+     }
+     });*/
+
+</script>
+</body>
+</html>

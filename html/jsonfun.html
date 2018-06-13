@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+
+<script>/*
+    var obj=[{name:"allenkis",age:25,job:"web",toJSON:function(){return this.job}}];//加上toJSON方法可以返回特定的某组值
+    //var str=JSON.stringify(obj,["name","job"]);// 第二个参数是你需要的值
+    var str=JSON.stringify(obj,function(key,value){ //如果第二个参数是function 那么里面的参数是key和value
+        if(key=="name" || key=="age"){
+            return "最帅"+value;
+        }else{
+            return value;
+        }
+    },4);//这个4表示的是缩进 让数据更清晰 第二个参数要是不需要就用null代替
+    alert(str);*/
+
+    /*var str='[{"name":"allenkis","age":25,"job":"web"}]';
+    var obj=JSON.parse(str,function(key,value){
+         if(key=="name"){
+             return "最帅"+value;
+         }else{
+             return value;
+         }
+    });
+    alert(obj[0].name);*/
+
+    var str1='2016-06-17 21:00:00';
+    var date1=new Date(str1).getTime();
+    var str2='2016-06-17';
+    var date2=new Date(str2);
+    console.log(new Date());
+</script>
+
+
+</body>
+</html>

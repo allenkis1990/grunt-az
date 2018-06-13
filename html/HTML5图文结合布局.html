@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title></title>
+    <style>
+
+        html{font-size:625%;}
+        *{margin:0; padding:0;}
+        .main{max-width:10rem; margin:0.3rem auto;} /*这里一定要给最大宽度才会响应式*/
+        img{max-width:100%;}
+        figure{width:50%; box-sizing:border-box;font-size: .16rem; float:left;}
+        .tit{font-size:0.16rem;}
+        .des{font-size:0.14rem; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;}
+        .sat{font-size:0.13rem;}
+        .money{font-size:0.13rem;}
+        .fl{float:left;}
+        .fr{float:right;}
+        .clear:after{content:"."; visibility: hidden; clear:both; height:0px;}
+        @media(max-width:750px){  /*媒体查询一定要写在最后否则不生效*/
+            figure{font-size: 0.12rem;}
+            .tit{font-size:0.12rem; background:red;}
+            .des{font-size:0.12rem;}
+            .sat{font-size:0.12rem;}
+            .money{font-size:0.12rem;}
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <figure>
+    <img src="images/10.jpg" />
+    <figcaption>
+        <div class="tit">这是一个标题</div>
+        <div class="des">这是一段描述这是一段描这是一段描述这是一段描述这是一段描这是一段描述这是一段描述这是一段描这是一段描述</div>
+        <div class="info">
+            <span class="sat fl">满意度</span>
+            <span class="money fr">价格:520元</span>
+            <div class="clear"></div>
+        </div>
+    </figcaption>
+</figure>
+    <figure>
+        <img src="images/10.jpg" />
+        <figcaption>
+            <div class="tit">这是一个标题</div>
+            <div class="des">这是一段描述这是一段描这是一段描述这是一段描述这是一段描这是一段描述这是一段描述这是一段描这是一段描述</div>
+            <div class="info">
+                <span class="sat fl">满意度</span>
+                <span class="money fr">价格:520元</span>
+                <div class="clear"></div>
+            </div>
+        </figcaption>
+    </figure>
+    <figure>
+        <img src="images/10.jpg" />
+        <figcaption>
+            <div class="tit">这是一个标题</div>
+            <div class="des">这是一段描述这是一段描这是一段描述这是一段描述这是一段描这是一段描述这是一段描述这是一段描这是一段描述</div>
+            <div class="info">
+                <span class="sat fl">满意度</span>
+                <span class="money fr">价格:520元</span>
+                <div class="clear"></div>
+            </div>
+        </figcaption>
+    </figure>
+    <figure>
+        <img src="images/10.jpg" />
+        <figcaption>
+            <div class="tit">这是一个标题</div>
+            <div class="des">这是一段描述这是一段描这是一段描述这是一段描述这是一段描这是一段描述这是一段描述这是一段描这是一段描述</div>
+            <div class="info">
+                <span class="sat fl">满意度</span>
+                <span class="money fr">价格:520元</span>
+                <div class="clear"></div>
+            </div>
+        </figcaption>
+    </figure>
+</div>
+
+</body>
+</html>

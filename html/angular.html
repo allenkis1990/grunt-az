@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="bootstrap">手动引导</button>
+<p>应该在下面看到一幅动画才对！</p>
+<ez-duang></ez-duang>
+
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script src="http://lib.sinaapp.com/js/angular.js/angular-1.2.19/angular.min.js"></script>
+<script>
+    angular.module("ezstuff",[])
+            .directive("ezDuang",function(){
+                return {
+                    restrict : "E",
+                    template : "<img src='http://ww4.sinaimg.cn/bmiddle/757eb2ffjw1eptcr4qobjg209205dthh.gif'>"
+                };
+            });
+
+
+
+
+    $("#bootstrap").hover(function(){
+        angular.bootstrap("body",["ezstuff"]);
+        angular.element(approot).data("$rootScope");
+    });
+</script>
+</body>
+</html>

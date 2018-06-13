@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="mycon">
+
+<mydir head="content"></mydir>
+<mydir2 head="{{content2}}">
+    <mydir3 head="content3()"></mydir3>
+</mydir2>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",function($scope){
+        $scope.content="艾伦克斯";
+        $scope.content2="艾伦克斯2";
+        $scope.content3=function(){
+            return "艾伦克斯3";
+        };
+    });
+
+    app.directive("mydir",function(){
+        return {
+            restrict:"E",
+            template:"<div>{{a1}}</div>",
+            //transclude:true,
+            replace:true,
+            link:function(scope,ele,attr){
+
+            },
+            scope:{
+                a1:"=head"
+            }
+
+        }
+    });
+
+    app.directive("mydir2",function(){
+        return {
+            restrict:"E",
+            template:"<div>{{a1}}<b ng-transclude></b></div>",
+            transclude:true,
+            replace:true,
+            link:function(scope,ele,attr){
+
+            },
+            controller:function($scope){
+                this.fn=function(){
+                    alert(111);
+                }
+            },
+            controllerAs:"allencon2",
+            scope:{
+                a1:"@head"
+            }
+
+        }
+    });
+
+    app.directive("mydir3",function(){
+        return {
+            restrict:"E",
+            template:"<div>{{a1()}}</div>",
+            //transclude:true,
+            replace:true,
+            require:"^mydir2",
+            link:function(scope,ele,attr,allencon2){
+                allencon2.fn();
+            },
+            scope:{
+                a1:"&head"
+            }
+
+        }
+    });
+</script>
+</body>
+</html>

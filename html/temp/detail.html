@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">详细内容！！！！<button  ng-click="fn()" >点击我来跳转详细内容下的VIEW</button><a href="#" ui-sref-active="hover" ui-sref="index.listdetail.listdetail2({id:5,type:6,myParam1:1,myParam2:2})">click</a></div><!--ui-sref-opts="{reload: true}"强制刷新-->
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div ui-view></div>
+        </div>
+    </div>
+
+</div>

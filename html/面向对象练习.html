@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    function Obj(options) {
+        this.dom = $("<div class='main'></div>").append('<button>click me</button>');
+        $('body').append(this.dom);
+        this.confirm(options.fn);
+        //console.log(this.dom.find('button'));
+    }
+
+    Obj.prototype.confirm = function (fn) {
+        var btn = this.dom.find('button');
+        btn.click(function (e) {
+            fn && $.isFunction(fn) && fn();
+            //console.log(e.target);
+            //alert('点击后的回调！！！');
+        });
+    }
+
+    var nowObj = {
+        click1: function (fn) {
+            var obj = new Obj(
+                    {
+                        fn: function () {
+                            fn && $.isFunction(fn) && fn();
+                        }
+                    }
+            );
+            $('.main').data('aaa',obj);
+        }
+    }
+    nowObj.click1(function () {
+        //setTimeout(function(){
+        alert(1111111);
+        //console.log($('.main').data('aaa').dom[0]);
+        //},3000);
+    });
+
+    //var obj=new Obj();
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+
+    /*function aa(){
+        return new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve(11);
+            },3000);
+        });
+    }*/
+    //过三秒打印了a 又过了三秒打印了b  如果是reject要try catch一下
+    //await一定要被async包着否则报错
+    async function fn(){
+        try {
+            var a= await new Promise(function(resolve,reject){
+                setTimeout(function(){
+                    reject('aa');
+                },3000);
+            });
+            console.log(a);
+        }catch(e){
+            console.log(e);
+        }
+
+        var b= await new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve('bb');
+            },3000);
+        });
+        console.log(b);
+    }
+    fn();
+
+
+    //使用all 数组里直接console是不安顺序的 但是 then里的返回值是按顺序的
+    /*var promise1= ()=>{
+        console.log(1);
+        return 1;
+    }
+    var promise2= ()=>{
+        console.log(2);
+        return 2;
+    }
+    var promise3= ()=>{
+        console.log(3);
+        return 3;
+
+    }
+    Promise.all([promise1(),promise2(),promise3()]).then(function(data){
+        console.log(data);
+    });
+*/
+
+
+
+
+
+</script>
+</body>
+</html>

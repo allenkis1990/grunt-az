@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    var strArr=[];
+    var strArr2=[];//归纳出来的年份
+
+    var realArr=[];
+    var fallyArr=[];
+    var arr=[
+        {id:'111',year:'1982'},
+        {id:'222',year:'1983'},
+        {id:'333',year:'1982'},
+        {id:'444',year:'1984'},
+        {id:'555',year:'1982'},
+        {id:'666',year:'1983'},
+        {id:'777',year:'1985'},
+        {id:'888',year:'1986'},
+        {id:'999',year:'1986'},
+        {id:'000',year:'1986'}
+    ];
+    for(var i=0;i<arr.length;i++){
+        strArr.push(arr[i].year);
+    }
+
+    for(var j=0;j<strArr.length;j++){
+        if(strArr2.indexOf(strArr[j],0)==-1){
+            strArr2.push(strArr[j]);
+        }
+    }
+
+    for(var k=0;k<strArr2.length;k++){
+        fallyArr.push(
+            {
+                list:[],
+                year:strArr2[k]
+            }
+        );
+    }
+    for(var m=0;m<strArr2.length;m++){
+        realArr[m]=$.grep(arr,function(item){
+            return item.year==strArr2[m];
+        });
+    }
+
+    for(var n=0;n<realArr.length;n++){
+        fallyArr[n].list=realArr[n];
+    }
+    console.log(fallyArr);
+
+
+
+    //console.log(realArr);
+    console.log(strArr2);
+</script>
+</body>
+</html>

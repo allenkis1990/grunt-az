@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        .orderRed{color:red;}
+        .orderGreen{color:green;}
+    </style>
+</head>
+<body ng-controller="mycon">
+
+<say-hi speak="{{content}}" sing="{{songname}}">美女</say-hi>
+<div say-hi="content"></div>
+</body>
+
+
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",function($scope){
+
+        $scope.content="想听我唱一首歌吗？";
+        $scope.songname="《最长的电影》";
+
+
+    });
+    app.directive("sayHi",function(){
+        return {
+            restrict:"E",
+            transclude:true,
+            replace:true,
+            scope:{
+                cont1:"@speak",
+                cont2:"@sing"
+            },
+            template:"<div>Hi<em ng-transclude></em>,{{cont1}}, {{cont2}}</div>"
+        }
+    });
+    /*app.directive("sayHi",function(){
+     return {
+     restrict:"A",
+     transclude:true,
+     replace:true,
+     scope:{
+     cont1:"="
+     },
+     template:"<div>Hi<em ng-transclude></em>,{{cont1}}</div>"
+     }
+     });*/
+
+
+
+
+</script>
+</html>

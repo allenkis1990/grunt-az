@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <span>{{fuck}}</span>
+        <button @click="fn()">innerClick</button>
+    </div>
+    <button onclick="fn()">click</button>
+    <button onclick="refresh()">refresh</button>
+    <button onclick="destroy()">destroy</button>
+    <button onclick="nextTick()">nextTick</button>
+
+
+
+    <script>
+
+
+        //数据变化完成后才被调用
+        function fn(){
+            console.log(vm);
+            vm.fuck='shit';
+            vm.$nextTick(function(){
+                alert(1);
+            });
+        }
+
+        function refresh(){
+            vm.$forceUpdate();
+        }
+
+        function destroy(){
+            vm.$destroy();
+        }
+
+
+        //局部注册组件
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                fuck:'fuck'
+            },
+            methods:{
+                fn:function(){
+                    console.log(vm.fuck);
+                }
+            },
+            updated:function(){
+                alert('update');
+            },
+            destroyed:function(){
+                alert('destroyed');
+            }
+
+        });
+    </script>
+</body>
+</html>

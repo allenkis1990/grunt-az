@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;list-style-type:none;}
+        .main{margin:200px 15px 0px;height:200px; border:1px solid deepskyblue;position:relative;overflow:hidden;}
+        .main ul{width:3190px;position:absolute;top:0px;left:0px;}
+        .main li{height:196px; border:2px solid blue; width:300px; margin-right:15px;float:left;}
+        .line{height:35px; background:#ddd;margin:100px 15px 0px;position:relative;}
+        .move-line{height:100%;position:absolute;left:0px;top:0px;background:#aaa; width:400px;}
+    </style>
+</head>
+<body>
+<div class="main">
+    <ul class="oul">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+
+<div class="line">
+    <div class="move-line"></div>
+</div>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    var x=0;
+    var _x=0;
+    var offleft=0;
+    var movex=0;
+
+    var doc=$(document).innerWidth()-30;
+    var oulwidth=$(".oul").innerWidth();
+    var movelinewidth=parseInt(doc*(doc/oulwidth));
+    var scrollmax=doc-movelinewidth;
+    //alert(movelinewidth);
+    $(".main").css("width",doc);
+    $(".line").css("width",doc);
+    $(".move-line").css("width",movelinewidth);
+
+    $(".move-line").mousedown(function(e){
+          x= e.clientX;
+          offleft=$(".move-line").offset().left-15;
+          move();
+    });
+    $(".move-line").mouseup(function(){
+        $(document).unbind("mousemove");
+    });
+    function move(){
+        $(document).mousemove(function(e){
+
+            movex=e.clientX-x+offleft;
+            if(movex<0){
+                movex=0;
+            }else if(movex>scrollmax){
+                movex=scrollmax;
+            }
+            $(".move-line").css("left",movex);
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var reg=/&([a-z]+)/,str='00000&she00000&lwh000000';
+    //正则匹配英文 she和lwh 找到第一个she就把she以及之前的字符串截掉（00000&she） 然后再用（00000&lwh000000）去找第二个
+    function a(reg,str){
+        var m=str.match(reg);
+        if(m){
+            var index=m.index;
+            var result=m[1];
+            console.log(result);
+            str=str.substr(index+result.length+1);
+            a(reg,str);
+        }
+    }
+    a(reg,str);
+    /*var m=str.match(reg);
+    console.log(m);
+    var index=m.index;
+    str=str.substr(index+m[1].length+1);
+    console.log(str);
+    var f=str.match(reg);
+    console.log(f);*/
+
+
+
+    /*var reg=/&([0-9a-z]+)/ig,str='www.baidu.com&she&jjkk';
+    var e=reg.exec(str);
+
+    console.log(e);*/
+</script>
+</body>
+</html>

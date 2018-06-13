@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0;padding:0;}
+        body,html{width:100%;height:100%;}
+        .box{
+            width:100%;
+            height:100%;
+            align-content: space-between;
+            display:-webkit-box;/*写在flex前面*/
+            display:flex;
+            flex-wrap: wrap;
+        }
+        .main{
+            height:33.3%;
+            width:100%;
+            display:-webkit-box;/*写在flex前面*/
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            }
+
+        .item{
+            width:33.3%;
+            height:100%;
+            box-sizing:border-box;
+            background:#666;
+            color:#fff;
+            /*flex-shrink:1;*//*使用益出缩小的时候 必须要把益出换行去掉*/
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+
+<div class="box">
+    <div class="main">
+        <div class="item">111</div>
+        <div class="item">222</div>
+    </div>
+    <div class="main">
+        <div class="item">333</div>
+        <div class="item">444</div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

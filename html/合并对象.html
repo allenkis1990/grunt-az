@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    /*var obj={a:'111'};
+    var obj2={b:'222'};
+    var extentObj= $.extend({},obj,obj2);
+    console.log(extentObj);*/
+    function Fn(){
+
+    }
+    Fn.prototype.init=function(){
+        this.name='allen';
+        this.age=18;
+        return this;
+    }
+
+    Fn.prototype.aaa=function(){
+        this.name='aaa'
+    }
+    var obj=new Fn();
+    obj.init().aaa();
+    console.log(obj.name);
+</script>
+</body>
+</html>

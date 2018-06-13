@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{overflow: hidden;}
+    </style>
+</head>
+<body>
+
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    $(document).click(function(e){
+        var x= e.clientX;
+        var y= e.clientY;
+        var docheight=$(document).height();
+        var docwidth=$(document).width();
+        var odiv=$("<div></div>");
+        odiv.css({"width":"10px","height":"65px","backgroundColor":"red","position":"absolute","top":docheight,"left":x});
+        $("body").append(odiv);
+        odiv.animate({"top":y},400,function(){
+            odiv.remove();
+            var arr=[];
+            for(var i=0;i<20;i++){
+                arr[i]=$("<div></div>");
+                arr[i].css({"width":"5px","height":"5px","backgroundColor":"blue","left":x,"top":y,"position":"absolute"})
+                $("body").append(arr[i]);
+                arr[i].speedX=parseInt(Math.random()*20-10);
+                arr[i].speedY=parseInt(Math.random()*20-10);
+            }
+            setInterval(function(){
+                for(var j=0;j<20;j++){
+                arr[j].css({"left":arr[j].offset().left+arr[j].speedX,"top":arr[j].offset().top+arr[j].speedY});
+                    arr[j].speedY+=0.7;
+                    if(arr[j].offset().left<0 || arr[j].offset().left>docwidth || arr[j].offset().top<0 || arr[j].offset().top>docheight){
+                           arr[j].remove();
+                    }
+                }
+
+            },50);
+        });
+
+    });
+</script>
+
+</body>
+</html>

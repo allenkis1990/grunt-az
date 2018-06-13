@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        body{height:1200px;}
+        .main{width:1200px; height:800px; border:1px solid red; margin:50px auto;}
+        .rel{position:relative;}
+        .abs{position:absolute;}
+        .a1{width:150px; height:150px; background:red; top:600px; left:530px; z-index:10;}
+        .a2{width:140px; height:140px; background:blue; top:525px; left:656px; z-index:9;}
+        .a3{width:130px; height:130px; background:yellow; top:445px; left:758px; z-index:8;}
+        .a4{width:120px; height:120px; background:green; top:348px; left:655px; z-index:7;}
+        .a5{width:110px; height:110px; background:black; top:266px; left:554px; z-index:6;}
+        .a6{width:120px; height:120px; background:pink; top:346px; left:444px; z-index:7;}
+        .a7{width:130px; height:130px; background:orange; top:442px; left:335px; z-index:8;}
+        .a8{width:140px; height:140px; background:orchid; top:523px; left:420px; z-index:9;}
+    </style>
+</head>
+<body>
+  <div class="main rel">
+      <div class="aa a1 abs"></div>
+      <div class="aa a2 abs"></div>
+      <div class="aa a3 abs"></div>
+      <div class="aa a4 abs"></div>
+      <div class="aa a5 abs"></div>
+      <div class="aa a6 abs"></div>
+      <div class="aa a7 abs"></div>
+      <div class="aa a8 abs"></div>
+  </div>
+
+
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery.mousewheel.js"></script>
+<script>
+    var arrWidth=[]; var arrHeight=[]; var arrLeft=[]; var arrTop=[]; var arrZindex=[];
+  $(".main").hover(function(){
+      document.onmousewheel=function(){
+          return false;
+      }
+  },function(){
+      document.onmousewheel=function(){
+          return true;
+      }
+  });
+  var lastTime=new Date();
+    //alert(arrWidth);
+    $(document).mousewheel(function(event,delta,deltaX,deltaY){
+        for(var i=0;i<8;i++){
+            arrWidth[i]=$(".aa").eq(i).css("width");
+            arrHeight[i]=$(".aa").eq(i).css("height");
+            arrLeft[i]=$(".aa").eq(i).css("left");
+            arrTop[i]=$(".aa").eq(i).css("top");
+            arrZindex[i]=$(".aa").eq(i).css("z-index");
+        }
+
+        if(new Date()-lastTime>500){
+            if(delta==-1){
+                for(var j=0;j<8;j++){
+                    var a=j-1;
+                    if(a<0){
+                        a=7;
+                    }
+                    $(".aa").eq(j).animate({
+                        "width":arrWidth[a],
+                        "height":arrHeight[a],
+                        "left":arrLeft[a],
+                        "top":arrTop[a],
+                        "z-index":arrZindex[a]
+                    });
+                }
+            }else if(delta==1){
+                for(var k=0;k<8;k++){
+                    var b=k+1;
+                    if(b>7){
+                        b=0;
+                    }
+                    $(".aa").eq(k).animate({
+                        "width":arrWidth[b],
+                        "height":arrHeight[b],
+                        "left":arrLeft[b],
+                        "top":arrTop[b],
+                        "z-index":arrZindex[b]
+                    });
+                }
+            }
+            lastTime=new Date();
+        }
+
+
+    })
+</script>
+</body>
+</html>

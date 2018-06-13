@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html ng-app="KendoDemos">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.2.624/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.2.624/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.2.624/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.2.624/styles/kendo.dataviz.min.css">
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.2.624/styles/kendo.dataviz.default.min.css">
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.2.624/styles/kendo.mobile.all.min.css">
+    <style>
+
+    </style>
+</head>
+<body ng-controller="MyCtrl">
+
+    <div style="position: relative;">
+        <div kendo-tree-view="tree" k-options="shu" style="position:relative">
+        </div>
+        <button style="position: absolute;top:8px;left:80px;" class="but" ng-click="win2.open()">配置按钮</button>
+    </div>
+
+    <div kendo-window="win2" k-title="'AJAX content'"
+         k-width="600" k-height="200" k-visible="false"
+         k-on-open="win2.center()"
+         k-on-close="win2visible = false">
+
+        <ul>
+            <li mydir>
+                <select class="sel1">
+                    <option>生产者1</option>
+                    <option>生产者2</option>
+                    <option>生产者3</option>
+                </select>
+                自助：<input type="text" class="text1"/>
+                <button class="add">确认</button>
+            </li>
+        </ul>
+
+    </div>
+
+<div  style="width:800px;">
+    <kendo-tabstrip><a href="#" style="color:#fff;text-decoration:none;">创建</a></kendo-tabstrip>
+    <table kendo-grid style="text-align: center;">
+        <thead class="center-th">
+            <tr><th style="text-align: center;">1</th><th style="text-align: center;">2</th><th style="text-align: center;">操作</th></tr>
+        </thead>
+        <tbody>
+            <tr><td></td><td></td><td><a href="#">链接</a></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/kendo.js"></script>
+<script>
+    angular.module("KendoDemos", ["kendo.directives"])
+            .controller("MyCtrl", function($scope){
+
+               $scope.shu={
+                   dataSource: {
+                       data: [
+                           { text: "系统",items: [
+                               { text: "生产者"}
+                           ] }
+                       ]
+                   }
+               };
+
+
+
+
+            })
+
+
+
+            .directive("mydir",function(){
+                return {
+                    restrict:"ECAM",
+                    replace:true,
+                    link:function(scope,ele,attr){
+
+                       function makeItem(){
+                           var aa=$(ele).find("select").find("option:selected").val();
+                           var bb=$(ele).find(".text1").val();
+                           if(bb){
+                               return { text: bb ,items: [
+                                   { text: "SubItem 2.1" },
+                                   { text: "SubItem 2.2" }
+                               ] }
+                           }else{
+                               return { text: aa,items: [
+                                   { text: "SubItem 2.1" },
+                                   { text: "SubItem 2.2" }
+                               ] }
+                           }
+                       }
+
+                        $(".add").click(function(){
+                            var aa=makeItem();
+                            scope.tree.append(aa,scope.tree.select());
+                        });
+                    }
+                }
+            });
+
+
+
+
+</script>
+</body>
+</html>

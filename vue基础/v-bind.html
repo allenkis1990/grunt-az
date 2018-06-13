@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+
+    <style>
+        .box{width:200px;height:200px;border:1px solid black;}
+        .classA{background:red;}
+        .classB{background:green;}
+        .classC{font-size:40px;color:#fff;}
+    </style>
+</head>
+<body >
+
+<div id="app">
+    <img v-bind:src="img" v-bind:aaa="img" />
+    <!--<div class="box" :class="{classA:ccc==='11',classB:ccc==='22'}"></div>
+    <div class="box" :class="className">sss</div>-->
+    <div class="box" :class="[classA,classC]">sss</div>
+
+    <div :style="ddd?styleA:''"></div>
+    <div :style="ddd?styleB:styleC"></div>
+</div>
+
+
+
+<script>
+    //数组模式下的class可以使用三元表达式
+    new Vue({
+        el:'#app',
+        data:{
+            ddd:false,
+            img:'../images/afei.jpg',
+            className:'classA classC',
+            classA:'classA',
+            classC:'classC',
+            styleA:'width:200px;height:200px;background:grey',
+            styleB:{width:200+'px',height:200+'px',border:'1px solid red'},
+            styleC:{width:200+'px',height:200+'px',border:'1px solid blue'}
+        },
+        methods:{
+            fn:function(){
+                console.log(this.ddd);
+            }
+        }
+    });
+    //console.log(v);
+</script>
+</body>
+</html>

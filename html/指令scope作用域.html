@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="mycon">
+<mydir2></mydir2>
+<mydir></mydir>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",function($scope){});
+
+    app.directive("mydir2",function(){ //被依赖的那个标签要在上面
+        return {
+            restrict:"ECAM",
+            template:"<div>222</div>",
+            replace:true,
+            controller:function($scope){
+                $scope.www="wawawawawa";
+            }
+            //controllerAs:"two",
+            //transclude:true
+        }
+    });
+
+    app.directive("mydir",function(){
+        return {
+            restrict:"ECAM",
+            template:"<div>11111</div>",
+            replace:true,
+            require:"?mydir2",
+            link:function(scope,ele,attr){
+                alert(scope.www);
+            }
+
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+<!--<div dialog show="Myservice.aaa"></div>-->
+{{Myservice.aaa}}
+<button ng-click="fn()">click</button>
+
+
+<script src="../js/angular2.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope,Myservice){
+
+        /*$scope.fn=function(){
+            Myservice.fn();
+        }*/
+        $scope.Myservice=Myservice;
+        $scope.fn=function(){
+            Myservice.fn();
+        }
+
+        //console.log();
+
+    });
+
+    app.directive('dialog',function(Myservice){
+        var directive={
+            scope:{
+                show:'='
+            },
+            template:'<div ng-if="show">222222</div>',
+            replace:true,
+            link:function($scope){
+
+            }
+        }
+        return directive;
+    });
+
+    app.factory('Myservice',function(){
+        var Myservice={};
+        Myservice.aaa=null;
+        Myservice.fn=function(){
+            this.aaa=true;
+        }
+        return Myservice;
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .main{width:250px; height:200px;border:1px solid #000;overflow:auto;}
+        .main-body{height:800px;background:#ffff00;}
+    </style>
+</head>
+<body style="height:5000px;">
+<div class="main">
+    <div class="main-body">11</div>
+</div>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/jq-nicescroll.js"></script>
+<script>
+    $(".main").niceScroll({
+        autohidemode:false,//是否隐藏滚动条
+        cursorcolor:'blue',//自定义颜色
+        cursorborder:'1px solid red',//自定义边框
+        cursorwidth:10,//滚动条宽度
+        cursorborderradius:5,//滚动条圆角
+        //scrollspeed:0.05,//滚动速度 默认为60
+        ZIndex:99999999,//默认是9999
+        mousescrollstep:40//鼠标上下滑动的步数
+    });
+</script>
+</body>
+</html>

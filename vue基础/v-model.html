@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body >
+
+<div id="app">
+    <!--<input type="text" v-model="aaa" />
+    <input type="text" v-model.lazy="aaa" />
+    <input type="text" v-model.number="aaa" />
+    <input type="text" v-model.trim="aaa" />
+    <div>{{aaa}}</div>
+    <input type="checkbox" v-model="bbb" value="1">
+    <input type="checkbox" v-model="bbb" value="2">
+    <input type="checkbox" v-model="bbb" value="3">
+    <div>{{bbb}}</div>
+    <button v-on:keyup="fn($event)">click</button>-->
+    <!--<button @click="fn">click</button>-->
+
+
+    <input type="radio" v-model="ccc" value="11" @click="fn" />
+
+
+    <select v-model="ddd" @change="fn">
+        <option>请选择</option>
+        <option >1</option>
+        <option >2</option>
+        <option >3</option>
+    </select>
+
+
+</div>
+
+
+
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            aaa:'1',
+            bbb:[],
+            ccc:'11',
+            ddd:'请选择'
+        },
+        methods:{
+            fn:function(){
+                console.log(this.ddd);
+            }
+        }
+    });
+    //console.log(v);
+</script>
+</body>
+</html>

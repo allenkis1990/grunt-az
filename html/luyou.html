@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .main{width:1000px; margin:50px auto; border:1px solid #0000ff;}
+    </style>
+</head>
+<body>
+
+<div ui-view></div>
+
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/angular-ui-router.min.js"></script>
+<script>
+    var app=angular.module("myapp",["ui.router"]);
+
+    app.config(function($stateProvider,$urlRouterProvider){
+        $urlRouterProvider.otherwise('/index');
+        $stateProvider
+                .state('index', { //这个是路径index
+            url: '/index',
+            // abstract: true,
+            views: {
+                '': {
+                    templateUrl: 'homeView.html'
+                },
+                'heading@index': {
+                    templateUrl: 'headView.html',//这个是index路径下的页面模块（头部模块）
+                    controller: function($scope,$state){
+                        $scope.fn=function(){
+                            $state.go('index.neiye')
+                        };
+                        $scope.fn2=function(){
+                            $state.go('index.neiye2')
+                        };
+
+                        $scope.fn3=function(){
+                            $state.go('index.neiye.sm')
+                        };
+                        $scope.fn4=function(){
+                            $state.go('any')
+                        };
+                    }
+                },
+                'content@index': {
+                    templateUrl: 'contentView.html'//这个是index路径下的页面模块（内容模块）
+                },
+                'footer@index': {
+                    templateUrl: 'footerView.html'//这个是index路径下的页面模块（底部模块）
+                }
+            }
+        }).state('any', { //这个是路径index
+                    url: '/any',
+                    // abstract: true,
+                    views: {
+                        '': {
+                            templateUrl: 'home2.html'
+                        },
+                        'heading@any': { //感觉这边有名字就可以
+                            templateUrl: 'headView.html',//这个是index路径下的页面模块（头部模块）
+                            controller: function($scope,$state){
+
+                            }
+                        }
+
+                    }
+                })
+
+
+                .state('index.neiye', {//这个是路径index下的neiye路径
+                    url: '/neiye1',
+                    // abstract: true,
+                    views: {
+
+                        'neiye1@index': {
+                            templateUrl: 'neiyeView1.html'
+                        }
+
+                    }
+                })
+
+
+                .state('index.neiye2', {
+                    url: '/neiye2',
+                    // abstract: true,
+                    views: {
+
+                        'neiye2@index': {
+                            templateUrl: 'neiyeView2.html'
+                        }
+
+                    }
+                })
+
+                .state('index.neiye.sm', {
+                    url: '/sm',
+                    // abstract: true,
+                    views: {
+
+                        'sm@index': {
+                            templateUrl: 'sm.html'
+                        }
+
+                    }
+                });
+
+    });
+
+
+
+    app.controller("footerctrl",["$scope",function($scope){
+        $scope.footer="我是底部！！！！！";
+    }]);
+</script>
+</body>
+</html>

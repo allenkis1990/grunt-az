@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        .box{width:100px;height:100px;background:cornflowerblue;}
+        .main{position:relative; width:400px;height:400px;border:5px solid blueviolet;margin-left:25%;}
+        .main2{position:relative; width:600px;height:400px;border:5px solid blueviolet;margin-left:25%;}
+        .a1{width:50px; height:50px; background:#000; position: absolute; top:50px;}
+        .a2{width:50px; height:50px; background:greenyellow; position: absolute; top:130px;}
+    </style>
+</head>
+<body ng-controller="myCon">
+
+
+<div class="box" my-dir>
+    <button ng-click="toggleBox1()">BTN2</button>
+    <div style="width:50px;height:50px;background:green;" ng-show="onOff1"></div>
+</div>
+
+<div class="main" my-dir2>
+     <button ng-click="toggleBox()">BTN</button>
+     <div class="a1" ng-show="onOff"></div>
+     <div class="a2"></div>
+</div>
+
+
+
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script>
+    var app=angular.module("myApp",[],function(){});
+    app.controller("myCon",function($scope){
+
+    });
+    app.directive("myDir",function(){
+        return {
+            restrict:"ECAM",
+            replace:true,
+            //require:"?myDir2",
+            link:function(scope,ele,attr){
+                $(ele).click(function(){
+                    $(this).animate({"margin-left":"400px"},2000);
+                });
+            }
+        }
+    });
+
+    app.directive("myDir2",function(){
+        return {
+            restrict:"ECAM",
+            replace:true,
+
+            controller:function($scope){
+                $scope.onOff=true;
+                $scope.toggleBox=function(){
+                    $scope.onOff=!$scope.onOff;
+                };
+
+                $scope.onOff1=true;
+                $scope.toggleBox1=function(){
+                    $scope.onOff1=!$scope.onOff1;
+                };
+            },
+            link:function(scope,ele,attr){
+               $(ele).find(".a1").click(function(){
+                    $(this).animate({"left":"300px"})
+                });
+
+                $(ele).find(".a2").click(function(){
+                    $(this).animate({"left":"300px"})
+                });
+                ele.attr("class","main2");
+
+              /*  $(ele).click(function(){
+                    $(this).animate({"left":"300px"});
+                });*/
+
+            }
+        }
+    });
+</script>
+</body>
+</html>

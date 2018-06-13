@@ -1,0 +1,213 @@
+///////////  Text  ////////////////
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.text-r{
+  text-align: right;
+}
+
+
+///////////  Float  ////////////////
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+
+
+////////////////  Clear float  ////////////////
+.clear{
+  overflow:hidden;
+  _zoom:1;
+}
+
+////////////////  Hide  ////////////////
+.hide{
+  display:none;
+}
+
+.v-hidden {
+  visibility: hidden;
+}
+
+////////////////  Input  ////////////////
+input{
+
+  &:focus{
+    outline: 0;
+  }
+}
+
+////////////////  Link  ////////////////
+a{
+  text-decoration: none;
+  color:#aaa;
+}
+
+////////////////  position  ////////////////
+.rel{
+  position: relative;
+}
+
+.abs{
+  position: absolute;
+}
+
+////////////////  display  ////////////////
+.block{
+  display: block;
+}
+.in-block{
+  display: inline-block;
+}
+.auto{
+  margin:0px auto;
+}
+.radius(@radius:3px){
+  -webkit-border-radius:@radius;
+  -moz-border-radius:@radius;
+  border-radius:@radius;
+}
+////////////////  公共  ////////////////
+.bor-d{
+  border:1px solid #ddd;
+}
+.height-1{height:257px;}
+.height-2{height:295px;}
+.height-3{height:220px;}
+
+.width-1{width:237px;}
+.width-2{width:533px;}
+.width-3{width:362px;}
+/***********top**************/
+.top{
+  width:100%;
+  height:30px;
+  background:#ededed;
+
+  .top-main{
+          width:1000px;
+          height:30px;
+          .auto;
+          font-size:12px;
+
+   span{
+       height:30px;
+       line-height:30px;
+       width:265px;
+       .fl;
+   }
+
+   .top-a{
+        width:135px;
+        height:30px;
+        .fr;
+        line-height:30px;
+
+     a{margin-left:6px;}
+   }
+  }
+}
+/***********banner**************/
+.banner{
+    width:1000px;
+    height:193px;
+    .auto;
+}
+/***********nav**************/
+.nav{
+  width:1000px;
+  height:37px;
+  .auto;
+  background:url(../../html/images/wujia/nav-bg.jpg);
+
+  li{
+    .fl;
+
+    a{color:#fff;
+      padding:0px 27px;
+      .in-block;
+      height:37px;
+      line-height:37px;
+      &:hover{background:#1a7fc9;}
+    }
+  }
+}
+/***********公共内容区**************/
+.common-con{
+  width:988px;
+  height:1000px;
+  .auto;
+  padding:6px;
+  background:#fff;
+}
+/***********友情链接**************/
+.f-link{
+  width:1000px;
+  height:45px;
+  background:#f0f0f0;
+  .auto;
+  line-height:45px;
+}
+.f-link span{
+  .fl;
+  font-size:18px;
+  margin-left:15px;
+}
+.f-link-list{
+  .fr;
+  margin-right:15px;
+  li{.fl;
+    a{
+      .in-block;
+      height:45px;
+      line-height:45px;
+      padding:0px 23px;
+      color:#777;
+    }
+  }
+}
+/***********底部版权**************/
+.footer{
+  width:1000px;
+  height:50px;
+  padding-bottom:200px;
+  margin:20px auto;
+  text-align:center;
+
+  a{
+    color:#407791;
+    font-size:12px;
+  }
+  span{
+    color:#70a4bd;
+    font-size:12px;
+    .in-block;
+  }
+}
+.tit{
+  width:100%;
+  height:32px;
+  color:#fff;
+  line-height:32px;
+  text-indent:15px;
+}
+.more{
+  .fr;
+  font-size:12px;
+  margin-right:1.3em;
+}
+/***********全蓝标题头**************/
+.tit1{
+  background:#54afee;
+}
+/***********半蓝标题头**************/
+.tit2{
+   width:100%;
+   height:32px;
+   background:url(../../html/images/wujia/tit-bg.png) no-repeat;
+   background-color:#f0f0f0;
+}

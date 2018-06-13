@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="myctrl">
+
+
+
+
+
+<div ng-bind-html="trs"></div>
+<div ng-include="'allenkis.html'"></div>
+<div ng-bind-html="allenkis"></div>
+<div ng-include="'11.html'"></div>
+<div class="main" ng-if="$scope.mark1 || $scope.mark2">2222222</div>
+<button ng-click="$scope.mark1=!$scope.mark1">a1</button>
+<button ng-click="$scope.mark2=!$scope.mark2">a2</button>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/angular-sanitize.min.js"></script>
+<script>
+    var html='<div>222</div>\n<div>333</div>';
+
+    var html2='<div>222</div><div>333</div>';
+    console.log(html);
+    console.log(html2);
+
+    var templateApp=angular.module('templateApp',[]);
+    templateApp.run(function($templateCache){
+//        var a=$templateCache.get('allenkis.html');
+//        console.log(a);
+        $templateCache.put('allenkis.html','<p style="font-size: 80px;color:red">我是艾伦克斯</p>' +
+        '<p style="font-size: 80px;color:red">我是艾伦克斯</p>' +
+        '<p style="font-size: 80px;color:red">我是艾伦克斯</p>');
+    });
+
+
+   var app= angular.module("myapp",['ngSanitize','templateApp']);
+
+
+    app.controller("myctrl",function($scope,$q,$http,$sce,$templateCache){
+
+
+
+        /*$templateRequest('11.html').then(function(data){
+            //console.log(data);
+        });*/
+
+        //$scope.a=$templateCache.get('allenkis.html');
+        //console.log($scope.a);
+        //$scope.trs=$sce.trustAsHtml($scope.a);
+        $scope.allenkis='<p style="font-size: 50px">刘伟恒</p>'
+        $scope.allenkis=$sce.trustAsHtml($scope.allenkis);
+        var def=$q.defer();
+
+        $http.get('11.html').then(function(data){
+            console.log(data.data);
+        });
+        function a(){
+            var def=$q.defer();
+            setTimeout(function(){
+                alert(1);
+                def.resolve('222');
+            },2000);
+            return def.promise;
+        }
+        a().then(function(data){
+            alert(data);
+        });
+        //console.log(def.resolve('11.html'));
+        //return def.promise;
+        /*$scope.mark1=true;
+        $scope.mark2=true;
+        $scope.obj={
+            name:"allen",
+            age:18,
+            fun:function(){
+                alert(this.name+this.age);
+            }
+        }
+        $scope.obj2={
+            name:"指向",
+            age:1188888
+        }
+        var obj2fun=angular.bind($scope.obj2,$scope.obj.fun); //改变指针指向$scope.obj2
+        obj2fun();//返回出一个函数 其实就是调用了原生的apply或者call*/
+
+        //$scope.obj.fun();
+    });
+</script>
+
+</body>
+</html>

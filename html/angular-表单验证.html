@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    .bor{border:1px solid red;}
+    input{outline: none;}
+    .red{color:red;position:absolute;left:265px;top:0px;}
+    .group{position:relative;}
+    .ng-valid         {color:blue;  }
+    .ng-invalid     { color:blue; }
+    .ng-pristine     { color:blue; }
+    .ng-dirty         {color:blue; }
+    /* really specific css rules applied by angular */
+    .ng-invalid-required         {color:blue;  }
+    .ng-invalid-minlength         { color:blue;}
+    .ng-valid-max-length         { color:blue; }
+    </style>
+</head>
+<body ng-controller="mycon">
+     <form name="myform"  novalidate ><!--禁用浏览器默认校验-->
+
+         <div class="group">
+             <label>用户名：</label>
+             <!--myform.username.$invalid验证不通过 && myform.username.$dirty为真的时候 加上bor这个CLASS-->
+             <input ng-class="{bor:myform.username.$invalid && myform.username.$dirty}" ng-model="username" type="text" name="username" ng-minlength="5" ng-maxlength="10" ng-pattern="/^[a-zA-z]/" ng-required="true"/>
+             <!--minlength的错误提示-->
+             <div>{{myform.username.$error}}</div>
+             <div class="red" ng-show="myform.username.$error.minlength">用户名不能小于5位</div>
+             <!--maxlength的错误提示-->
+             <div class="red"  ng-show="myform.username.$error.maxlength">用户名不能大于10位</div>
+             <div class="red"  ng-show="myform.username.$error.required&&myform.username.$dirty">用户名不能为空</div>
+             <!--pattern的错误提示-->
+             <div class="red"  ng-show="myform.username.$error.pattern">用户名首字母要为英文</div>
+         </div>
+         <br /><br />
+
+         <div class="group">
+             <label>密码：</label>
+             <input ng-class="{bor:myform.password.$invalid && myform.password.$dirty}" ng-model="password" type="password" name="password" ng-minlength="5" ng-maxlength="10" ng-required="true"/>
+             <div class="red" ng-show="myform.password.$error.minlength">密码不能小于5位</div>
+             <div class="red" ng-show="myform.password.$error.maxlength">密码不能大于10位</div>
+             <div class="red" ng-show="myform.password.$error.required && myform.password.$dirty">不能为空</div>
+         </div>
+         <br /><br />
+
+         <div class="group">
+             <label>确认密码：</label>
+             <input ng-class="{bor:myform.passwordconfirm.$invalid && myform.passwordconfirm.$dirty && password!=passwordconfirm}" ng-model="passwordconfirm" type="password" name="passwordconfirm" ng-maxlength="10" ng-required="true"/>
+             <div class="red" ng-show="password!==passwordconfirm && myform.password.$dirty && myform.passwordconfirm.$dirty">第二次密码输入与第一次不一致</div>
+         </div>
+
+         <br /><br />
+
+         <div class="group">
+             <label>年龄：</label>
+             <input ng-class="{bor:myform.number.$invalid && myform.number.$dirty}" ng-model="number" name="number" ng-required="true" max="99" min="10" type="number"/>
+             <div class="red" ng-show="myform.number.$error.max">年龄不能超过99岁</div>
+             <div class="red" ng-show="myform.number.$error.min">年龄不能小于10岁</div>
+             <div class="red" ng-show="myform.number.$error.required && myform.number.$dirty">请填写年龄</div><!--$dirty为改动的时候为空才触发开始为空不触发-->
+         </div>
+
+         <br /><br />
+
+         <div class="group">
+             <label>Email：</label>
+             <input ng-class="{bor:myform.email.$invalid && myform.email.$dirty}" ng-model="email" name="email" type="email" ng-required="true"/>
+             <div class="red" ng-show="myform.email.$error.email && myform.email.$dirty">请填写正确的Email</div>
+             <div class="red" ng-show="myform.email.$error.required && myform.email.$dirty">请填写邮箱</div>
+         </div>
+
+
+         <div class="group">
+            <input type="submit" value="提交"/>
+         </div>
+     </form>
+
+
+     <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+     <script type="text/javascript" src="../js/angular.min.js"></script>
+     <script>
+         var app=angular.module("myapp",[],function(){});
+         app.controller("mycon",function($scope){
+             //$scope.password="";
+             $scope.submitForm = function(isValid) {
+                 if (!isValid) {
+                     alert('验证失败');
+                 }
+
+                 if(!$scope.myform.username.$dirty){
+                     $scope.myform.username.$dirty=true;
+                 }
+                 if(!$scope.myform.password.$dirty){
+                     $scope.myform.password.$dirty=true;
+                 }
+                 if(!$scope.myform.passwordconfirm.$dirty){
+                     $scope.myform.passwordconfirm.$dirty=true;
+                 }
+                 if(!$scope.myform.number.$dirty){
+                     $scope.myform.number.$dirty=true;
+                 }
+                 if(!$scope.myform.email.$dirty){
+                     $scope.myform.email.$dirty=true;
+                 }
+
+
+             };
+         });
+/*
+         indexOf查找数组中某一元素的序列号
+         var arr=[1,"aa",9,4,2];
+         alert(arr.indexOf("aa"));
+*/
+     </script>
+</body>
+</html>

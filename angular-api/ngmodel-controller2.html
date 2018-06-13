@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="customControl">
+<head>
+    <title>ngModelController</title>
+    <meta charset="utf-8">
+    <script src="../angular-1.3.2.js"></script>
+    <script src="script.js"></script>
+    <link type="text/css" href="../bootstrap.css" rel="stylesheet" />
+    <style>
+        *{font-family: 'MICROSOFT YAHEI'}
+    </style>
+</head>
+<body>
+<div class="container" ng-controller="ctrl">
+    <div class="page-header">
+        <h1>ngModelController- <small>创建一个实现了双向数据绑定的可编辑文本区域</small></h1>
+    </div>
+    <form role="form" name="myForm">
+        <div class="form-group">
+            <div contenteditable name="myWidget" ng-model="userContent"  class="form-control" required default-text="请输入内容"></div>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-default btn-primary" ng-click="setNone()">设置为'抱歉,我没有想输入的内容'</button>
+        </div>
+        <div class="alert alert-danger" role="alert" ng-show="myForm.myWidget.$error.required">
+            <strong>Oh!</strong> 必填!
+        </div>
+    </form>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">用户输入的内容为:</h3>
+        </div>
+        <div class="panel-body">
+            {{userContent}}
+        </div>
+    </div>
+</div>
+
+<script src="../js/angular.min2.js"></script>
+<script>
+    var app = angular.module('customControl',[]);
+    app.controller('ctrl',function($scope){
+        $scope.setNone = function(){
+            $scope.userContent = '抱歉,我没有想输入的内容'
+        }
+
+    });
+    app.directive('contenteditable',function(){
+        return {
+            restrict:'A',
+            require:'?^ngModel',
+            link:function(scope,element,attrs,ngModel){
+                if(!ngModel){
+                    return
+                }
+                //一开始scope.userContent是空
+
+                ngModel.$render = function(){
+                    element.html(ngModel.$viewValue || attrs.defaultText)
+                };
+                element.bind('focus',function(){
+                    if(element.html()==attrs.defaultText){
+                        element.html('')
+                    }
+                });
+                element.bind('keyup',function(){
+                    console.log(scope.userContent);
+                    ngModel.$setViewValue(element.html());
+                    console.log('$viewValue为:'+ngModel.$viewValue);
+                    console.log('$modelValue为:'+ngModel.$modelValue);
+                });
+                ngModel.$parsers.push(function(value){
+                    return value.toUpperCase()
+                })
+            }
+        }
+    });
+</script>
+</body>
+</html>

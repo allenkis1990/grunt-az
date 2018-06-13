@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+<div>累计已选：{{count}},还差：<span ng-if="24-count>0">{{24-count}}</span><span ng-if="24-count<=0">0</span></div>
+<div style="margin-top:15px;">必修课：</div>
+<ul>
+    <li ng-repeat="item in arr1"><input type="checkbox" ng-click="fn($event,item)">{{item.name}}</li>
+</ul>
+
+<div>选修课：</div>
+<ul>
+    <li ng-repeat="item in arr2"><input type="checkbox" ng-click="fn($event,item)">{{item.name}}</li>
+</ul>
+
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/angular2.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope){
+
+        $scope.count=0;
+        $scope.arr1=[
+            {name:'必修1',count:2,isMust:true},
+            {name:'必修2',count:3,isMust:true},
+            {name:'必修3',count:2,isMust:true},
+            {name:'必修4',count:4,isMust:true}
+        ];
+
+        $scope.arr2=[
+            {name:'选修1',count:5,isMust:false},
+            {name:'选修2',count:6,isMust:false},
+            {name:'选修3',count:7,isMust:false},
+            {name:'选修4',count:8,isMust:false}
+        ];
+
+        $scope.fn=function(e,item){
+
+            if(e.target.checked==true){
+                if($scope.count>=24){
+                    alert('大于24不能再选');
+                    e.target.checked=false;
+                    return false;
+                }
+                $scope.count=$scope.count+item.count;
+                console.log($scope.count);
+            }else{
+                $scope.count=$scope.count-item.count;
+                console.log($scope.count);
+            }
+
+        }
+
+    });
+
+
+</script>
+</body>
+</html>

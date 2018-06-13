@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+<button lwhtest="111" ng-click="fn()" ng-disabled="submitable">click</button>
+
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/angular2.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope){
+        $scope.fn=function(){
+            $scope.submitable=true;
+        }
+    });
+
+    app.directive('lwhtest',function(){
+        return {
+            link:function($scope,ele,attr,ngModel){
+                console.log(attr.lwhtest);
+                if(attr.lwhtest==='111'){
+                    $(ele).css('display','block');
+                }else{
+                    $(ele).css('display','none');
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

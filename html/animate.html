@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    .main{width:200px; height:200px; background:red; display:none;}
+</style>
+<body>
+<input type="button" value="click me" class="btn" />
+<div class="main"></div>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    /*$(".btn").click(function(){
+          $(".main").show("slow",function(){
+              $(this).hide("slow");
+          });
+    });*/
+
+    $(".btn").click(function(){
+        $(".main").animate({
+
+            "height":"toggle",
+            "width":"hide"
+        });
+    });
+    /*$(".btn").click(function(){
+        $(".main").fadeTo("1000","0.3");
+    });*/
+
+    /*$(".btn").click(function(){
+        $(".main").toggle();
+    });*/
+
+    /*$(".btn").click(function(){
+        $(".main").fadeIn("1000",function(){
+            $(this).fadeOut();
+        });
+    });*/
+    /*$(".btn").click(function(){
+        $(".main").fadeToggle("1000");
+
+    });*/
+
+    /*var div=0;
+    for(var i=0;i<10;i++){
+        div=$("<div class='odiv'></div>")
+        $("body").append(div);
+        div.css("height","100px");
+    }*/
+
+</script>
+</body>
+</html>

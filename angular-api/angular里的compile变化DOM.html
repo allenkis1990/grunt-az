@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="myctrl">
+
+<div mydir class="aaaaa"><em>333333</em><em>333333</em><em>333333</em></div>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+   var app= angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+
+    });
+    app.directive('mydir',function(){
+        return {
+            //replace:true,
+            //template:'<div class="main"><span ng-transclude></span></div>',
+            transclude:'element',
+            link:function($scope,ele,attr,ctrl,$transclude){
+                //console.log(attr);
+                //console.log($transclude);
+                $transclude($scope,function(clone){
+                    console.log(clone);
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

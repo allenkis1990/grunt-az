@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+
+        /*flex布局不需要设置宽度   高度可以设置设置高度后布局最大能拉伸到这个高度值*/
+
+        *{margin:0;padding:0;}
+        html,body{
+            height:100%;
+        }
+        .box{
+            height: 100%;
+            display:-webkit-box;
+            display:flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+        .main{
+            display:-webkit-box;
+            flex:1;
+            display:flex;
+        }
+        .item{
+            display:flex;
+            border:1px solid #fff;
+            background:deepskyblue;
+            justify-content:center;
+            align-items:center;
+            color:#fff;
+            flex:1;
+        }
+
+        .main:nth-child(2) .item:nth-child(2){
+            flex:0 0 60%;/*第三个参数初始占多少宽度*/
+            margin-left:20px;
+            margin-right:20px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <div class="box">
+        <div class="main">
+            <div class="item">header</div>
+        </div>
+
+        <div class="main">
+            <div class="item">left</div>
+            <div class="item">center</div>
+            <div class="item">right</div>
+        </div>
+
+        <div class="main">
+            <div class="item">fotter</div>
+        </div>
+    </div>
+
+
+</body>
+</html>

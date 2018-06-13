@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+
+<div parent>
+    <div child></div>
+</div>
+
+<script src="../js/angular2.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope){
+
+    });
+    app.directive('parent',function(){
+        return {
+            scope:true,
+            controller:function($scope){
+                this.fn=function(){
+                    alert(1);
+                }
+                $scope.model={
+                    a1:'aaa',
+                    a2:'bbb'
+                }
+            }
+        }
+    });
+
+    app.directive('child',function(){
+        return {
+            require:'?^parent',
+            /*controller:function($scope){
+                console.log($scope.model);
+            },*/
+            link:function($scope,ele,attr,ctrl){
+                ctrl.fn();
+                console.log($scope.model);
+            }
+        }
+    });
+</script>
+</body>
+</html>

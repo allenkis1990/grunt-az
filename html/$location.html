@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<div ng-controller="parentCtrl">
+    <div ng-controller="erzi">
+        <div ng-controller="sunzi"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("parentCtrl",function($scope){
+
+
+        $scope.$on("parent-data",function(d,data){
+            console.log(data);
+        });
+
+    });
+    app.controller("erzi",function($scope){
+
+        $scope.$emit('parent-data', '我是父亲');
+        $scope.$broadcast('erzi-data', '我是儿子');
+
+    });
+    app.controller("sunzi",function($scope){
+
+        $scope.$on('erzi-data',function(d,data){
+            console.log(data);
+        });
+
+    });
+
+
+
+
+   /* angular.module("myapp",[],function($provide,$filterProvider,$controllerProvider){
+           $provide.factory("obj",function(){
+              return [
+                  {name:"allen",age:18,love:"ball"},
+                  {name:"allen",age:20,love:"ball222"},
+                  {name:"jack",age:30,love:"ball333"}
+              ];
+           });
+
+         $controllerProvider.register("mycon",function($scope,obj,$filter){
+               $scope.obj=obj;
+
+               $scope.num=$filter('currency')(1990312);
+         });
+
+        $filterProvider.register("allenkis",function(){
+            return function(obj){
+                var arr=[];
+                //console.log(obj);
+                angular.forEach(obj,function(item){
+
+                    if(item.name=='allen'){
+                        arr.push(item);
+                    }
+
+                });
+
+                return arr;
+            }
+        });
+    });  */
+
+
+
+
+
+
+  /*  app.controller("mycon",function($scope){
+        $scope.obj=[
+            {name:"allen",age:18,love:"ball"},
+            {name:"allen",age:20,love:"ball222"},
+            {name:"jack",age:30,love:"ball333"}
+        ];
+    });
+
+    app.filter("allenkis",function(){
+
+        return function(obj){
+            var arr=[];
+            //console.log(obj);
+           angular.forEach(obj,function(item){
+
+               if(item.name=='allen'){
+                   arr.push(item);
+               }
+
+           });
+
+            return arr;
+        }
+    }); */
+</script>
+</body>
+</html>

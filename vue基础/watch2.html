@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <input type="text" v-model="count" />
+    </div>
+
+
+
+    <script>
+
+        //局部注册组件
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                count:'',
+            },
+            methods:{
+
+            },
+
+            mounted:function(){
+                this.$watch('count',function(nv){
+                    if(nv){
+                        console.log(nv);
+                    }
+                });
+            }
+        });
+        //immediate 加载时就触发
+        /*vm.$watch('num',function(nv){
+            if(nv){
+                if(nv===100){
+                    vm.num=666666666;
+                }
+            }
+        },{deep:true,immediate:true});*/
+    </script>
+</body>
+</html>

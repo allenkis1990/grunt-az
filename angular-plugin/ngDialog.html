@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/ngDialog.css" />
+    <link rel="stylesheet" href="../css/ngDialog-plain.css" />
+    <link rel="stylesheet" href="../css/ngDialog-default.css" />
+</head>
+<body ng-controller="con">
+
+<script src="../js/angular.min2.js"></script>
+<script src="../js/ngDialog.js"></script>
+<script type="text/ng-template" id="templateId">
+    <h1>Template heading</h1>
+    <p>Content goes here</p>
+    <div>{{value}}</div>
+    <button ng-click="lwhAlert($event)">click</button>
+</script>
+<script>
+    var app=angular.module('app',['ngDialog']);
+    app.config(['ngDialogProvider', function (ngDialogProvider) {
+        ngDialogProvider.setDefaults({
+            className: 'ngdialog-theme-default',
+            //plain: true,
+            showClose: true,
+            closeByDocument: true,
+            closeByEscape: true
+        });
+    }]);
+    app.controller('con',function($scope,ngDialog,$timeout){
+        $timeout(function(){
+            $scope.value=666;
+        },3000);
+
+
+        $scope.lwhAlert=function(e){
+            var id=e.target.parentElement.parentElement.id;
+            console.log(id);
+            ngDialog.close(id);
+
+        }
+
+        var dia=ngDialog.open({
+            template: 'templateId',
+            //plain:true, 使用标签
+            scope:$scope,
+            preCloseCallback:function(){
+                ngDialog.open({
+                    plain:true,
+                    template:'<div>111111</div>'
+                });
+                /*var nestedConfirmDialog = ngDialog.openConfirm({
+                    template:'\
+                <p>Are you sure you want to close the parent dialog?</p>\
+                <div class="ngdialog-buttons">\
+                    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">No</button>\
+                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm()">Yes</button>\
+                </div>',
+                    plain: true
+                });*/
+            }
+        });
+        dia.closePromise.then(function(data){
+            alert(data);
+        });
+
+        $scope.confirm=function(){
+            alert(111);
+        }
+
+    });
+</script>
+
+</body>
+</html>

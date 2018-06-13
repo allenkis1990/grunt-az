@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+<button ng-click="fn()"> click</button>
+
+
+<script src="../js/angular2.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.run(['$rootScope',function($rootScope){
+        $rootScope.$on('a',function(e,data){
+            //if(newVal){
+                console.log(data);
+            //}
+        });
+       // console.log(1);
+    }]);
+
+
+    app.controller('con',function($rootScope,$scope){
+        $rootScope.a=0;
+        $scope.fn=function(){
+            $rootScope.$broadcast('a',1);
+        }
+    });
+</script>
+</body>
+</html>

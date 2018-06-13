@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0; padding:0;}
+        .main{width:200px; height:200px; background:#0000ff;}
+    </style>
+</head>
+<body>
+
+<div class="main"></div>
+<!--<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>-->
+<script>
+    /*var obj={
+        funList:[],
+        add:function(fn){
+            this.funList.push(fn);
+        },
+        outPut:function(){
+            this.funList.forEach(function(fn) {
+                fn();
+            })
+        }
+    }
+    function fn1(){alert(111);}
+    function fn2(){alert(222);}
+    obj.add(fn1);
+    obj.add(fn2);
+
+    obj.outPut();*/
+
+    function Callbacks(options) {
+        var list = [];
+        var self;
+        var firingStart;
+        var memory;
+
+        function _fire(data) {
+            memory = options === 'memory' && data;
+            firingIndex = firingStart || 0;
+            firingStart = 0;
+            firingLength = list.length;
+            for (; list && firingIndex < firingLength; firingIndex++) {
+                list[firingIndex](data)
+            }
+        }
+
+        self = {
+            add: function(fn) {
+                var start = list.length;
+                list.push(fn)
+                console.log(list);
+                if (memory) {
+                    firingStart = start; //获取最后一值
+                    _fire(memory);
+                }
+            },
+            fire: function(args) {
+                if (list) {
+                    _fire(args)
+                }
+            }
+        }
+
+        return self;
+
+    }
+    function fn1(){
+        alert(1);
+    }
+
+    function fn2(){
+        alert(2);
+    }
+    function fn3(){
+        alert(3);
+    }
+    var cbs = Callbacks('memory');
+    cbs.add(fn1);
+    cbs.fire();
+    cbs.add(fn2);
+    cbs.fire();
+    cbs.add(fn3);
+    cbs.fire();
+
+</script>
+</body>
+</html>

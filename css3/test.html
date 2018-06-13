@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .main{width:200px;height:200px;border:1px solid #000;margin:100px auto;position:relative;}
+        .circle{overflow:hidden; width:100px;height:200px;position: absolute;top:0;}
+        .left{left:0;}
+        .right{right:0;}
+        .process{top:0;width:160px;height:160px;border:20px solid pink;border-radius:50%;position:absolute;}
+        .process-left{left:0;-webkit-animation: circleProgressLoad_left 5s linear infinite;}
+        .process-right{right:0;-webkit-animation: circleProgressLoad_right 5s linear infinite;}
+
+
+
+        @-webkit-keyframes circleProgressLoad_right{
+            0%{
+                border-top:20px solid #ED1A1A;
+                border-right:20px solid #ED1A1A;
+                -webkit-transform: rotate(45deg);
+            }
+            50%{
+                border-top:20px solid rgb(232, 232, 12);
+                border-right:20px solid rgb(232, 232, 12);
+                border-left:20px solid rgb(81, 197, 81);
+                border-bottom:20px solid rgb(81, 197, 81);
+                -webkit-transform: rotate(225deg);
+            }
+            100%{
+                border-left:20px solid green;
+                border-bottom:20px solid green;
+                -webkit-transform: rotate(225deg);
+            }
+        }
+        @-webkit-keyframes circleProgressLoad_left{
+            0%{
+                border-bottom:20px solid #ED1A1A;
+                border-left:20px solid #ED1A1A;
+                -webkit-transform: rotate(45deg);
+            }
+            50%{
+                border-bottom:20px solid rgb(232, 232, 12);
+                border-left:20px solid rgb(232, 232, 12);
+                border-top:20px solid rgb(81, 197, 81);
+                border-right:20px solid rgb(81, 197, 81);
+                -webkit-transform: rotate(45deg);
+            }
+            100%{
+                border-top:20px solid green;
+                border-right:20px solid green;
+                border-bottom:20px solid green;
+                border-left:20px solid green;
+                -webkit-transform: rotate(225deg);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+    <div class="main">
+        <div class="circle left">
+            <div class="process process-left"></div>
+        </div>
+        <div class="circle right">
+            <div class="process process-right"></div>
+        </div>
+    </div>
+
+</body>
+</html>

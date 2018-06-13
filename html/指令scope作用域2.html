@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="mycon">
+
+<mydir1 job="web">
+    <mydir2 came="name"></mydir2>
+</mydir1>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",function($scope){
+
+    });
+    app.directive("mydir1",function(){
+        return {
+            restrict:"ECAM",
+            replace:true,
+            template:"<div>11111<span ng-transclude='true'></span></div>",
+            controller:function($scope,$element,$transclude,$log,$attrs){
+                $scope.name="allenkis";
+                $attrs.job="web222";
+                //console.log($attrs.job);
+            },
+            transclude:true
+        }
+    });
+
+    app.directive("mydir2",function(){
+        return {
+            restrict:"ECAM",
+            replace:true,
+            template:"<div>22222</div>",
+            require:"^?mydir1",
+            scope:{
+                a:"=came"
+            },
+            controller:function($scope){
+                $scope.name=$scope.a;
+            },
+            link:function(scope,ele,attr){
+                  alert(scope.name);
+            }
+
+        }
+    });
+</script>
+</body>
+</html>

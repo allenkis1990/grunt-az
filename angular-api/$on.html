@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body ng-controller="myctrl">
+
+<div ng-controller="childCtrl">
+    <button ng-click="fn()">click</button>
+</div>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app= angular.module("myapp",[]);
+    app.controller("myctrl",function($timeout,$scope,$rootScope){
+        $timeout(function(){
+            $scope.aaa='111';
+            $scope.$broadcast('complete',$scope.aaa);
+        },3000);
+
+        //console.log(1);
+    });
+
+    app.controller("childCtrl",function($scope){
+
+        function fn(data){
+            $scope.aaa=data;
+            console.log(data);
+        }
+
+        $scope.$on('complete',function(e,data){
+            $scope.aaa=data;
+        });
+        $scope.fn=function(){
+            $scope.$watch('aaa',function(newVal){
+                if(newVal){
+                    console.log($scope.aaa);
+                }
+            });
+        }
+
+
+
+
+    });
+
+</script>
+</body>
+</html>

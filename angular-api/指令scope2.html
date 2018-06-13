@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="myctrl">
+
+
+<div mydir3 show="isShow"></div>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+
+
+   var app= angular.module("myapp",[]);
+
+
+    app.controller("myctrl",function($scope){
+        $scope.isShow=false;
+    });
+
+
+   app.directive('mydir3',function(){
+       return {
+           restrict:'A',
+           template:'<div ng-if="show==undefined?true:show">content!!!!!!</div>',
+           link:function($scope,ele,attr,mydirCtrl){
+
+           },
+
+           scope:{
+               show:'='
+           }
+       }
+   });
+</script>
+
+</body>
+</html>

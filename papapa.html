@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+        .remodal-overlay {
+            background: rgba(43, 46, 56, 0.9);
+        }
+        .remodal-overlay {
+            position: fixed;
+            z-index: 9999;
+            top: -5000px;
+            right: -5000px;
+            bottom: -5000px;
+            left: -5000px;
+            display: none;
+        }
+        .remodal-wrapper {
+            padding: 10px 10px 0;
+        }
+        .remodal-overlay, .remodal-wrapper {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        .remodal-wrapper {
+            position: fixed;
+            z-index: 10000;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: none;
+            overflow: auto;
+            text-align: center;
+            -webkit-overflow-scrolling: touch;
+        }
+        .remodal {
+            max-width: 700px;
+        }
+        .remodal, .remodal-wrapper::after {
+            vertical-align: middle;
+        }
+        .remodal {
+            box-sizing: border-box;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 35px;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            color: #2b2e38;
+            background: #fff;
+        }
+        .remodal-is-initialized {
+            display: inline-block;
+        }
+        .remodal {
+            position: relative;
+            outline: none;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        .remodal, [data-remodal-id] {
+            display: none;
+        }
+
+        .m-exam-dialog {
+            font-family: "微软雅黑";
+            font-size: 13px;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .m-exam-dialog .d-qus-ans, .m-exam-dialog .d-qus-slt, .m-exam-dialog .d-qus-tit {
+            position: relative;
+        }
+
+        .m-exam-dialog .d-qus-label {
+            display: inline-block;
+            background-color: #bae2fc;
+            color: #3ca2e2;
+            height: 30px;
+            width: 50px;
+            line-height: 30px;
+            text-align: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .m-exam-dialog .d-qus-tit .d-qus-body {
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .m-exam-dialog .d-qus-body {
+            padding-left: 65px;
+            margin-bottom: 25px;
+        }
+
+        .m-exam-dialog .d-qus-ans, .m-exam-dialog .d-qus-slt, .m-exam-dialog .d-qus-tit {
+            position: relative;
+        }
+
+        .m-exam-dialog .d-qus-label {
+            display: inline-block;
+            background-color: #bae2fc;
+            color: #3ca2e2;
+            height: 30px;
+            width: 50px;
+            line-height: 30px;
+            text-align: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .m-exam-dialog .d-qus-body {
+            padding-left: 65px;
+            margin-bottom: 25px;
+        }
+
+
+        .m-exam-dialog .d-slt {
+            padding: 0 5px;
+            margin-bottom: 8px;
+            background-color: #f2f2f2;
+            border: 1px solid #f2f2f2;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        .m-exam-dialog label {
+            padding: 5px 0;
+            display: inline-block;
+            width: 100%;
+        }
+        .m-exam-dialog input, .m-exam-dialog label {
+            cursor: pointer;
+        }
+        .gltrhover tr, .slt, a, i, input, label, textarea {
+            transition: all .4s;
+            -moz-transition: all .4s;
+            -webkit-transition: all .4s;
+            -o-transition: all .4s;
+        }
+
+
+        .m-exam-dialog .slt-txt {
+            padding-left: 5px;
+        }
+
+
+        .m-exam-dialog .slt-ed {
+            color: #3ca2e2;
+        }
+        .m-exam-dialog .d-slt:hover, .m-exam-dialog .slt-ed {
+            border: 1px solid #3ca2e2;
+        }
+
+
+        .m-exam-dialog .d-qus-ans {
+            padding-top: 5px;
+        }
+        .m-exam-dialog .d-qus-ans, .m-exam-dialog .d-qus-slt, .m-exam-dialog .d-qus-tit {
+            position: relative;
+        }
+
+
+        .remodal-confirm {
+            color: #fff;
+            background: #81c784;
+        }
+        .remodal-confirm, .remodal-cancel {
+            font: inherit;
+            display: inline-block;
+            overflow: visible;
+            min-width: 110px;
+            margin: 0;
+            padding: 12px 0;
+            cursor: pointer;
+            -webkit-transition: background 0.2s;
+            transition: background 0.2s;
+            text-align: center;
+            vertical-align: middle;
+            text-decoration: none;
+            border: 0;
+            outline: 0;
+        }
+
+
+        .remodal-cancel {
+            color: #fff;
+            background: #e57373;
+        }
+        .remodal-confirm, .remodal-cancel {
+            font: inherit;
+            display: inline-block;
+            overflow: visible;
+            min-width: 110px;
+            margin: 0;
+            padding: 12px 0;
+            cursor: pointer;
+            -webkit-transition: background 0.2s;
+            transition: background 0.2s;
+            text-align: center;
+            vertical-align: middle;
+            text-decoration: none;
+            border: 0;
+            outline: 0;
+        }
+    </style>
+
+
+</head>
+<body>
+<div class="remodal-overlay remodal-is-opened" style="display: block;"></div>
+<div class="remodal-wrapper remodal-is-opened" style="display: block;"><div class="remodal remodal-is-initialized remodal-is-opened" id="question_remodal" tabindex="-1"><p id="modal-content"><div class="m-exam-dialog"><div class="d-qus-tit"><span class="d-qus-label">题目</span><div class="d-qus-body" data-id="topic">弹窗题00063
+    <div class="remodal-wrapper remodal-is-opened" style="display: block;"><div class="remodal remodal-is-initialized remodal-is-opened" id="question_remodal" tabindex="-1"><p id="modal-content"><div class="m-exam-dialog answer-error"><div class="d-qus-tit"><span class="d-qus-label">题目</span><div class="d-qus-body" data-id="topic">弹窗题00063
+    0+1=？
+    </div>
+</div>
+    <div class="d-qus-slt"><span class="d-qus-label">选项</span>
+        <div class="d-qus-body" data-id="configItem">
+            <div class="d-slt y" data-sign="yes"><label><input data-id="0" name="hb_nb_exam_select_1488521462469"
+                                                               type="radio">A.<span class="slt-txt">1</span></label>
+            </div>
+            <div class="d-slt n slt-ed" data-sign="no"><label><input data-id="1" name="hb_nb_exam_select_1488521462469"
+                                                                     type="radio">B.<span
+                    class="slt-txt">2</span></label></div>
+            <div class="d-slt n" data-sign="no"><label><input data-id="2" name="hb_nb_exam_select_1488521462469"
+                                                              type="radio">C.<span class="slt-txt">3</span></label>
+            </div>
+            <div class="d-slt n" data-sign="no"><label><input data-id="3" name="hb_nb_exam_select_1488521462469"
+                                                              type="radio">D.<span class="slt-txt">4</span></label>
+            </div>
+        </div>
+    </div>
+    <div class="d-qus-ans"></div>
+</div>
+    </p><p id="modal-answer" style="color:blue; text-align: left;"></p><br>
+    <p data-remodal-message-id="modal-message" style="color:red;margin-top: 5px">回答错误，请重新作答！您还可以作答2次。</p>
+    <button data-remodal-action="confirm" class="remodal-confirm">确定</button>
+    <button data-remodal-action="cancel" class="remodal-cancel" style="display: none;">关闭窗口</button>
+</div>
+</div>
+
+</body>
+</html>

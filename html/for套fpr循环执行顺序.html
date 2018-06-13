@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+<script>
+    /*for(var i=0;i<10;i++){
+        for(var j=0;j<10;j++){
+           alert(i+"*"+j);  //for套for循环先从最里面那个循环执行也就是1&1 1&2 1&3。。。。1&9然后2&1 2&2 2&3 ..2&9 1&9然后3&1 3&2 3&3 ..3&9
+        }
+    }*/
+
+/*
+    var box=/google[^a-z]+/;
+    var str="google";
+    alert(box.test(str));
+*/
+
+    /*var box=/8(.+?)8/g;
+    var str="8google8 8google8 8google8 "
+    //alert(box.test(str));
+    var a=str.replace(box,"<strong>$1</strong>");
+    document.write(a);*/
+   // var box=/([a-z]+)\s([0-9]{4})/;  //括号括起来的话最后用exec方法调用的是包含总字符串和被分割的两个字符的数组
+    //var box=/([a-z]+)\s(?:[0-9]{4})/;//如果前面加上?:的话则使用exec后不会返回那个带?:的
+    //var str="allenkis 1990"
+   // var a=box.exec(str);
+   // alert(a[0]);
+    //alert(a instanceof Array); a是一个数组
+    //alert(box.test(str));
+    var box=/[1-9][0-9]{5}/;
+    var str="724000";//要6位 第一个不为0 要是数字
+    alert(box.test(str));
+</script>
+</body>
+</html>

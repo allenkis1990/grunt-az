@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .main{width:600px;height:250px;border:1px solid deepskyblue;}
+    </style>
+</head>
+<body ng-controller="con">
+
+<div contenteditable="true" class="main" ng-model="edit" lwhtest></div>
+<div>{{edit}}</div>
+
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/angular2.min.js"></script>
+<script>
+    /*$('.main').keyup(function(){
+        console.log($(this).text());
+    });*/
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope){
+        $scope.edit='我1212121212121212121212';
+        $scope.$watch('edit',function(val){
+            console.log(val);
+        });
+    });
+
+    app.directive('lwhtest',function($timeout){
+        return {
+            replace:true,
+            require:'^?ngModel',
+            link:function($scope,ele,attr,ngModel){
+                ngModel.$render=function(){ //用timeout也可以
+                    var modelVal=ngModel.$modelValue || ngModel.$viewValue;
+                    console.log(modelVal);
+                    $(ele).text(modelVal);
+                };
+                $(ele).keyup(function () {
+                    //console.log($(this).text());
+                    ngModel.$setViewValue($(this).text());
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

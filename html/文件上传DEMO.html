@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button>BTN</button>
+<form name="myform">
+    <input type="file" name="file" />
+</form>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    var form = document.forms["myform"];
+    //var file=form["file"].files[0];
+
+
+    $("button").click(function(){
+        if(form["file"].files.length>0){
+// console.log(form["file"].files[0]);
+            console.log(form["file"].files[0]);
+            var reader = new FileReader();
+            reader.onloadstart=function(){
+                alert(11);
+            }
+        }
+
+    });
+
+</script>
+</body>
+</html>

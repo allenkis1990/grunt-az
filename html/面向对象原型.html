@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    /*function obj(){
+
+        this.name="jack";
+     this.sfun=function(){
+         alert(222);
+     }
+if(typeof this.fun !="function"){
+    alert(111); //使用typeof 这个初始化时候只执行一次 多个初始化时候也只执行一次
+    obj.prototype.fun=function(){return this.name;}
+}
+
+    }
+
+    var ob=new obj();
+    var ob1=new obj();
+*/
+    function obj1(){
+        this.name="jack";
+        this.age="18"
+    }
+    obj1.prototype.run=function(){
+        alert(this.name);
+    }
+    /*var kk=new Object();
+    obj1.call(kk)
+    alert(kk.name);
+    function obj2(){
+        obj1.call(this)
+    }  //在构造函数里面冒充对象obj1
+    var obj11=new obj2();
+    alert(obj11.name);*/
+   function obj2(){
+   }
+
+    obj2.prototype=new obj1();
+    var obj222=new obj2();
+    obj222.run();
+</script>
+</body>
+</html>

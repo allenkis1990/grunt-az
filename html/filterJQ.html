@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{list-style: none;}
+        .box{width:388px;height:500px;border:1px solid red;margin:30px auto;}
+        .text{width:85%;margin:10px auto;}
+        ul{border:1px solid #eee;}
+        li{border-bottom:1px solid #eee;}
+        .yellow{background:yellow;}
+    </style>
+</head>
+<body>
+<div class="box">
+    <input type="text" class="text"/>
+    <ul>
+        <li>姓名：<span>aaaaaaa</span></li>
+        <li>姓名：<span>bbbbbbb</span></li>
+        <li>姓名：<span>ccccccc</span></li>
+        <li>姓名：<span>ddddddd</span></li>
+        <li>姓名：<span>eeeeeee</span></li>
+    </ul>
+</div>
+
+<div>
+    <p>哈哈哈</p>
+    <p>呵呵呵</p>
+</div>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+      var text;
+      $(".text").keyup(function(){
+          text=$(this).val();
+          $("ul li").hide().find("span").filter(":contains('"+text+"')").parent().show();
+      });
+
+    $(document).click(function(e){
+        $(e.target).closest("p").toggleClass("yellow");
+        return false;
+    });
+
+</script>
+</body>
+</html>

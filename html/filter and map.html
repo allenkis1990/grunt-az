@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+       .a1,.a2,.a3{width:200px; height:200px;}
+       .a1{border:5px solid red;}
+       .a2{border:5px solid blue;}
+       .a3{border:5px solid green;}
+    </style>
+</head>
+<body>
+   <div class="a1"></div>
+   <div class="a2">我</div>
+   <div class="a3"></div>
+
+
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    $("div").filter(function(){
+        return $(this).html()=="我";
+    }).css("background","#000");
+
+    var k=$("div").map(function(){
+        return $(this).index();
+    });
+    var j="";
+    k.push("6");
+    //alert(k.length);
+
+    for(var i=0;i< k.length;i++){
+        var l=new String(k[i]);
+        j+=l;
+        //document.write(k[i]);
+        $("body").html(j);
+
+    }
+    //alert(j);
+</script>
+</body>
+</html>

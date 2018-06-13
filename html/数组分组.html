@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var arr=[
+        {page:1,ischecked:true},
+        {page:2,ischecked:false},
+        {page:3,ischecked:false},
+        {page:4,ischecked:false},
+        {page:5,ischecked:false},
+        {page:6,ischecked:false},
+        {page:7,ischecked:false},
+        {page:8,ischecked:false},
+        {page:9,ischecked:false},
+        {page:10,ischecked:false},
+        {page:11,ischecked:false},
+        {page:12,ischecked:false},
+        {page:13,ischecked:false},
+        {page:14,ischecked:false},
+        {page:15,ischecked:false},
+        {page:16,ischecked:false},
+        {page:17,ischecked:false},
+        {page:18,ischecked:false},
+        {page:19,ischecked:false},
+        {page:20,ischecked:false},
+        {page:21,ischecked:false},
+        {page:22,ischecked:false},
+        {page:23,ischecked:false}
+
+    ]
+
+    var bigArr=[];
+    for(var i=0;i<Math.ceil(23/5);i++){
+        bigArr[i]=arr.splice(0,5);
+    }
+    console.log(bigArr);
+    console.log(arr);
+</script>
+</body>
+</html>

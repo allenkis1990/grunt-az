@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="mycon">
+    <hello biaoti="title">{{text}}</hello>
+</div>
+
+<input type="checkbox" ng-model="a1" ng-click="fn()" />
+<input type="checkbox" ng-model="a1" />
+
+<script src="http://www.hubwiz.com/scripts/angular.min.js"></script>
+
+<script>
+var app=angular.module("myapp",[]);
+app.controller("mycon",function($scope){
+    $scope.a1=false;
+    $scope.fn=function(){
+        $scope.a1=!$scope.a1;
+    }
+   $scope.title="我是Allenkis";
+   $scope.text="我是Allenkis我是Allenkis我是Allenkis我是Allenkis";
+});
+
+/*app.directive("hello",function(){
+    return{
+        restrict:"E",
+        replace:true,
+        transclude:true,
+        templateUrl:"angulartem.html",
+        scope:{
+            mytitle:"=biaoti"
+        },
+        link:function(scope){
+            scope.lock=false;
+            scope.fn=function(){
+                scope.lock=!scope.lock;
+            };
+        }
+    };
+});*/
+</script>
+</body>
+</html>

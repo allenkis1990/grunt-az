@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{padding:0;margin:0;}
+        .main{width:300px;height:170px;background:blue;margin:300px auto;position:relative;}
+        .main .modal{width:100%;height:100%;background:#000;opacity:0.5;position:absolute;left:0px;top:170px;}
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="modal"></div>
+</div>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+
+    var l=$('.main').offset().left;
+    var t=$('.main').offset().top;
+    var h=$('.main').height();
+    var w=$('.main').width();
+    console.log(t);
+    $('.main').mouseenter(function(e){
+        var clx=e.clientX;
+        var cly= e.clientY;
+        //console.log(e);
+        //console.log(e.clientY);
+
+        //左边
+        if((clx>=l&&clx<=l+(w/2))&&(cly>=t&&cly<=t+h)){
+            $('.modal').stop(true,true).animate(
+                {
+                    left:-w,
+                    top:0
+                },'fast'
+            ).stop(true,true).animate(
+                {
+                    left:0,
+                    top:0
+                },'fast'
+            );
+            console.log(11);
+        }
+
+        //右边
+        if((clx<=l+w&&clx>l+(w/2))&&(cly>=t&&cly<=t+h)){
+            $('.modal').stop(true,true).animate(
+                    {
+                        left:w,
+                        top:0
+                    },'fast'
+            ).stop(true,true).animate(
+                    {
+                        left:0,
+                        top:0
+                    },'fast'
+            );
+            //console.log(11);
+        }
+
+        //上面
+        if((clx>=l&&clx<=l+w)&&(cly>=t&&cly<=t+(h/2))){
+            $('.modal').stop(true,true).animate(
+                    {
+                        left:0,
+                        top:-h
+                    },'fast'
+            ).stop(true,true).animate(
+                    {
+                        left:0,
+                        top:0
+                    },'fast'
+            );
+            console.log(1);
+        }
+    });
+</script>
+</body>
+</html>

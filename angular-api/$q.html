@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+
+<script type="text/javascript" src="../js/angular.min2.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope,$q,$http){
+        function doSomeThing(){
+            var def=$q.defer();
+            setTimeout(function(){
+                var obj={name:'allen'};
+                alert(11111);
+                def.notify('失败回调！');
+            },3000);
+            return def.promise;
+        }
+
+
+        //第一个是成功回调 第二个是失败回调 第三个是pending回调
+        doSomeThing().then(function(data){
+            alert('回调成功');
+            console.log(data);
+        },function(data){
+            console.log(data);
+        },function(){
+            alert(111111111);
+        });
+
+
+        /*$http.get('temp/dialog-temp.html').then(function(data){
+            console.log(data);
+        });*/
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+
+<script>
+    /*function abc(a,b){
+        c=a+b;
+        console.log(arguments.callee);
+    }
+    abc(1,2);*/
+
+
+    /*
+    function med(fn){
+        var outArg=Array.prototype.slice.call(arguments,1);
+        //console.log(outArg);
+        return function(){
+            var innerArg=Array.prototype.slice.call(arguments);
+            var newarr=outArg.concat(innerArg);
+            return fn.apply(null,newarr);
+        }
+    }
+    function ab(a,b){
+        return a+b;
+    }
+    var inner=med(ab,1);
+    alert(inner(2));*/
+
+
+    var data=[1,3,5];
+    function auto(data){
+        setTimeout(function(){
+            if(data.length>0){
+                var item=data.shift();
+                document.write(item);
+                setTimeout(arguments.callee,50);
+            }
+        },50);
+
+    }
+    auto(data.concat());
+
+    setTimeout(function(){
+        console.log(data);
+    },1000)
+
+
+    /*function med(data){
+        setTimeout()
+        var item=data.shift();
+    }*/
+    //med(data);
+
+</script>
+</body>
+</html>

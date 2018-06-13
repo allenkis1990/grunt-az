@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../public/themes/hongbo.css" rel="stylesheet">
+</head>
+<body>
+ <div class="header">
+     <div class="header-main">
+         <div class="logo">
+             <a href="#"><img src="images/logo2.png" width="162" height="75" /></a>
+         </div>
+         <ul class="nav-list">
+             <li class="hover"><a href="#">首 页<span>home</span></a></li>
+             <li><a href="#">我们的业务<span>Our business</span></a></li>
+             <li><a href="#">平台功能<span>Function</span></a></li>
+             <li><a href="#">服务内容与流程<span>Services</span></a></li>
+             <li><a href="#">选择我们的理由<span>Why Us</span></a></li>
+             <li><a href="#">关于我们<span>About Us</span></a></li>
+         </ul>
+     </div>
+ </div>
+ <div class="banner">
+     <div class="banner-pic">
+         <a href="#"><img src="images/banner1.jpg" width="1001" height="529" /></a>
+         <a href="#"><img src="images/banner2.jpg" width="1001" height="529" /></a>
+         <a href="#"><img src="images/banner3.jpg" width="1001" height="529" /></a>
+         <ul class="banner-list">
+             <li class="hover"></li>
+             <li></li>
+             <li></li>
+         </ul>
+         <div class="counsel"></div>
+         <span class="counsel-pic">最新资讯</span>
+         <div class="animate-txt">
+             <span id="txt">鸿博源诚与贵州号百正式签订“118114云教室”项目合作协议！</span>
+
+         </div>
+
+     </div>
+     <div class="banner-pic"></div>
+     <div class="banner-pic"></div>
+ </div>
+ <div class="column">
+     <ul class="column-list">
+         <li>
+           <a href="#">
+             <img src="images/xt1.jpg" width="321" height="123" />
+             <div class="c-list-txt">
+                 <h3>我们的业务</h3>
+                 <p>零投资、零维护，全业务一体化专业服务</p>
+             </div>
+           </a>
+         </li>
+         <li class="mar">
+             <a href="#">
+                 <img src="images/xt2.jpg" width="321" height="123" />
+                 <div class="c-list-txt">
+                     <p>十大应用亮点</p>
+                     <h3>产品应用功能</h3>
+                 </div>
+             </a>
+         </li>
+         <li>
+             <a href="#">
+                 <img src="images/xt3.jpg" width="321" height="123" />
+                 <div class="c-list-txt c-lt-3">
+                     <h3 class="chose">选择我们的理由</h3>
+                     <p>Choose us，why？</p>
+                     <span></span>
+                 </div>
+             </a>
+         </li>
+     </ul>
+ </div>
+ <div class="footer">
+     <span>© 版权所有　all rights reserved 2009　ICP备00000000    地址：贵州省贵阳市云岩区下合群路1号龙泉大厦12楼</span>
+     <a href="#" class="a1">联系我们</a> | <a href="#">站点地图</a>
+ </div>
+ <script>
+     var i=0;
+     var txt=document.getElementById("txt");
+     var text="鸿博源诚与贵州号百正式签订“118114云教室”项目合作协议！";
+     function auto(){
+         var str=text.substr(0,i);
+         txt.innerHTML=str+"";
+         i++;
+         if(i>text.length){
+             i=0;
+         }
+         setTimeout(auto,100);
+     }
+
+     window.onload=function(){
+         auto();
+     }
+
+ </script>
+</body>
+</html>

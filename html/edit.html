@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Kendo UI Snippet</title>
+
+
+
+
+
+</head>
+<body>
+
+
+<script>
+    function med(fn,context,arg){
+        fn.timeplay=null;
+        fn.timeplay=setTimeout(function(){
+            return fn.call(context,arg);
+        },100);
+
+    }
+    function outputFun(name){
+        this.name=name;
+        console.log(this.name);
+    }
+    var abc={};
+    //window.onresize=function(){
+        med(outputFun,abc,"tom");
+
+    //}
+
+
+</script>
+</body>
+</html>

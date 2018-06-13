@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*var str='sadasdsad  lwh asdad lwh   lwh';
+    var reg=new RegExp('lwh','g');
+
+    while ( (out=reg.exec(str))!==null){
+
+        console.log(out);
+        console.log(reg.lastIndex);
+    }*/
+
+    var str='sadasdsad 1233654 lwh asdad lwh   lwh';
+    var reg=new RegExp(/\d/,'g');
+
+    console.log(str.match(reg));
+</script>
+</body>
+</html>

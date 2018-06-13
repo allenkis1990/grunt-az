@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <style>
+        *{ margin:0; padding:0;}
+        body{ background-color:#000;}
+        #box{ width:300px; height:500px; border:10px solid #fff; margin: 25px auto 0;font-family:"Microsoft yahei"; position:relative; overflow:hidden;}
+        #box .title{ color:#fff; font-size:24px; text-align:center; padding-top:100px;}
+        #box .diff p{ line-height:30px; color:#000; font-size:16px; text-align:center; width:200px; background:#fff; margin:70px auto; cursor:pointer;}
+        #box .diff p.on{ background-color:#f6c; color:#fff;}
+        #box .plane{ width:60px; height:36px; position:absolute;}
+        #box .bullet{ width:6px; height:22px; position:absolute;}
+        #box .enemy{ width:23px; height:30px; position:absolute;}
+    </style>
+</head>
+<body>
+
+<div id="box"></div>
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    $(function(){
+        game.init();
+    });
+
+    var game = {
+
+        box : $('#box'),
+        init : function(){
+            var $title = $("<div>");
+            $title.addClass('title');
+            $title.html('打灰机 v1.0 - 测试版');
+            var $diff = $('<div>');
+            $diff.addClass('diff');
+            $diff.append("<p>简单</p><p>一般</p><p>困难</p>");
+            game.box.append($title);
+            game.box.append($diff);
+            $('div.diff p').hover(function(){$(this).addClass('on');},function(){$(this).removeClass('on')}).click(function(e){
+                var index = $(this).index();
+                var e = e || window.event;
+                var eX = e.clientX;
+                var eY = e.clientY;
+                var ev = {x:eX,y:eY}
+                //code……
+                game.start(ev);
+            });
+        },
+
+        start : function(ev){
+            game.box.empty();
+            game.plane(ev);
+        },
+
+        plane : function(ev){
+            var $plane = $('<img src="img/plane.png" />');
+            $plane.addClass('plane');
+            game.box.append($plane);
+            var cssTop = game.box.offset().top + 10 + $('img.plane').height()/2;
+            var cssLeft = game.box.offset().left + 10 + $('img.plane').width()/2;
+
+            var topMax = game.box.height()-$('img.plane').height();
+            var leftMin = -$('img.plane').width()/2;
+            var leftMax = game.box.width()-$('img.plane').width()/2;
+
+            $plane.css({
+                top : ev.y - cssTop + 'px',
+                left : ev.x - cssLeft + 'px'
+            });
+
+            $(document).mousemove(function(e){
+                var top =  e.clientY - cssTop;
+                var left = e.clientX - cssLeft;
+                if (top<  0){top=  0;}else if(top>topMax){top=topMax;}
+                if (left<leftMin){left=leftMin;}else if (left>leftMax){left=leftMax;}
+                $plane.css({
+                    top : top + 'px',
+                    left : left + 'px'
+                });
+            });
+            game.plane.bTime = setInterval(function(){
+                game.bullet();
+            },300); // 子弹速度
+            game.plane.eTime = setInterval(function(){
+                game.enemy();
+            },1000);//敌军生成速度
+        },
+
+        bullet : function(){
+            var $bullet = $('<img class="bullet" src="img/bullet.png">');
+            game.box.append($bullet);
+            $bullet.css({
+                top : $('img.plane').position().top - $('img.bullet').height() + 'px' ,
+                left : $('img.plane').position().left + $('img.plane').width()/2 - $('img.bullet').width()/2 + 'px' ,
+            }).animate({
+                top : - $('img.bullet').height() + 'px',
+            },2000,'linear',function(){
+                $(this).remove();
+            });
+        },
+
+        enemy : function(){
+            var $enemy = $("<img class='enemy' src='img/enemy.png' />")
+            game.box.append($enemy);
+            $enemy.css({
+                top : -$('img.enemy').height(),
+                left : Math.random()*(game.box.width()-$('img.enemy').width())
+            }).animate({
+                top : game.box.height()
+            },5000,'linear',function(){
+                $(this).remove();
+            }); // 敌军移速
+        },
+
+
+    };
+</script>
+</body>
+</html>

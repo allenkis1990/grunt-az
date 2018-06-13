@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .main{
+            width:100px; height:50px; background:red"
+        }
+    </style>
+</head>
+<body>
+
+<div class="main"></div>
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    /*var testStyle=document.createElement('div').style;
+    console.log(testStyle);
+    *//*var style=document.createElement('div').style;
+    console.log(style);
+    var a='c';
+    var b={c:2};
+    alert(a in b);*//*
+    var str='shewsdsdsd';
+    var newstr=str.replace('she',function(all,word,a){
+        return word+'1';
+    });
+    console.log(newstr);*/
+
+
+    /*var box='box';
+    var pattern=new RegExp(box,'ig');
+    var str='Box';
+    alert(pattern.test(str));*/
+
+    /*var str="this is a box that is a BoX";
+    var pattern=/box/ig;
+    var arr=str.match(pattern);
+    var index=str.search(pattern);
+    console.log(arr);
+    console.log(index);*/
+
+    /*var str='allenkis';
+    var pattern=/al{1,2}enkis/ig;
+
+    var bol=pattern.test(str);
+    alert(bol);*/
+
+    /*var str='kllenkis';
+    var pattern=/[a-z]llenkis/ig;
+
+    var bol=pattern.test(str);
+    alert(bol);*/
+
+    /*var str='Fllenkis';
+    var pattern=/[a-z0-9A-Z]llenkis/;
+
+    var bol=pattern.test(str);
+    alert(bol);*/
+
+    /*var str='.llenkis';
+    var pattern=/[^\w]llenkis/;
+
+    var bol=pattern.test(str);
+    alert(bol);*/
+
+
+    /*function Allen(){
+
+    }
+    Allen.prototype.deleteSpace=function(str){
+        var pattern=/[\s]*//*ig;
+        var newstr=str.replace(pattern,'');
+        return newstr;
+    }
+    var allen=new Allen();
+    var str='  allen    allen      allen';
+    var newstr=allen.deleteSpace(str);
+
+
+    alert(newstr);*/
+    function UpperFirstLetter(str)
+    {
+        return str.replace(/\b\w+\b/g, function(word) {
+            return word.substring(0,1).toUpperCase( ) +  word.substring(1);
+        });
+    }
+    //var pattern=/-[a-z]/i;
+    var str='webkit-allen-tom-haha-cao-ids';
+    var arr2=[];
+    var arr=str.split('-');
+    for(var i=0;i<arr.length;i++){
+        arr2[i]=UpperFirstLetter(arr[i]);
+    }
+    arr2[0]=arr2[0].toLowerCase();
+    //var newstr=arr.join('');
+    var newStr=arr2.join('');
+    console.log(newStr);
+
+
+</script>
+</body>
+</html>

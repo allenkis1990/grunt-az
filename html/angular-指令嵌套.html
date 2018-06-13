@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        .main{width:800px;height:200px; margin:100px auto;}
+        .content{width:100%;height:100%;border:1px solid blue;}
+        .head{height:40px; width:100%;}
+        .con{width:100%;}
+    </style>
+</head>
+<body ng-controller="mycon">
+
+
+<outdir>
+    <innerdir ng-repeat="item in fac" head="item.head">{{item.con}}</innerdir>
+</outdir>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",["$scope","myfac",function($scope,myfac){
+         $scope.fac=myfac;
+    }]);
+    app.factory("myfac",function(){
+         return [
+             {name:"allen1",head:"这是标题1",con:"这是内容1"},
+             {name:"allen2",head:"这是标题2",con:"这是内容2"},
+             {name:"allen3",head:"这是标题3",con:"这是内容3"}
+         ]
+    });
+
+    app.directive("outdir",function(){
+          return {
+              restrict:"ECAM",
+              replace:true,
+              template:"<div class='main' ng-transclude='true'></div>",
+              transclude:true
+          }
+    });
+
+    app.directive("innerdir",function(){
+        return {
+            restrict:"ECAM",
+            replace:true,
+            templateUrl:"tem2.html",
+            transclude:true,
+            controller:function($scope){
+                $scope.fac=$scope.a;
+            },
+            scope:{
+                a:"=head" //&和=形式的继承 可以利用指令内的controller把$scope.fac=$scope.a 把a付给fac
+            }    //但是以@形式的字符串单向绑定需要在自定义指令里绑定head="{{item.head}}",模板里也要绑定一个{{a}}
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+<script>
+   /* var color="红色";
+    function box(){
+        alert(this.color);
+    }
+    box.call(desk()); //不需要实例化的时候冒充 并且是方法冒充 方法里面必须有东西比如alert(this.color); 被冒充的那个里面要有这个color
+
+    function desk(){
+        this.color="绿色";
+    }*/
+
+   function desk(){   //被冒充者
+       this.color="绿色";
+   }
+
+    var odiv={
+        color:"金黄色"
+    };
+
+
+
+    /*function oli(){}
+   var olli=new oli();
+   desk.call(olli); //这种是需要实例化但在构造函数外部冒充
+   alert(olli.color);*/
+
+
+    /*function oul(){  //这种事需要实例化并且在构造函数内部冒充
+        return desk.call(this);
+    }
+    var ouul=new oul();
+    alert(ouul.color);*/
+
+
+</script>
+</body>
+</html>

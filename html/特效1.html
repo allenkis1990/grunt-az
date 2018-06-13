@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        .main{width:300px;height:170px;margin:300px auto; background:red;position:relative;overflow:hidden;}
+        .modal{position:absolute;width:100%;height:100%;background:#000;opacity:0.5;top:170px;left:0px;}
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="modal"></div>
+</div>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    /*$('.main').mouseenter(function(e){
+        console.log(e.clientX);
+    });*/
+
+    var winH=$(window).height();
+    var winW=$(window).width();
+    //alert(winH);
+
+    var boxW=$('.main').width();
+    var boxLeft=$('.main').offset().left;//800
+    var left=boxLeft-boxW;//500
+
+
+    var boxH=$('.main').height();
+    var boxTop=$('.main').offset().top;//300
+    var top1=boxTop+boxH;//470
+    //console.log(top1);
+    $(document).mousemove(function(e){//左上右下
+
+        console.log(e.offsetX);
+        if((e.clientX>left&&e.clientX<boxLeft) && (e.clientY>boxTop&&e.clientY<top1)){
+            //console.log('我到了！！！！！');
+            $('.modal').animate({top:0,left:-boxW},'fast');
+
+            $('.main').mouseenter(function(e){
+                $('.modal').stop(true).animate({left:0,top:0},'fast');
+            });
+        }else
+
+         if((e.clientX>boxLeft&&e.clientX<(boxLeft+boxW)) && (e.clientY>(boxTop-boxH)&&e.clientY<boxTop)){
+            //console.log(111111);
+            $('.modal').animate({top:-boxH,left:0},'fast');
+            $('.main').mouseenter(function(e){
+                $('.modal').stop(true).animate({left:0,top:0},'fast');
+            });
+        }else
+
+
+        if((e.clientX>(boxLeft+boxW)&&e.clientX<(boxLeft+2*boxW)) && (e.clientY>boxTop&&e.clientY<top1)){
+            //console.log(11111);
+            $('.modal').animate({top:0,left:boxW},'fast');
+            $('.main').mouseenter(function(e){
+                $('.modal').stop(true).animate({left:0,top:0},'fast');
+            });
+        }else
+
+
+        if((e.clientX>boxLeft&&e.clientX<(boxLeft+boxW)) && (e.clientY>top1&&e.clientY<(top1+boxH))){
+            //console.log(1111);
+            $('.modal').animate({top:boxH,left:0},'fast');
+            $('.main').mouseenter(function(e){
+                $('.modal').stop(true).animate({left:0,top:0},'fast');
+            });
+        }else if((e.clientX>boxLeft&&e.clientX<boxLeft+boxW) && e.clientY>boxTop&&e.clientY<top1){
+            //$('.modal').stop(true).animate({left:0,top:0},'fast');
+        }else{
+            //$('.modal').css({top:boxH,left:0});
+        }
+
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+doctype
+html
+    head
+        meta(charset="utf-8")
+        style
+            include style/a1.css
+            include style/a2.css
+    body
+        div.lwh=name
+            span.txt=age
+        ul.ul
+            - for (var i=0;i<arr.length;i++)
+                li(dirname=arr[i].name)=arr[i].name
+
+        script.
+            var a={name:'allen'};
+            console.log(a);
+

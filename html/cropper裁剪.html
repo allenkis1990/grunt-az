@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../js/cropper.min.css" />
+    <style>
+        .main{width:500px; height:500px;}
+        .box{overflow:hidden;}
+        .box-lg{margin-left:600px;width:200px; height:200px;}
+        .box-sm{width:120px;height:200px;}
+    </style>
+</head>
+<body>
+<div style="width:70px;height:20px;position:relative">
+    <div style="width:70px;height:20px;position:absolute;background:deeppink;color:#fff;">选择文件</div>
+    <input type="file" id="aaa" style="opacity:0; width:70px;position:absolute" accept />
+</div>
+
+<button>click</button>
+<div class="main">
+    <img src="../images/afei.jpg" />
+</div>
+
+<div class="box box-lg" style="border-radius:100px;"></div>
+<div class="box box-sm"></div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<script type="text/javascript" src="../js/cropper.min.js"></script>
+<script>
+
+    $(function(){
+        var $img=$('.main img');
+        $img.cropper({
+            aspectRatio: 1 / 1,
+            resizable:true,
+            movable:true,
+            preview:'.box',
+            zoomable:false,//放大缩小图片
+            crop: function(data) {
+                // Output the result data for cropping image.
+                //console.log(data);
+            }
+        });
+    });
+
+    //$('#aaa').
+    /*$('#aaa').change(function(){
+        var url=this.files[0];
+        console.log(url);
+        $('.main img').cropper('reset', true).cropper('replace', url);
+
+    });*/
+
+    $('button').click(function(){
+        var info=$img.cropper('getData');
+        console.log(info);
+    });
+
+    var $image=$('.main img');
+    var $inputImage = $('#aaa'),
+            URL = window.URL || window.webkitURL,
+            blobURL;
+
+    if (URL) {
+        $inputImage.change(function () {
+            console.log(this.files);
+            var files = this.files,
+                    file;
+
+            if (files && files.length) {
+                file = files[0];
+
+                if (/^image\/\w+$/.test(file.type)) {
+                    if(blobURL!==undefined){
+                        URL.revokeObjectURL(blobURL);//用不到了就删除这个URL对象
+                    }
+                    //console.log(URL.revokeObjectURL);
+                    //URL.revokeObjectURL(blobURL);
+                    blobURL = URL.createObjectURL(file);//创建这个URL对象
+                    //console.log(blobURL);
+                    //$image.cropper({aspectRatio: 1 / 1, preview:'.box'});
+                    $image.cropper('reset', true).cropper('replace', blobURL);
+                    $image.attr('src',blobURL);
+                    $inputImage.val('');
+                } else {
+                    //showMessage('Please choose an image file.');
+                }
+            }
+        });
+    } else {
+        $inputImage.parent().remove();
+    }
+
+</script>
+</body>
+</html>

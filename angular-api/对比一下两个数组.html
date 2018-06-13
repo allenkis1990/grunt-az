@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+
+
+
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/angular2.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope){
+
+        $scope.arr1=[{name:'allen',age:18}];
+        $scope.arr2=[{name:'allen1',age:18}];
+        console.log($scope.arr1[0].toString()===$scope.arr2[0].toString());
+    });
+
+
+</script>
+</body>
+</html>

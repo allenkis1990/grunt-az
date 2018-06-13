@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{list-style: none;}
+        #mainList2 li{float:left;}
+    </style>
+</head>
+<body>
+
+<div id="main">
+    <ul id="mainList"></ul>
+</div>
+
+<div id="main2">
+    <ul id="mainList2" style="width:800px;"></ul>
+</div>
+
+<input lwh="allen" class="lwh" type="checkbox" checked="checked" />lwh
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    var json=[
+        {id:1,src:"1.jpg",text:"aaaa",checked:false},
+        {id:2,src:"2.jpg",text:"bbbb",checked:false},
+        {id:3,src:"3.jpg",text:"cccc",checked:true},
+        {id:4,src:"4.jpg",text:"dddd",checked:false},
+        {id:5,src:"5.jpg",text:"eeee",checked:false},
+        {id:6,src:"6.jpg",text:"ffff",checked:true},
+        {id:7,src:"7.jpg",text:"gggg",checked:false},
+        {id:8,src:"8.jpg",text:"hhhh",checked:true},
+        {id:9,src:"9.jpg",text:"iiii",checked:false},
+        {id:10,src:"10.jpg",text:"jjjj",checked:true}
+    ];
+
+  /*  for(var i=0;i<json.length;i++){
+
+    var list="<li><img width='80' height='80' src=\"images/"+json[i].src+"\"><input type=\"checkbox\" id=\""+json[i].id+"\" /><p>"+json[i].text+"</p></li>";
+            if(json[i].checked){
+                $("#main #mainList").append(list);
+            }
+    }*/
+
+    for(var j=0;j<json.length;j++){
+        var list2="<li><img width='80' height='80' src=\"images/"+json[j].src+"\"><input type=\"checkbox\" "+(json[j].checked?"checked":"")+" id=\""+json[j].id+"\" /><p>"+json[j].text+"</p></li>";
+
+        $("#main2 #mainList2").append(list2);
+        //console.log(list2);
+    }
+
+    $("#mainList2 input").change(function(){
+       if($(this).prop("checked")==true&&$("#mainList2 input").filter(":checked").length==5){
+           $(this).attr("checked",false);
+       }
+    });
+
+    //alert($("#mainList2 input:checked").length);
+    //alert($("div[lwh=allen]").text());
+
+    alert($(".lwh").is("[lwh=allen]:checked"));
+</script>
+</body>
+</html>

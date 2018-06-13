@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="mycon">
+
+<button ng-click="fn()">BTN</button>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",function($scope,$http){
+           $scope.fn=function(){
+               /* $http.get("text.json").success(function(data,status,head,config){
+                       $scope.data=data;
+                    alert($scope.data[0].name);
+                });*/
+               $http.put("text.json",function(data,config){
+                       alert(config);
+               });
+
+
+           };
+    });
+</script>
+</body>
+</html>

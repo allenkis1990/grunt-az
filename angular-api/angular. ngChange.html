@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="myctrl">
+
+<input type="checkbox" ng-change="fn()" ng-model="a1" />
+<!--<input type="radio" ng-change="fn()" ng-model="a3" name="a1" />
+<input type="radio" ng-change="fn()" ng-model="a3" name="a1" />-->
+<input type="text" ng-change="fn()" ng-model="a2" />
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+   var app= angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+        $scope.fn=function(){
+            console.log("改变！！");
+        }
+
+    });
+</script>
+</body>
+</html>

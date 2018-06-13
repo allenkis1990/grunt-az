@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+
+</head>
+<body >
+
+<div id="app">
+
+<lwh :lwh-name="userName"
+     @click.native="fn"
+     @haha="haha"
+     ref="lwhComponent"></lwh>
+
+
+
+
+</div>
+
+
+
+<script>
+
+    new Vue({
+        el:'#app',
+        data:{
+            userName:{name:11}
+        },
+        methods:{
+            haha:function(num){
+                console.log(num);
+            },
+
+            fn:function(){
+                console.log('native fn~');
+            }
+        },
+
+        mounted:function(){
+            //父组件调用子组件里的方法
+            this.$refs.lwhComponent.fuck();
+        },
+
+
+        components:{
+            lwh:{
+                mounted:function(){
+                    //子组件调用父亲的方法
+                    this.$emit('haha',111);
+                },
+
+                template:'<div>my name is {{lwhName}}</div>',
+                props:{
+                    lwhName:{
+                        type:String,
+                        default:'111111111111'//默认给一个值
+                    }
+                },
+                methods:{
+                    fuck:function(){
+                        console.log('fuck~~~!!!');
+                    }
+                }
+
+
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

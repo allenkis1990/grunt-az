@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+
+
+</head>
+<body >
+
+<div id="app">
+
+    <a href="#" @click="fn($event)">btn</a>
+
+</div>
+
+
+
+<script>
+
+
+    new Vue({
+        el:'#app',
+        data:{
+
+        },
+        methods:{
+            fn:function(e){
+                //冒泡
+                console.log(e.stopPropagation());
+                //阻止元素默认事件
+                console.log(e.preventDefault);
+            }
+        }
+    });
+    //console.log(v);
+</script>
+</body>
+</html>

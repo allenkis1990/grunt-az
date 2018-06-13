@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .dialog {
+            left: 40%;
+            top: 30%;
+            background: #eee;
+            position: fixed;
+            z-index: 9999;
+        }
+
+        .dialog-tit {
+            height: 30px;
+            background: blue;
+            color: #fff;
+        }
+
+        .modal {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            opacity: 0.5;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body ng-controller="con" style="height:3000px;">
+
+<div ng-bind-html='content'></div>
+<button ng-click="click()">点击我弹出窗口</button>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/angular-sanitize.min.js"></script>
+<script>
+
+    var app = angular.module('app', ['ngSanitize'], function () {
+    });
+    app.controller('con', function ($scope, hbDialog) {
+
+        $scope.content='<span style="font-size:xx-large;background-color:#3399cc;">我我我我我我</span>';
+
+        $scope.click = function () {
+            hbDialog.contentAs($scope,
+                    {
+                        title: '弹窗',
+                        yesBtnText: '点击确定',
+                        noBtnText: '点击取消',
+                        templateUrl: 'temp/dialog-temp.html',
+                        width: 400,
+                        height: 300
+                    }, function () {
+                        alert(1);
+                    }
+            );
+        }
+
+    });
+
+    app.factory('hbDialog', function ($compile) {
+        var hbDialog = {
+            notfirstTime: false,
+            contentAs: function ($scope, options, okFn, noFn) {
+                var _self = this;
+                if (!options.templateUrl) {
+                    return false;
+                }
+
+                if (this.notfirstTime == false) {
+                    hbDialog.dom = angular.element('<div dialog-content></div>');
+                    compileDom = $compile(hbDialog.dom)($scope);
+                    angular.element('body').append(compileDom);
+                    this.notfirstTime = true;
+                } else {
+                    hbDialog.dom && hbDialog.dom.show();
+                }
+
+
+                $scope.dialogArr = $scope.dialogArr || [];
+                var itemDialog = {
+                    width: options.width + 'px',
+                    height: options.height + 'px',
+                    title: options.title || '提示',
+                    templateUrl: options.templateUrl,
+                    showModal: true,
+                    yesBtnText: options.yesBtnText || '确定',
+                    noBtnText: options.noBtnText || '取消',
+                    ok: function (index) {
+                        okFn && angular.isFunction(okFn) && okFn();
+                        this.showModal = false;
+                        $scope.dialogArr.splice(index, 1);
+                        if ($scope.dialogArr.length <= 0) {
+                            hbDialog.notfirstTime = false;
+                            hbDialog.dom && hbDialog.dom.remove();
+                            hbDialog.dom && delete hbDialog.dom;
+                        }
+                    }
+                }
+                $scope.dialogArr.push(itemDialog);
+            }
+        }
+        return hbDialog;
+    });
+
+    app.directive('dialogContent', function () {
+        return {
+            templateUrl: 'temp/dialog-main.html'
+        }
+    });
+
+</script>
+</body>
+</html>

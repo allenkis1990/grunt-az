@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>距离考研还有<h1></h1>天</div>
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    //myDate.getHours();
+    //myDate.getMinutes();
+    //myDate.getSeconds();
+    var nowdate=new Date();
+    nowdate.setFullYear(2016,10,1);
+    nowdate.setSeconds(0);
+    nowdate.setMinutes(0);
+    nowdate.setHours(9);
+    var cha=Math.floor((nowdate-new Date())/86400000);
+    $("h1").html(cha);
+    console.log(cha);
+</script>
+</body>
+</html>

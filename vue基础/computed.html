@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+
+
+</head>
+<body >
+
+<div id="app">
+    {{arr}}
+    {{money}}
+</div>
+
+
+
+<script>
+    //数组模式下的class可以使用三元表达式
+    new Vue({
+        el:'#app',
+        data:{
+            arr:[1],
+            yuanjia:100,
+            zhekou:0.9
+        },
+        methods:{
+            fn:function(){
+                console.log(this.ddd);
+            }
+        },
+        computed:{
+            //如果data里有money则不进行运算 只有没有这个属性的时候才生效
+            money:function(){
+                return '￥'+this.yuanjia*this.zhekou;
+            }
+        }
+    });
+    //console.log(v);
+</script>
+</body>
+</html>

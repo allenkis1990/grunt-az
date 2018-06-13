@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="mycon">
+
+<div my-dir></div>
+
+<div my-dir2></div>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",["$scope",function($scope){
+         $scope.obj={name:"allen",age:18};
+    }]);
+  /*  app.directive("myDir",function(){//& @ = 继承父类的scope
+        return {
+            restrict:"ECAM",
+            template:"<div>Allenkis</div>",
+            replace:true,
+            scope:{a:"=obj"},
+            controller:function($scope){
+                $scope.obj=$scope.a;
+            },
+            link:function(scope,ele,attr){
+                ele.on("click",function(){
+                    console.log(scope.obj.name);
+                });
+            }
+        }
+    }); */
+
+    app.directive("myDir",function(){//& @ = 继承父类的scope
+        return {
+            restrict:"ECAM",
+            template:"<div>Allenkis</div>",
+            replace:true,
+            controller:function($scope){
+                $scope.arr=[1,2,3,4,5];
+            },
+            controllerAs:"mycon2"
+
+        }
+    });
+
+    app.directive("myDir2",function(){
+        return {
+            restrict:"ECAM",
+            template:"<div>Allenkis2</div>",
+            replace:true,
+            require:"?^myDir",  //问好是匹配同级指令的控制器  ^是匹配到父元素上的指令的控制器
+            link:function(scope,ele,attr,mycon2){
+                ele.on("click",function(){
+                     alert(scope.arr);
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

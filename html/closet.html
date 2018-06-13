@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        li{height:30px;border:1px solid red; list-style-type:none; margin:15px 0px;}
+    </style>
+</head>
+<body>
+<ul class="main-list">
+    <li class="lili">
+        <a href="#">aaa</a>
+        <ul class="child-list">
+            <li><a href="#">bbbb1</a></li>
+            <li><a href="#">bbbb2</a></li>
+            <li><a href="#">bbbb3</a></li>
+        </ul>
+    </li>
+
+</ul>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    $(".main-list li").has(".child-list").find("a").click(function(){
+        alert(11);
+    });
+</script>
+</body>
+</html>

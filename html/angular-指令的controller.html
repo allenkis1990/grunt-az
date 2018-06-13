@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div my-dir ng-model="obj.name" lwh="allenkis"></div>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    //app.controller("mycon",["$scope",function($scope){
+
+    //}]);
+    app.directive("myDir",function(){
+        return {
+            restrict:"ECAM",
+            template:"<div>{{obj.name}}</div>",
+            replace:true,
+            controller:function($scope){
+                 $scope.obj={name:"allenkis"};
+                 this.fn=function(){
+                     alert(2222);
+                 };
+            },
+            controllerAs:"mycon",
+            link:function(scope,ele,attr,mycon){
+                mycon.fn();
+            }
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //255.255,255,255
+    //所有的1位或者2位数字
+    //以1开头的3位数字
+    //以2开头第二位是0到4的3位数字
+    //以后2开头的第二位是5第三位是0到5
+    var str='256.1.0.';
+    var reg=/(((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))\.){3}/;
+    console.log(reg.test(str));
+</script>
+</body>
+</html>

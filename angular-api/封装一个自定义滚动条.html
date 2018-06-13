@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .main{width:250px; height:200px;border:1px solid #000;overflow:auto;}
+        .main-body{height:800px;background:#ffff00;}
+    </style>
+</head>
+<body ng-controller="con">
+
+<div class="main"
+     nicescroll
+     id="main"
+     width="scrollParams.width"
+     color="scrollParams.color"
+     border="scrollParams.border"
+     is-hide="scrollParams.isHide">
+
+    <div class="main-body">11</div>
+
+</div>
+
+
+<script src="../js/angular2.min.js"></script>
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/jq-nicescroll.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope){
+        $scope.scrollParams={
+            width:15,
+            color:'blue',
+            border:'2px solid pink',
+            isHide:false
+        }
+    });
+
+    app.directive('nicescroll',function(){
+        return {
+            scope:{
+                width:'=',
+                color:'=',
+                border:'=',
+                isHide:'='
+            },
+            link:function($scope,ele,attr){
+                console.log(attr.id);
+                console.log($scope.isHide);
+                $('#'+attr.id).niceScroll({
+                    autohidemode:$scope.isHide==undefined?true:$scope.isHide,//是否隐藏滚动条
+                    cursorcolor:$scope.color || '#000',//自定义颜色
+                    cursorborder:$scope.border || '1px solid #fff',//自定义边框
+                    cursorwidth:$scope.width || 5,//滚动条宽度
+                    cursorborderradius:5,//滚动条圆角
+                    //scrollspeed:0.05,//滚动速度 默认为60
+                    ZIndex:99999999,//默认是9999
+                    mousescrollstep:40//鼠标上下滑动的步数
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

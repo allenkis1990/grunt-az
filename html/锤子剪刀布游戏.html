@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script>
+    function player(name){
+        this.name=name;
+        
+    }
+    player.prototype={
+        obj:function(){
+            this.say=window.prompt("请选择出拳顺序: 1锤子 2剪刀 3布");
+        },
+        show:function(){
+            console.log("我是"+this.name+"我出"+this.say);
+        }
+    };
+
+    function computer(){
+        this.name="电脑";
+    }
+    computer.prototype={
+        obj:function(){
+            this.say=Math.floor(Math.random()*3+1);
+        },
+        show:function(){
+            console.log("我是"+this.name+"我出"+this.say);
+        }
+    };
+
+    function run(){
+        this.player=new player("Allenkis");
+        this.computer=new computer();
+    }
+    run.prototype={
+        play:function(){
+            this.player.obj();
+            this.player.show();
+            this.computer.obj();
+            this.computer.show();
+            var playernum=this.player.say;
+            var computernum=this.computer.say;
+
+            if((playernum==1 && computernum==2) || (playernum==2 && computernum==3) || (playernum==3 && computernum==1)){
+                        console.log(this.player.name+"赢了");
+            }else if(playernum==computernum){
+                        console.log("平局");
+            }else{
+                        console.log(this.computer.name+"赢了");
+            }
+        }
+    };
+    var run=new run();
+    run.play();
+</script>
+
+</body>
+</html>

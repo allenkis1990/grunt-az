@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Kendo UI Snippet</title>
+
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.dataviz.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.dataviz.default.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.mobile.all.min.css">
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2015.2.624/js/kendo.all.min.js"></script>
+</head>
+<body>
+
+<input id="parent" />
+<input id="child" />
+<input id="sunzi" />
+<script>
+    $("#parent").kendoDropDownList({
+        dataTextField: "parentName",
+        dataValueField: "parentId",
+        dataSource: [
+            { parentName: "福建", parentId: 1 },
+            { parentName: "四川", parentId: 2 }
+        ]
+    });
+
+    $("#child").kendoDropDownList({
+        cascadeFrom: "parent",//指定他的父亲是谁
+        dataTextField: "childName",
+        dataValueField: "childId",
+        dataSource: [
+            { childName: "福州", childId: 1, parentId: 1 },
+            { childName: "厦门", childId: 2, parentId: 1 },
+            { childName: "自贡", childId: 3, parentId: 2 },
+            { childName: "宜宾", childId: 4, parentId: 2 }
+        ]
+    });
+    $("#sunzi").kendoDropDownList({
+        cascadeFrom: "child",
+        dataTextField: "sunziName",
+        dataValueField: "sunziId",
+        dataSource: [
+            { sunziName: "台江", sunziId: 1, childId: 1 },
+            { sunziName: "鼓楼", sunziId: 2, childId: 1 },
+            { sunziName: "集美", sunziId: 3, childId: 2 },
+            { sunziName: "海昌", sunziId: 4, childId: 2 },
+            { sunziName: "st", sunziId: 5, childId: 3 },
+            { sunziName: "风情", sunziId: 6, childId: 3 },
+            { sunziName: "黑子", sunziId: 7, childId: 4 },
+            { sunziName: "213", sunziId: 8, childId: 4 }
+
+        ]
+    });
+</script>
+</body>
+</html>

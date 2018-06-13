@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script>
+    function pre(name,age){
+        this.name=name;
+        this.age=age;
+    }
+    pre.prototype.fn=function(){
+        alert(this.name+"|"+this.age);
+    }
+    var a1=new pre("allen",18);
+    function now(){
+        pre.call(this,"tom",22);
+    }
+    /*now.prototype=pre.prototype;*/
+    for(var i in pre.prototype){
+        now.prototype[i]=pre.prototype[i];//浅拷贝
+    }
+    var a2=new now();
+
+    now.prototype.fun=function(){
+        alert(this.name+"kis");
+    }
+    a2.fun();
+    a1.fun();//这时找不到fun()
+
+
+
+</script>
+</body>
+</html>

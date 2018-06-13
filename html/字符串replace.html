@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button>click me</button>
+<div class="main">hahahaha</div>
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+$('button').click(function(){
+
+    var html='刘伟恒傻瓜';
+    var r=html.replace('傻瓜','');//把傻瓜替换掉
+    $('.main').html(r);
+});
+</script>
+</body>
+</html>

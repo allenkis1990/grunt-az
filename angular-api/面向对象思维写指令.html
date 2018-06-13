@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+<div mydir></div>
+
+
+<script src="../js/angular2.min.js"></script>
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope){
+
+    });
+
+    app.directive('mydir',function($compile){
+        return {
+            restrict:'AE',
+            templateUrl:'temp/box.html',
+            link:function($scope){
+                var main=new Box($compile,$scope);
+                $scope.alert=function(){
+                    main.show();
+                }
+            }
+        }
+    });
+
+    function Box($compile,$scope){
+        this.$scope=$scope;
+        this.$compile=$compile;
+        //this.box=null;
+        //this.compileBox=null;
+        this.defaultConfig={height:300,width:300,background:'blue'};
+        return this.init($compile,$scope);
+    }
+
+    Box.prototype.init=function(){
+        this.box=$('<div class="main" ng-if="show"></div>');
+        this.box.css(this.defaultConfig);
+        this.compileBox=this.$compile(this.box)(this.$scope);
+        $('body').append(this.compileBox);
+        bindEvent.call(this);
+    }
+
+    Box.prototype.show=function(){
+        alert(111);
+        this.$scope.show=true;
+    }
+
+    function bindEvent(){
+        var that=this;
+        $('.green').click(function(){
+            $('.main').css({background:'green'});
+        });
+        $('.yellow').click(function(){
+            $('.main').css({background:'yellow'});
+        });
+    }
+</script>
+</body>
+</html>

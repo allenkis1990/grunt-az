@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+<div mydir obj="aobj">
+
+</div>
+
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/angular2.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+
+
+    app.provider('ser',function(){
+        var stra=null;
+        this.setStr=function(str){
+            stra=str;
+        }
+
+        this.$get = [function () {
+            return {
+                alert: function () {
+                    console.log(stra);
+                },
+
+                setStr: function (str) {
+                    stra=str;
+                }
+            };
+        }]
+    });
+
+    app.controller('con',function($scope,$log){
+        $scope.aobj='hahaha';
+    });
+
+    app.run(function(ser){
+        //ser.setStr('刘哥');
+        //ser.alert();
+    });
+
+    /*app.config(function(serProvider){
+        //serProvider.alert();
+        //var p=serProvider.$get[0]();
+        //console.log(p.alert());
+        console.log(serProvider);
+    });*/
+
+    app.directive('mydir',function(ser){
+        return {
+
+            template:'<div childdir></div>',
+            scope:{
+                obj:'='
+            },
+
+            link:function($scope,ele,attr){
+                $scope.name='allen';
+
+                //$scope.obj=111;
+                //ser.alert();
+                //console.log(newS);
+            }
+        }
+    });
+    app.directive('childdir',function($compile){
+        return {
+            link:function($scope,ele,attr){
+                //$scope.name='allen';
+                $scope.$watch('name',function(nv){
+                    if(nv){
+                        var newS=$scope.$new();
+                        newS.fuck=nv;
+                        var el=$('<div '+ nv + '></div>');
+                        ele.append(el);
+
+                        $compile(el)(newS);
+                        //console.log($scope);
+                    }
+                });
+            }
+        }
+    });
+    app.directive('allen',function(){
+        return {
+            link:function($scope,ele,attr){
+                console.log($scope.obj);
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

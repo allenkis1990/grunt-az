@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="fn()">{{fnView}}</button>
+        <button @click="fuck()">{{fuckView}}</button>
+    </div>
+
+
+
+    <script>
+
+
+        var mixinObj={
+            mounted:function(){
+                //alert('mixin');
+            },
+            methods:{
+                fn:function(){
+                    alert('fn');
+                }
+            },
+            data:{
+                fnView:'fnfn'
+            }
+        };
+
+        //局部注册组件
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                fuckView:'fuckfuck'
+            },
+            mounted:function(){
+                //alert('inner');
+            },
+            mixins:[mixinObj],
+            methods:{
+                fuck:function(){
+                    alert('fuck');
+                }
+                //里面的fn可覆盖外面mixin进来的
+                /*fn:function(){
+                    alert(1111);
+                }*/
+            }
+        });
+    </script>
+</body>
+</html>

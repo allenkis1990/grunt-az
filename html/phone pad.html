@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+</head>
+<body>
+    <div class="container-fluid main-header">
+        <div class="col-xs-2">
+            <a href="#" class="changeClass">换班</a>
+        </div>
+        <div class="col-xs-8">
+            <div class="main-header-tit">21014年度市政公用工程 (增项)</div>
+        </div>
+        <div class="col-xs-2">
+            <a href="#" class="collapse-btn"></a>
+        </div>
+    </div>
+    <div style="" class="box">
+        <div class="main-progress">
+            <div class="com-tit clear">
+                <h3 class="pull-left">当前进度</h3>
+                <a href="#" class="btn pull-right">考核要求</a>
+            </div>
+            <ul class="main-progress-ul">
+                <li>
+                    <span>36%</span>
+                    <p>学习进度</p>
+                </li>
+                <li>
+                    <span>0</span>
+                    <p>考试成绩</p>
+                </li>
+                <li>
+                    <span>3</span>
+                    <p>作业</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="padding:0px 30px; background:#eee;" class="study">
+        <div class="com-tit clear">
+            <h3 class="pull-left">正在学习</h3>
+            <a href="#" class="btn pull-right">选课</a>
+        </div>
+    </div>
+
+    <div class="">
+        <ul class="main-menu-list">
+            <li>
+                <div class="row">
+                    <div class="col-xs-8"><a href="#">市政工程质量检查实务 (桥梁)</a></div>
+                    <div class="col-xs-4">
+                        <div class="menu-progress">30%
+                            <div class="menu-progress-bar" style="width:30%"></div>
+                        </div>
+                    </div>
+                </div>
+                <i></i>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-xs-8"><a href="#">市政工程质量检查实务 (桥梁)</a></div>
+                    <div class="col-xs-4">
+                        <div class="menu-progress">30%
+                            <div class="menu-progress-bar" style="width:30%"></div>
+                        </div>
+                    </div>
+                </div>
+                <i></i>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-xs-8"><a href="#">市政工程质量检查实务 (桥梁)</a></div>
+                    <div class="col-xs-4">
+                        <div class="menu-progress">30%
+                            <div class="menu-progress-bar" style="width:30%"></div>
+                        </div>
+                    </div>
+                </div>
+                <i></i>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-xs-8"><a href="#">市政工程质量检查实务 (桥梁)</a></div>
+                    <div class="col-xs-4">
+                        <div class="menu-progress">30%
+                            <div class="menu-progress-bar" style="width:30%"></div>
+                        </div>
+                    </div>
+                </div>
+                <i></i>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-xs-8"><a href="#">市政工程质量检查实务 (桥梁)</a></div>
+                    <div class="col-xs-4">
+                        <div class="menu-progress">30%
+                            <div class="menu-progress-bar" style="width:30%"></div>
+                        </div>
+                    </div>
+                </div>
+                <i></i>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-xs-8"><a href="#">市政工程质量检查实务 (桥梁)</a></div>
+                    <div class="col-xs-4">
+                        <div class="menu-progress">30%
+                            <div class="menu-progress-bar" style="width:30%"></div>
+                        </div>
+                    </div>
+                </div>
+                <i></i>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-footer">
+        <ul class="main-footer-list">
+            <li><i></i><span>个人</span></li>
+            <li><i></i><span>班级</span></li>
+            <li><i></i><span>咨询</span></li>
+        </ul>
+    </div>
+    <script>
+        var obj={};
+        obj.a1=function(){
+            this.num=50;
+        }
+        obj.a2=function(){
+            this.name="allenkis";
+        }
+        obj.a3=function(){
+            this.age=18;
+        }
+
+        obj.play=function(para){
+            return new obj[para]();
+        }
+        var me=obj.play('a1');
+        alert(me.num);
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="mycon">
+
+
+
+
+<button ng-click="toggleClick($event)">我是按钮</button>
+
+<button ng-click="fn()">控制ng-show</button>
+<p ng-show="click">控制ng-show控制ng-show控制ng-show控制ng-show控制ng-show控制ng-show控制ng-show控制ng-show控制ng-show控制ng-show</p>
+
+
+
+<p ng-bind-h="html1"></p>
+</body>
+
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",function($scope){
+        $scope.html1="wowow<div>我我我我</div>";
+
+        $scope.click='';
+        $scope.fn=function(){
+            $scope.click=!$scope.click;
+        };
+
+        $scope.mark=false;
+        $scope.toggleClick=function(e){
+
+            if($scope.mark==false){
+                angular.element(e.target).html("我被点了");
+                $scope.mark=true;
+            }else{
+                angular.element(e.target).html("我是按钮");
+                $scope.mark=false;
+            }
+
+
+
+        };
+    });
+</script>
+</html>

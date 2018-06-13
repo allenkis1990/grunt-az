@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var ruleFrom = '^(?!(.*?^\/admin)).*?$';
+    //var ruleFrom = '^(?!(.*?^\/admin)|(.*?^\/login)|(.*?^\/center)|(.*?^\/bower_components)|(.*?^\/play)|(.*?^\/mfs)';
+    //ruleFrom += '|.*?(\.html|\.js|\.jpg|\.jpeg|\.json|\.png|\.php|\.css|\.woff|\.woff2|\.ttf|\.svg|\.eot|\.gif)).*?$';
+    var reg=new RegExp(ruleFrom);
+    console.log(reg.test('.haa'));
+</script>
+</body>
+</html>

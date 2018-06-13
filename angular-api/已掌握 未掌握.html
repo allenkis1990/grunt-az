@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <style>
+        .clear{clear:both;_zoom:1;}
+        .clear:after,.clear:before{display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden;}
+        body {
+            padding: 50px 0px 0px 100px;
+        }
+
+        * {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        input[type="checkbox"] {
+
+        }
+
+        .ml-1 {
+            margin-left: 10px;
+        }
+
+        .mt-1 {
+            margin-top: 10px;
+        }
+
+        .mb-1 {
+            margin-bottom: 10px;
+        }
+        li{margin-bottom:10px;}
+        .tab-btn-group a{display:inline-block; width:85px; height:35px; text-align:center; line-height:35px;
+         text-decoration:none; color:#000; border:1px solid deepskyblue;}
+        .tab-btn-group .active a{background:deepskyblue; color:#fff;}
+        .tab-btn-group ul li{float:left;}
+    </style>
+</head>
+
+<body ng-controller="myctrl">
+
+<div class="tab-btn-group">
+    <ul class="clear">
+        <li class="active"><a href="#all" data-toggle="tab">知识列表</a></li>
+        <li><a href="#no" data-toggle="tab">未掌握</a></li>
+    </ul>
+
+</div>
+<div class="tab-content" style="margin-top:15px;">
+    <div id="all" role="tabpanel" class="tab-pane fade in active">
+        <ul>
+            <li ng-repeat="item in data" ng-init="parsindex=$index">
+                <span style="font-size:18px; font-weight:bold;">{{item.subject}} <input type="checkbox" class="ml-1" /><span>已掌握</span></span>
+                <ul style="margin-left:10px; padding-top:10px;">
+                    <li ng-repeat="subItem in item.classify" ng-init="parindex=$index">
+                        <span style="font-weight:bold;">{{subItem.classname}} <input type="checkbox" class="ml-1" /><span>已掌握</span></span>
+                        <ul style="margin-left:20px; padding-top:10px;">
+                            <li ng-repeat="grandItem in subItem.know"><span>{{grandItem.info}} <input type="checkbox" class="ml-1" ng-click="checkIt($index,parindex,parsindex,data)" /><span>已掌握</span></span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+
+        </ul>
+    </div>
+    <div id="no" role="tabpanel" class="tab-pane fade">2</div>
+</div>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+   var app= angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+        $scope.data=[
+            {
+                subject:"内科",
+                classify:
+                        [
+                            {
+                                classname:"分类1",know:[{info:"知识点1",ischecked:true},{info:"知识点2",ischecked:false},{info:"知识点3",ischecked:false}]
+                            },
+                            {
+                                classname:"分类2",know:[{info:"知识点1",ischecked:true},{info:"知识点2",ischecked:false},{info:"知识点3",ischecked:true},{info:"知识点4",ischecked:false}]
+                            },
+                            {
+                                classname:"分类3",know:[{info:"知识点1",ischecked:false},{info:"知识点2",ischecked:true}]
+                            }
+
+                        ]
+            },
+
+            {
+                subject:"外科",
+                classify:
+                        [
+                            {
+                                classname:"分类1",know:[{info:"知识点1",ischecked:true},{info:"知识点2",ischecked:false},{info:"知识点3",ischecked:false}]
+                            },
+                            {
+                                classname:"分类2",know:[{info:"知识点1",ischecked:true},{info:"知识点2",ischecked:false},{info:"知识点3",ischecked:true},{info:"知识点4",ischecked:false}]
+                            },
+                            {
+                                classname:"分类3",know:[{info:"知识点1",ischecked:false},{info:"知识点2",ischecked:true}]
+                            }
+
+                        ]
+            }
+        ];
+
+        $scope.newData=angular.copy($scope.data);
+
+        angular.forEach($scope.newData,function(item,itemindex){
+            angular.forEach(item.classify,function(subItem,subindex){
+                angular.forEach(subItem.know,function(grandItem,graindex){
+                    $scope.arr=$.grep($scope.newData,function(newItem){
+                        return newItem.classify[subindex].know[graindex].ischecked==true;
+                    });
+                });
+            });
+        });
+
+        console.log($scope.arr);
+
+
+        $scope.checkIt=function(index,parindex,parsindex,data){
+            //console.log(index,parindex,parsindex);
+
+        }
+    });
+</script>
+</body>
+</html>

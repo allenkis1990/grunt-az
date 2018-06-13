@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+<form name="myform">
+    <input type="text" name="text" ng-model="aaa" />
+</form>
+
+<button ng-click="fn()">click</button>
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/angular2.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope){
+
+
+        $scope.aaa='0';
+        function isNull(obj){
+            return obj===undefined||obj===''||obj===null;
+        }
+
+        function dirtyAndEqualZero(name,modelName){
+            return !($scope.myform[name].$dirty==false&&$scope[modelName]==0);
+        }
+
+        $scope.fn=function(){
+            //console.log($scope.myform.text.$dirty);
+            //if(!($scope.myform.text.$dirty==false&&$scope.aaa==0)){
+                if(isNull($scope.aaa)){
+                    alert('价格没填写');
+                }
+            //}
+
+        }
+
+    });
+
+
+</script>
+</body>
+</html>

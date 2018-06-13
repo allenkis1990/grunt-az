@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+  /*  $.when(
+            $.ajax("test.php"), $.ajax("user.php"))
+               .done(function(data){alert(111);})
+               .fail(function(){alert(222);})
+               .done(function(){alert(1111);});*//*
+
+
+  function fun(){
+      var def= $.Deferred();
+      function creatDef(){
+          alert(111);
+          def.resolve();//已完成
+          //还有一种状态为deferred.reject()已失败返回fail后的  deferred.notify()对应的是progress()方法
+      }
+      setTimeout(creatDef,2000);
+
+      return def.promise();//直接返回promise对象
+  }
+//var f=fun();
+  $.when(fun()).then(//$.when里的函数需要执行
+        fun
+  ).then(fun);//如果then里面是fun()那么就不会等待后触发 只接受函数名
+ // f.resolve(); //直接加会直接跳出 promise对象没有resolve reject notify方法也就是不能被修改
+
+*/
+
+
+  function pre(){
+      var def= $.Deferred();
+      setTimeout(function(){
+          alert("要先执行我！！");
+          def.resolve(333);
+      },3000);
+
+      return def.promise();
+  }
+
+  pre().then(function(data){
+      alert(data);
+      return 222;
+  }).then(function(data){
+      alert(data);
+      return 111;
+  }).then(function(data){
+      alert(data);
+  });
+
+
+
+</script>
+</body>
+</html>

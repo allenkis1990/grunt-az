@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0; padding:0;}
+        .main{width:150px; height:150px; background:red; display:none;}
+        .green{background:green;}
+    </style>
+</head>
+<body>
+<div class="main"></div>
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+var div=$(".main");
+    div.show("slow").animate({"margin-left":200},2000);
+    div.queue(function(){
+        $(this).addClass("green");
+        $(this).dequeue();
+    });
+    div.animate({"margin-left":0},2000).removeClass("green");
+    div.queue(function(){
+        $(this).removeClass("green");
+        $(this).dequeue();
+    });
+</script>
+</body>
+</html>

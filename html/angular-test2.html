@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    th,td,table{border:1px solid #666;}
+    td{text-align: center;}
+    table{border-collapse:collapse; width:800px; margin:40px 0px 0px 40px;}
+</style>
+<body>
+
+<div ng-controller="mycon">
+    <input type="text" ng-model="search" />
+
+    <table>
+        <thead>
+            <tr><th>姓名</th><th>年龄</th><th>爱好</th></tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in arr | filter:{love:search}">
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td>{{item.love}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <input type="text" ng-model="owatch"/>
+</div>
+
+
+
+
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function($provide){
+
+    });
+
+    app.controller("mycon",function($scope){
+
+
+        $scope.arr=[
+            {name:"allen11",age:18,love:"sk11"},
+            {name:"tom22",age:20,love:"fu22"},
+            {name:"jack33",age:22,love:"ball33"}
+        ];
+        angular.forEach($scope.arr,function(item,index){
+            console.log(item+"|||"+index);
+        });
+    });
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

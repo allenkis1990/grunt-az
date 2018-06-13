@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        .box{width:550px; height:710px; border:5px solid cornflowerblue; margin:50px auto;position:relative;overflow: hidden;}
+        .plane{width:40px;height:50px;background: red;position: absolute;left:100px;top:100px; }
+        .bullet{width:10px; height:10px; background:green; position: absolute;}
+        .emey{width:40px;height:40px;background:#dda0dd;position: absolute;}
+    </style>
+</head>
+<body>
+
+
+<div class="box"></div>
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    $(function(){
+        game.plane();
+    });
+
+    var game={
+
+        plane:function(){
+            var $plane=$("<div class='plane'></div>");
+            $(".box").append($plane);
+            $(document).mousemove(function(e){
+                var fixW=$(".box").offset().left+5+$(".plane").width()/2;
+                var fixH=$(".box").offset().top+5+$(".plane").height()/2;
+                var mx= e.clientX-fixW;
+                var my= e.clientY-fixH;
+                if(mx<0){
+                    mx=-$(".plane").width()/2;
+                }else if(mx>$(".box").width()){
+                    mx=$(".box").width()-$(".plane").width()/2;
+                }
+
+                if(my<=0){
+                    my=0;
+                }else if(my>$(".box").height()){
+                    my=$(".box").height()-$(".plane").height();
+                }
+                $(".plane").css({top:my,left:mx});
+            });
+        },
+
+        bullet:function(){
+            var $bullet=$("<div class='bullet'></div>");
+            $(".box").append($bullet);
+            $bullet.css({top:$(".plane").position().top-20,left:$(".plane").position().left+15}).animate({top:0},function(){
+                $(this).remove();
+            });
+        },
+
+        emey:function(){
+            var $emey=$("<div class='emey'></div>");
+            $(".box").append($emey);
+            $emey.css({top:0,left:Math.random()*$(".box").width()}).animate({top:$(".box").height()},1000,"linear",function(){
+                $(this).remove();
+            });
+        }
+
+
+    }
+
+
+
+
+
+    game.bulletTime=setInterval(function(){
+        game.bullet();
+    },150);
+
+    game.emeyTime=setInterval(function(){
+        game.emey();
+    },300);
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

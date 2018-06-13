@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+
+
+</head>
+<body >
+
+<div id="app">
+
+    <div v-lwh.haha="color">{{num}}</div>
+    <button @click="fn">click</button>
+</div>
+
+
+
+<script>
+    Vue.directive('lwh',{
+
+        bind:function(ele,binding){
+            console.log('bind');
+            $(ele).click(function(){
+                alert(111);
+            });
+            console.log(binding);
+            $(ele).css({color:binding.value});
+        },
+
+        inserted:function(){
+            console.log('inserted');
+        },
+
+        update:function(){
+            console.log(arguments);
+            console.log('update');
+        },
+
+        componentUpdated:function(){
+            console.log('componentUpdated');
+        },
+        unbind:function(){
+            console.log('unbind');
+        }
+
+
+    });
+
+    new Vue({
+        el:'#app',
+        data:{
+            aaa:1,
+            color:'red',
+            num:0
+        },
+        methods:{
+            fn:function(){
+                this.num++;
+            }
+        }
+    });
+    //console.log(v);
+</script>
+</body>
+</html>

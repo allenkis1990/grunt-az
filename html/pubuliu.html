@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0; padding:0;}
+        .main{width:1000px; border:1px solid red; margin:0px auto;}
+        .list{float:left;margin-left:15px;}
+    </style>
+</head>
+<body>
+   <div class="main">
+       <div class="list"></div>
+       <div class="list"></div>
+       <div class="list"></div>
+       <div class="list"></div>
+   </div>
+
+   <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+   <script>
+       var jsondata=[];
+       $.ajax({
+           type:"POST",
+           url:"pubuliu.json",
+           success:function(data){
+                 jsondata=data;
+                 getimg();
+           }
+
+       });
+
+       function getimg(){ //从JSON中循环出所有的图片并且添加到 最小高度的那一列
+           for(var i=0;i<jsondata.length;i++){
+               var div="";
+
+               div+='<div class="pic"><img height="'+jsondata[i].height+'" src="'+jsondata[i].src+'" alt="'+jsondata[i].alt+'" width="230" /></div>';
+
+               getminimg($(".list")).append(div);
+           }
+       }
+
+       function getminimg(obj){   //筛选出最小高度的那一列
+           var index=0;
+           var min=obj.eq(index).height(); //先假设第一列的高度是最小的
+           for(var j=0;j<obj.length;j++){
+               if(obj.eq(j).height()<min){
+                   min=obj.eq(j).height();
+                   index=j;
+               }
+           }
+           return obj.eq(index);
+       }
+       $(window).scroll(function(){
+           var scrollh=document.body.scrollHeight;
+           var scrollt=document.body.scrollTop;
+           var h=$(window).height();
+           if(h+scrollt>=scrollh){
+               getimg();
+           }
+       });
+
+
+
+   </script>
+</body>
+</html>

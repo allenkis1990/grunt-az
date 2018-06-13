@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <lwh v-for="item in arr">
+            <span slot="name">{{item.name}}</span>
+            <span slot="beat">{{item.beat}}</span>
+        </lwh>
+    </div>
+
+
+
+
+    <script>
+
+        //局部注册组件
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                num:0,
+                arr:[{name:'allen',beat:20},{name:'jack',beat:18}]
+            },
+            methods:{
+
+            },
+            components:{
+                'lwh':{
+                    template:`<div>
+                        <div>玩家：<slot name="name"></slot>,获胜场次：<slot name="beat"></slot></div>
+                    </div>`
+                }
+            }
+
+        });
+        //注册add方法
+        vm.$on('add',function(num){
+            this.num+=num;
+        });
+        function add(){
+            //调用add
+            vm.$emit('add',2);
+        }
+        function off(){
+            //注销add
+            vm.$off('add');
+        }
+    </script>
+</body>
+</html>

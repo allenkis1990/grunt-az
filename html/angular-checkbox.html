@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="mycon">
+<label ng-repeat="item in obj">
+    <input type="checkbox" ng-click="fn(item.id)" ng-checked="arrobj.arr.indexOf(item.id)!===-1"/>{{item.name}}
+</label>
+
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",function($scope){
+      $scope.obj=[
+          {id:1,name:"篮球"},
+          {id:2,name:"游戏"},
+          {id:3,name:"看书"},
+          {id:4,name:"写代码"}
+      ];
+
+      $scope.arrobj={
+          arr:[1,3]
+      };
+
+      $scope.fn=function(id){
+        var index=$scope.arrobj.arr.indexOf(id);
+
+        if(index===-1){ //INDEX=-1表示在ARR数组里找不到对应的值
+            $scope.arrobj.arr.push(id);
+        }else{
+            $scope.arrobj.arr.splice(index,1);
+        }
+      };
+    });
+</script>
+</body>
+</html>

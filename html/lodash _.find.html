@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script type="text/javascript" src="../js/lodash.min.js"></script>
+<script>
+    var arr=[{name:1},{name:2},{name:3}];
+    var item=_.find(arr,function(item){
+        return item.name==2;
+    });
+    item.age=18;
+    console.log(arr);
+</script>
+</body>
+</html>

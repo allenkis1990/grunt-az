@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        .main{width:700px;height:300px;margin:40px auto;position:relative;}
+        .box{width:100%;height:100%;position:absolute;}
+        .list{width:50px;}
+        ul li{width:50px; height:50px; background:#000; color:#fff;text-align:center;line-height:50px;}
+        ul{margin:0px auto;}
+        ul li.hover{background:blue;}
+    </style>
+</head>
+<body>
+
+
+<div class="main">
+    <div class="box" style="background:red;z-index:99"></div>
+    <div class="box" style="background:green;"></div>
+    <div class="box" style="background:blue;"></div>
+    <div class="box" style="background:pink;"></div>
+</div>
+<ul class="list">
+    <li class="hover">1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+
+<span class="haha" style="margin-top:20px;">
+    <span class="left">左</span>
+    <span class="right">右</span>
+</span>
+
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    var timePlay=null;
+    var index=0;
+    var box=$('.box');
+    $('.list li').click(function(){
+        var $this=$(this);
+        index=$this.index();
+        $this.addClass('hover').siblings().removeClass('hover');
+        box.eq(index).stop(true).fadeIn().siblings().stop(true).fadeOut();
+    });
+
+    function autoPlay(){
+        timePlay=setInterval(function(){
+            index++;
+            if(index>3){
+                index=0;
+            }
+            $('.list li').eq(index).addClass('hover').siblings().removeClass('hover');
+            box.eq(index).stop(true).fadeIn().siblings().stop(true).fadeOut();
+        },2000);
+    }
+    autoPlay();
+
+    $('.haha span.right').click(function(){
+        index++;
+        if(index>3){
+            index=0;
+        }
+        $('.list li').eq(index).addClass('hover').siblings().removeClass('hover');
+        box.eq(index).stop(true,true).fadeIn().siblings().stop(true,true).fadeOut();
+    });
+
+    $('.haha span.left').click(function(){
+        index--;
+        if(index<0){
+            index=3;
+        }
+        $('.list li').eq(index).addClass('hover').siblings().removeClass('hover');
+        box.eq(index).stop(true,true).fadeIn().siblings().stop(true,true).fadeOut();
+    });
+
+    $('.haha span.left').hover(function(){
+        clearInterval(timePlay);
+    },function(){
+        autoPlay();
+    });
+    $('.haha span.right').hover(function(){
+        clearInterval(timePlay);
+    },function(){
+        autoPlay();
+    });
+    $('.main').hover(function(){
+        clearInterval(timePlay);
+    },function(){
+        autoPlay();
+    });
+    $('.list').hover(function(){
+        clearInterval(timePlay);
+    },function(){
+        autoPlay();
+    });
+
+</script>
+</body>
+</html>

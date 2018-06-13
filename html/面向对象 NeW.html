@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .main{width:300px;height:300px;background:blue;}
+    </style>
+</head>
+<body>
+<div class="main"></div>
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    function Obj(){
+        this.name='allen',
+        this.age=18,
+        this.dom=$('.main')
+        /*this.event=function(){
+            //alert(111);
+        }()*/
+        return this.init();
+    }
+    Obj.prototype.init=function(){
+        var that=this;
+        this.dom.click(function(){
+            alert(that.name+that.age);
+        });
+    }
+    var obj=new Obj();
+</script>
+</body>
+</html>

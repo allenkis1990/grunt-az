@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="myctrl">
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+   var app= angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+        $scope.str='{"name":"allen","job":"web","age":"18"}'
+        $scope.json=angular.fromJson($scope.str);
+        console.log($scope.json);
+
+
+        $scope.obj={name:"allen",job:"web",age:18}
+        $scope.strstr=angular.toJson($scope.obj,true);//后面加一个true能格式化一下字符串
+        console.log($scope.strstr);
+
+    });
+</script>
+</body>
+</html>

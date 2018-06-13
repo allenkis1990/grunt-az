@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+{{aaa}}
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    var script=document.createElement('script');
+    script.id='aaa';
+    script.src='../js/angular2.min.js';
+    var head=document.getElementsByTagName('head')[0];
+    head.appendChild(script);
+    /*var script=$('<script type="text/javascript" src="../js/angular2.min.js"><\/script>');
+    $('head').append(script);*/
+
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope){
+        $scope.aaa='222';
+    });
+</script>
+</body>
+</html>

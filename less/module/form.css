@@ -1,0 +1,26 @@
+.ipt-txt {
+  color: #777;
+}
+.ipt-txt-1 {
+  width: 43px;
+  height: 31px;
+  line-height: 31px;
+  font-size: 12px;
+}
+.ipt {
+  padding: 0;
+  border: none;
+  border: 1px solid #ddd;
+}
+.ipt-1 {
+  width: 152px;
+  height: 31px;
+}
+.ipt-2 {
+  width: 82px;
+  height: 31px;
+}
+.yzm {
+  height: 31px;
+  width: 61px;
+}

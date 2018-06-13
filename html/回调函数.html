@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+
+    public("我是延迟加载！！！",function(){
+        alert("回调！！");
+    });
+    function public(str,callback){
+
+        function fun(){
+            var def= $.Deferred();
+            setTimeout(function(){
+                alert(str);
+                def.resolve();
+            },2000);
+            return def.promise();
+        }
+        $.when(fun()).then(function(){
+            if(callback){
+                callback();
+            }
+        });
+
+
+    }
+
+
+</script>
+</body>
+</html>

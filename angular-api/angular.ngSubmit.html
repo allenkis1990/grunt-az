@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="myapp" xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="myctrl">
+<form ng-submit="fn()" name="myform">
+    <input type="text" ng-model="a1" name="text" ng-minlength="6" />
+    <input type="text" ng-model="a2" name="text"  />
+    <button type="submit" id="submit">aaa</button>
+</form>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+   var app= angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+        $scope.fn=function(){
+            if($scope.myform.$valid){
+                alert(11);
+            }
+        }
+    });
+</script>
+</body>
+</html>

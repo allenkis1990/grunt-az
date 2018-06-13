@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="btn">btn</button>
+<input type="text" id="psd" />
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    (function($){
+        $.fn.togglePassword=function(option){
+            var obj= $.extend($.fn.togglePassword.obj,option);//合并对象{ev:"click",option}option就是下面调用的{ele:"#btn"}
+            var $input=$(this);
+            $(obj.ele).bind(obj.ev,function(){
+                if($input.attr("type")=="password"){
+                    $input.attr("type","text")
+                }else if($input.attr("type")=="text"){
+                    $input.attr("type","password")
+                }
+            });
+        }
+
+        $.fn.togglePassword.obj={ev:"click"};
+    })(jQuery);
+
+    $("#psd").togglePassword({
+        ele:"#btn"
+    });
+</script>
+</body>
+</html>

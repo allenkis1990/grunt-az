@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<script>
+    //var a=10;
+    function digui(a){
+        if(a>0){
+            console.log(a);
+            //a--;
+            digui(a-1);
+        }else{
+            console.log('递归完成');
+            return false;
+        }
+    }
+    digui(10);
+</script>
+</body>
+</html>

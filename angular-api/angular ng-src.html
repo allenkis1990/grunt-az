@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script id="aaa" type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+</head>
+<body ng-controller="con" style="height:3000px;">
+<input type="checkbox" id="che" />
+<div class="aaa" style="margin-top:5000px;"><div mydir><img ng-src="{{src}}"></div></div>
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+
+    /*$('#che').click(function(e){
+        console.log(e.target.checked);
+    });*/
+    /*var script  = document.createElement ( "script" );
+    script.id   = '_login_script';
+    script.type = "text/javascript";
+    script.src  = '../js/jquery-1.9.1.min.js';
+    document.getElementsByTagName ( 'head' )[0].appendChild ( script );
+    script.onload = function () {
+        alert(111);
+    }*/
+
+
+
+
+
+
+    var app=angular.module('app',[],function(){
+
+
+    });
+    app.controller('con',function($scope,$timeout){
+        $scope.src='../images/afei.jpg';
+    });
+    app.directive('mydir',['$timeout','$animate',function($timeout,$animate){
+        return {
+            transclude:'element',
+            compile:function(){
+                return function prelink($scope,ele,attr,ctrl,transclude){
+                    var parele=$(ele).parent();
+                    //console.log(ele);
+                    transclude($scope,function(clone){
+                        //console.log(clone[0]);
+                        $animate.enter(clone,parele,ele,function(){ //1克隆 2要插入到的节点 3插入后的样子
+                            alert('加载成功');
+                            console.log(ele[0]);
+                        });
+                        /*$animate.leave(clone,function(){
+                            alert(111);
+                        });*/
+                    });
+                }
+            }
+            /*link:function($scope,ele,attr,ctrl,transclude){
+
+                var parele=$(ele).parent();
+                //console.log(ele);
+                transclude($scope,function(clone){
+                    //console.log(clone[0]);
+                    $animate.enter(clone,parele,ele,function(){ //1克隆 2要插入到的节点 3插入后的样子
+                        alert('加载成功');
+                        console.log(ele[0]);
+                    });
+                    $animate.leave(clone,function(){
+                        alert(111);
+                    });
+                });
+
+
+
+
+
+
+            }*/
+        }
+    }]);
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script>
+
+    /*
+     * 判断obj是否为一个整数
+     */
+    function isInteger(obj) {
+        return Math.floor(obj) === obj;
+    }
+
+    /*
+     * 将一个浮点数转成整数，返回整数和倍数。如 3.14 >> 314，倍数是 100
+     * @param floatNum {number} 小数
+     * @return {object}
+     * {times:100, num: 314}
+     */
+    function toInteger(floatNum) {
+        var ret = {times: 0, num: 0};
+        if (isInteger(floatNum)) {
+            ret.num = floatNum;
+            return ret;
+        }
+        var strfi = floatNum + '';
+        var dotPos = strfi.indexOf('.');
+        var len = strfi.substr(dotPos+1).length;
+        var times = Math.pow(10, len);
+        var intNum = parseInt(floatNum * times + 0.5, 10);
+        ret.times = times;
+        ret.num = intNum;
+        return ret;
+    }
+
+    /*
+     * 核心方法，实现加减乘除运算，确保不丢失精度
+     * 思路：把小数放大为整数（乘），进行算术运算，再缩小为小数（除）
+     *
+     * @param a {number} 运算数1
+     * @param b {number} 运算数2
+     * @param digits {number} 精度，保留的小数点数，比如 2, 即保留为两位小数
+     * @param op {string} 运算类型，有加减乘除（add/subtract/multiply/divide）
+     *
+     */
+    var obj={};
+    var filterArr=[];
+    function operation(arr,digits) {
+        for(var i=0;i<arr.length;i++){
+            obj['a'+i]=toInteger(arr[i]);
+        }
+
+        var max = o1.times > o2.times ? o1.times : o2.times;
+        var result = null;
+        result = o1.num + o2.num;
+        return result / max;
+    }
+
+    operation([1,2,3], 2);
+
+</script>
+</body>
+</html>

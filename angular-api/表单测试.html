@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="con">
+
+<div style="width:100%;height:800px;"></div>
+<form name="myform">
+    <input ng-required="true" name="aaa" ng-model="fuck" ng-minlength="16" />
+    <button ng-click="fn(myform)">click me</button>
+
+</form>
+<button ng-click="fn2()">666</button>
+<input type="text" ng-model="hehe" lwhtest />
+<button class="setPristine">$setPristine</button>
+
+
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/angular2.min.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('con',function($scope){
+
+        //$scope.hehe=6;
+        $scope.fn2=function(){
+            $scope.hehe=88;
+        }
+
+        $scope.fn=function(form){
+            console.log(form);
+        }
+    });
+
+    app.directive('lwhtest',function(){
+        return {
+            require:'ngModel',
+            link:function($scope,ele,attr,ngModel){
+                //$scope.$apply(function(){
+                console.log($scope);
+                    $('.setPristine').click(function(){
+                        $scope.$apply(function(){
+                            ngModel.$setPristine();
+                        });
+                    });
+                //});
+
+            }
+        }
+    });
+</script>
+</body>
+</html>

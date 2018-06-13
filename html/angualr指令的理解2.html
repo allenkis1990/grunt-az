@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        .orderRed{color:red;}
+        .orderGreen{color:green;}
+    </style>
+</head>
+<body ng-controller="mycon">
+<div say-hi1>2222</div>
+<say-hi2><div>里面的</div></say-hi2>
+
+</body>
+
+
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",function($scope){
+
+        $scope.content="想听我唱一首歌吗？";
+        $scope.songname="《最长的电影》";
+        $scope.arr=[
+            {name:"allen",age:26},
+            {name:"allenkis",age:22}
+        ];
+
+
+    });
+    app.directive("sayHi1",function(){
+        return {
+            restrict:"ECAM",
+            //transclude:true,
+            replace:true,
+            compile:function(){
+                console.log("compile前执行1！");
+                return {
+                    pre:function prelink(){
+                        console.log("PRE执行1！");
+                    },
+                    post:function postlink(scope,ele,attr,ctrl){
+                        console.log("POST执行1！");
+                        ele.on("click",function(){
+                            alert(11);
+                        });
+                    }
+                }
+            }
+        }
+    });
+    app.directive("sayHi2",function(){
+        return {
+            restrict:"ECAM",
+            //transclude:true,
+            replace:true,
+            template:"<div>hahahah<span ng-transclude>222</span></div>",
+            transclude:true,
+            controller:function($scope){
+                console.log($scope);
+            },
+            compile:function(ele,attr,trans){
+                //console.log(trans);
+                console.log("compile前执行2！");
+                return {
+                    pre:function prelink(){
+                        console.log("PRE执行2！");
+                    },
+                    post:function postlink(){
+                        console.log("POST执行2！");
+                    }
+                }
+            }
+        }
+    });
+    app.directive("sayHi3",function(){
+        return {
+            restrict:"ECAM",
+            //transclude:true,
+            replace:true,
+            compile:function(){
+                console.log("compile前执行3！");
+                return {
+                    pre:function prelink(){
+                        console.log("PRE执行3！");
+                    },
+                    post:function postlink(){
+                        console.log("POST执行3！");
+                    }
+                }
+            }
+        }
+    });
+
+
+
+
+
+</script>
+</html>

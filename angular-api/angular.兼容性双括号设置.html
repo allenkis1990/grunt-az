@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="myctrl">
+
+
+<div>ha{{allen}}</div>
+
+
+
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/angular-sanitize.min.js"></script>
+<script>
+
+//$interpolateProvider.startSymbol ( 'b{{' );
+    var app=angular.module('myapp',[],function($interpolateProvider){
+        $interpolateProvider.startSymbol ( 'ha{{' );
+    });
+
+
+
+    app.controller("myctrl",function($scope){
+
+        $scope.allen='allenkis';
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script>
+    function obj(o){ //o表示被继承的对象
+        function F(){}
+        F.prototype=o;//相当于F就是继承的那个元素 孩子
+        return new F();
+    }
+
+    var box={  //相当于var box=new Object();
+        name:"jack",
+        age:18,
+        family:[1,2,3]
+    };
+
+    var box1=obj(box);
+    box1.family.push(4);
+    //alert(box1.family);
+    var box2=obj(box);
+    alert(box2.family);
+</script>
+</body>
+</html>

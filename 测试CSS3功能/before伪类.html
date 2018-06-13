@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        /**::before两个冒号是伪元素 :before一个冒号是伪类 两个功能一样**/
+        .main{position:relative;margin-left:600px;z-index:99;}
+        .main::before{
+            transform:skewX(50deg);
+            width:100px;
+            height:100px;
+            background:red;
+            /**给伪元素设置宽高要先设置绝对定位**/
+            position:absolute;
+            content:'';
+            z-index:-1;
+        }
+
+        .main2{width:400px;height:400px;border:10px dashed #000000;position:relative;}
+        .main2:before{width:450px;height:450px;position:absolute;
+            border:10px dashed #000000;left:0px;top:0px;content:'';margin-left:50px;}
+
+    </style>
+</head>
+<body>
+<div class="main">22</div>
+<div class="main2"></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    *{margin:0; padding:0;}
+    .left{position:absolute;left:-1100px;top:200px;border:5px solid red;width:80px;height:300px;}
+    .mid{position:absolute;left:400px;top:1500px; border:5px solid blue;width:300px;height:300px;}
+    .right{position:absolute;left:2150px;top:200px;border:5px solid red;width:80px;height:300px;}
+    </style>
+</head>
+<body>
+<div class="left"></div>
+<div class="mid"></div>
+<div class="right"></div>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    var left=$(".left").offset().left;
+    var mid=$(".mid").offset().top;
+    var right=$(".right").offset().left;
+    var k=100;
+    var time=null;
+    $(function(){
+        time=setInterval(function(){
+
+            if($(".left").offset().left>=200 || $(".mid").offset().top<=200 || $(".right").offset().left<=850){
+                 clearInterval(time);
+            }else{
+                $(".left").css({"left":left+k});
+                $(".mid").css({"top":mid-k});
+                $(".right").css({"left":right-k});
+                k+=100;
+            }
+        },30);
+    });
+    $(document).mousemove(function(e){
+        var x= e.clientX-100;
+        var y= e.clientY;
+        $(".mid").css({"left":x*0.22+230,"top":y*0.2+30});
+        $(".left").css({"top":y*0.2+30});
+        $(".right").css({"top":y*0.2+30});
+    });
+
+
+</script>
+</body>
+</html>

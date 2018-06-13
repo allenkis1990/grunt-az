@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="mycon">
+
+<div mydir ng-model="data[0].name"></div>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    var i=0;
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",["$scope",function($scope){
+       $scope.data=[
+           {name:"allenkis",age:18},
+           {name:"allen",age:20}
+       ];
+    }]);
+    app.directive("mydir",function(){
+        return{
+            restrict:"ECAM",
+            templateUrl:"dir.html",
+            replace:true,
+            compile:function(ele,attr,transclude,ctrl){
+                    console.log(attr);
+                   ele.append(angular.element("<p>{{data[0].name}} {{data[0].num}}</p>"));
+
+                return {
+                    pre:function prelink(){},
+                    post:function postlink(scope,ele,attr,ctrl){
+                        ele.on("click",function(){
+                            scope.$apply(function(){
+                                scope.data[0].name="fuck";
+                                //scope.item.num=i++;
+                                scope.data[0].num=i++;
+                            });
+                        });
+                    }
+                }
+
+            },
+        /*    link:function(scope,ele,attr,ctrl){
+
+                $(ele).append($("<div>{{item.name}}</div>"));
+                  $("#main a").hover(function(){
+                     // alert(1);
+                  });
+            }*/
+        }
+    });
+</script>
+</body>
+</html>

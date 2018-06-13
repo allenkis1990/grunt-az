@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="myctrl">
+
+<select ng-model="moren" ng-options="item.id as item.name for item in arr"></select>
+{{moren}}
+<div ng-switch on="moren">
+    <div ng-switch-when="1">allen</div>
+    <div ng-switch-when="2">tom</div>
+    <div ng-switch-when="3">jack</div>
+    <div ng-switch-when="4">fuck</div>
+    <div ng-switch-when="5">shit</div>
+</div>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+   var app= angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+        $scope.moren=3;
+        $scope.arr=[
+            {id:1,name:"allen"},
+            {id:2,name:"tom"},
+            {id:3,name:"jack"},
+            {id:4,name:"fuck"},
+            {id:5,name:"shit"}
+        ];
+    });
+</script>
+</body>
+</html>

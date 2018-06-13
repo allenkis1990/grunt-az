@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+<script>
+    /*(function (){
+        alert("sss");
+    })();  //匿名函数调用 */
+
+    /*var box=(function(){
+        return 111;
+    })();
+    alert(box);*/
+    /*function box(){
+        return function(){
+            return "lee";
+        }
+    }
+    alert(box()());*/
+
+    function box(){
+        var arr=[];
+        for(var i=0;i<5;i++){
+            arr[i]=(function(num){
+                return function(){
+                    return num;
+                };
+            })(i);  //包裹在匿名函数外面的圆括号可以去掉因为它已经付给了arr[i]
+        }
+        return arr;
+    }
+
+    var b=box();
+    for(var j=0;j< b.length;j++){
+        alert(b[j]());
+    }
+    /*var b=function(){
+        alert("lee");
+    }();*/
+
+</script>
+</body>
+</html>

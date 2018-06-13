@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+   /* function Box(){   //使用继承既能访问到实例里面的 也能访问到prototype里的
+        this.name="jack";
+        this.age=18;
+    }
+    Box.prototype.run=function(){
+        return this.age;
+    }
+
+    function Desk(){}
+    Desk.prototype=new Box();
+    var obj=new Desk();
+    alert(obj.name+"-----"+obj.run());
+    */
+
+
+
+
+   function Box(name,age){  //对象冒充不能继承原型里面的
+       this.name=name;
+       this.age=age;
+   }
+
+   Box.prototype.run=function(){
+       return this.age;
+   }
+    function Desk(){
+        Box.call(this,"tom",28);  //传参
+    }
+    var obj=new Desk();
+    alert(obj.name);
+    //如果两种方法配合使用的话既解决了传参问题又解决了继承问题
+
+ </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script type="text/javascript" src="../js/index.js"></script>
+<script>
+    var arr=[-9,-5,3,-300,-1,-18];
+
+    var index=0;
+    var min=arr[index];
+
+    function getmin(){
+        for(var i=0;i<arr.length;i++){
+            if(arr[i]<min){
+                min=arr[i];
+                index=i;
+            }
+
+        }
+        return min;
+    }
+
+</script>
+</body>
+</html>

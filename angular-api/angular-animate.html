@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .main{width:300px; height:300px; background:red;}
+        @keyframes rotateFall {
+            0%         { transform: rotateZ(0deg); }
+            20%     { transform: rotateZ(10deg); animation-timing-function: ease-out; }
+            40%     { transform: rotateZ(17deg); }
+            60%     { transform: rotateZ(16deg); }
+            100%     { transform: translateY(100%) rotateZ(17deg); }
+        }
+
+        @keyframes slideOutLeft {
+            to         { transform: translateX(-100%); }
+        }
+
+        @keyframes rotateOutNewspaper {
+            to         { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
+        }
+
+        @keyframes scaleUp {
+            from     { opacity: 0.3; -webkit-transform: scale(0.8); }
+        }
+
+        @keyframes slideInRight {
+            from     { transform:translateX(100%); }
+            to         { transform: translateX(0); }
+        }
+
+        @keyframes slideInUp {
+            from     { transform:translateY(100%); }
+            to         { transform: translateY(0); }
+        }
+
+        @keyframes marginLeft {
+            from     { width:0px; }
+            to         { width: 45%; }
+        }
+        @keyframes marginLeft2 {
+            from     { width:45%; }
+            to         { width: 0px; }
+        }
+
+        .main{transition: 0.5s all;}
+        .main.ng-enter{ animation: scaleUp 0.5s both ease-in; z-index: 8888; }
+        .main.ng-enter-active{ animation: scaleUp 0.5s both ease-in; z-index: 8888; }
+        .main.ng-leave{ animation: slideOutLeft 0.5s both ease-in; z-index: 9999; }
+        .main.ng-leave-active{ animation: slideOutLeft 0.5s both ease-in; z-index: 9999; }
+
+        .box{width:300px; height:300px; background:blue; transition: 0.5s all;}
+        .opa-add{animation: scaleUp 0.5s both ease-in; z-index: 8888;}
+        .opa-add-active{animation: scaleUp 0.5s both ease-in; z-index: 8888;}
+        .opa-remove{animation: rotateOutNewspaper 0.5s both ease-in; z-index: 9999;}
+        .opa-remove-active{animation: rotateOutNewspaper 0.5s both ease-in; z-index: 9999;}
+
+        .outer-bar{ position:relative; width:800px; height:50px; border:1px solid deepskyblue; margin:0px auto;}
+        .inner-bar{transition: 0.5s all;width:0%; position:absolute; top:0px; left:0px; height:50px; background:deepskyblue; }
+        .innerbaradd{width:45%;}/*记得加*/
+        .inner-bar.innerbaradd-add{animation: marginLeft 1.5s both ease-in;}
+        .inner-bar.innerbaradd-add-active{animation: marginLeft 1.5s both ease-in;}
+        .inner-bar.innerbaradd-remove{animation: marginLeft2 1.5s both ease-in;}
+        .inner-bar.innerbaradd-remove-active{animation: marginLeft2 1.5s both ease-in;}
+    </style>
+</head>
+<body ng-controller="myctrl">
+
+<button ng-click="fn()">click me</button>
+<button ng-click="changeFn()">ng-class</button>
+<div class="main" ng-if="isShow"></div>
+<!--<div class="box" ng-class="{opa:changeTrue}"></div>-->
+<div class="outer-bar">
+    <div class="inner-bar" ng-class="{innerbaradd:changeTrue}"></div>
+</div>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/angular-animate.min.js"></script>
+<script>
+    var app= angular.module("myapp",["ngAnimate"]);
+    app.controller("myctrl",function($scope){
+        $scope.isShow=false;
+        $scope.fn=function(){
+            $scope.isShow=!$scope.isShow;
+        }
+        $scope.istrue=false;
+        $scope.changeTrue=false;
+        $scope.changeFn=function(){
+            $scope.changeTrue=!$scope.changeTrue;
+        }
+    });
+
+
+
+</script>
+</body>
+</html>

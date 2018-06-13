@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+<div>
+
+<mydir ng-controller="me"  aa="obj.name" kkk="true"></mydir>
+
+</div>
+
+
+
+
+
+<script type="text/javascript" src="../js/angular2.min.js"></script>
+<script type="text/javascript" src="../js/angular-cookies.min.js"></script>
+<script>
+
+
+
+
+
+    var app= angular.module("myapp",[]);
+
+
+    app.controller("me",function($scope,$attrs,$parse){
+
+       // $scope.aaa='111';
+
+        $scope.obj={name:'allenkis'};
+        var getter=$parse($attrs.aa);
+        console.log(getter($scope));
+        var setter=getter.assign;
+        var a=setter($scope,'chunge');
+        console.log(a);
+        //var str=$attrs.kkk;
+        //var bol=$scope.$eval(str);
+        //console.log(typeof bol);
+        /*$scope.$watch($parse($attrs.aa),function(val){
+            console.log(val);
+        });*/
+    });
+
+    app.directive('mydir',function(){
+        return {
+            restrict:'ECAM',
+            replace:true,
+            template:'<div>888</div>',
+            controller:'me'
+        }
+    });
+
+</script>
+
+</body>
+</html>

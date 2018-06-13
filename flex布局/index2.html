@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0;padding:0;}
+        .main{
+            height:500px;
+            align-items:center;/*单行纵向对齐方式 高度要设置*/
+            display:-webkit-box;/*写在flex前面*/
+            display:flex;
+            border:1px solid black;
+            flex-wrap: wrap;
+            align-content: center;/*多行纵向对齐方式 高度要设置*/
+            }
+        .item{
+            width:20%;
+            height:100px;
+            box-sizing:border-box;
+            background:#666;
+            color:#fff;
+            border:1px solid red;
+            /*flex-shrink:1;*//*使用益出缩小的时候 必须要把益出换行去掉*/
+        }
+        .item:nth-child(1){
+
+        }
+        .item:nth-child(2){
+
+        }
+        .item:nth-child(6){
+            flex-grow:1;/*还有空间的时候会按比例填剩余空间*/
+            align-self:flex-end;/*item的单独纵向对齐方式*/
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="main">
+        <div class="item item1">1</div>
+        <div class="item item2">2</div>
+        <div class="item item3">3</div>
+        <div class="item item3">4</div>
+        <div class="item item3">5</div>
+        <div class="item item3">6</div>
+    </div>
+
+</body>
+</html>

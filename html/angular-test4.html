@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        th,td,table{border:1px solid #666;}
+        td{text-align: center;}
+        table{border-collapse:collapse; width:800px; margin:40px 0px 0px 40px;}
+    </style>
+</head>
+<body ng-controller="mycon">
+
+<table>
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>爱好</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in obj |allenkis">
+        <td>{{item.name}}</td>
+        <td>{{item.age}}</td>
+        <td>{{item.love}}</td>
+    </tr>
+    </tbody>
+</table>
+  {{arr | json}}  <!--JSON字符串-->
+ <!--{{arr | filter:"1" }}过滤属性值中含有1这个关键字的-->
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",function($scope,$location){
+
+        $scope.arr=[
+            {name:"allen1",age:18},
+            {name:"tom",age:120},
+            {name:"jack",age:22}
+        ];
+
+        $scope.arr2=
+            {name:"allen1",age:18}
+
+
+    });
+
+    app.filter("allenkis",function(){
+
+        return function(obj){
+            var arr=[];
+            //console.log(obj);
+            angular.forEach(obj,function(item){
+
+                if(item.name=='allen'){
+                    arr.push(item);
+                }
+
+            });
+
+
+   /* angular.module("myapp",[],function($provide,$filterProvider,$controllerProvider){
+           $provide.factory("obj",function(){
+              return [
+                  {name:"allen",age:18,love:"ball"},
+                  {name:"allen",age:20,love:"ball222"},
+                  {name:"jack",age:30,love:"ball333"}
+              ];
+           });
+
+         $controllerProvider.register("mycon",function($scope,obj,$filter){
+               $scope.obj=obj;
+
+               $scope.num=$filter('currency')(1990312);
+         });
+
+        $filterProvider.register("allenkis",function(){
+            return function(obj){
+                var arr=[];
+                //console.log(obj);
+                angular.forEach(obj,function(item){
+
+                    if(item.name=='allen'){
+                        arr.push(item);
+                    }
+
+                });
+
+                return arr;
+            }
+        });
+    });  */
+
+
+
+
+
+
+  /*  app.controller("mycon",function($scope){
+        $scope.obj=[
+            {name:"allen",age:18,love:"ball"},
+            {name:"allen",age:20,love:"ball222"},
+            {name:"jack",age:30,love:"ball333"}
+        ];
+    });
+
+    app.filter("allenkis",function(){
+
+        return function(obj){
+            var arr=[];
+            //console.log(obj);
+           angular.forEach(obj,function(item){
+
+               if(item.name=='allen'){
+                   arr.push(item);
+               }
+
+           });
+
+            return arr;
+        }
+    }); */
+</script>
+</body>
+</html>

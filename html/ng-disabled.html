@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="mycon">
+
+<button ng-disabled="isoff">BTN</button>
+
+<input type="text" ng-readonly="isoff" />
+
+<a ng-href="{{url}}">aaa</a>
+
+
+
+<div ng-bind="bind"></div>
+
+<div ng-bind-template="{{bind}} {{bind2}}"></div>
+
+<div ng-cloak>{{bind}}</div>
+
+
+<form ng-submit="sub()">
+    <input type="text" ng-model="peo.name"/>
+    <input type="submit" ng-model="peo.name"/>
+
+</form>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){
+
+    });
+    app.controller("mycon",function($scope,$timeout){
+            $scope.isoff=true;
+            $timeout(function(){
+                $scope.isoff=false;
+            },3000);
+
+            $scope.url="http://www.seo3355.com";
+
+        $scope.bind="kkkkkk";
+        $scope.bind2="ppppppp";
+
+
+        $scope.peo={
+            name:null
+        };
+
+        $scope.person=[];
+        $scope.sub=function(){
+            if($scope.peo){
+                $scope.person.push({name:$scope.peo.name});
+                $scope.peo.name='';
+                console.log($scope.person);
+            }
+        };
+    });
+</script>
+</body>
+</html>

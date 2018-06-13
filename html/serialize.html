@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form id="myform">
+    <input type="text" name="text1" value="txt1" />
+    <input type="text" name="text2" value="txt2" />
+    <input type="text" name="text3" value="txt3" />
+</form>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    var myform=$("#myform").serializeArray();
+
+    for(var i=0;i<myform.length;i++){
+        for(var j in myform[i]){
+            alert(j)
+        }
+    }
+    //alert(myform.length);
+    //alert(typeof myform);
+    //$("body").html(myform);
+</script>
+</body>
+</html>

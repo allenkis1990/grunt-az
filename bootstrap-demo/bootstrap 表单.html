@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        ul,li{list-style-type: none;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="a1">姓名</label>
+            <input type="text" placeholder="请输入姓名" id="a1" class="form-control" />
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" />点我啊
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="a2">价钱</label>
+            <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input type="text" class="form-control" id="a2" />
+                <div class="input-group-addon">.00</div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <form class="form-inline">
+        <ul style="-webkit-padding-start: 0px;">
+            <li>
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" class="form-control" />
+                </div>
+            </li>
+            <li>
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" class="form-control" />
+                </div>
+            </li>
+            <li>
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" class="form-control" />
+                </div>
+            </li>
+        </ul>
+    </form>
+
+    <div style="width:500px;">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 control-label">姓名</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div style="margin-top:100px; max-width:700px;">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-xs-2">姓名：</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">Email：</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-5 col-xs-offset-2">
+                    <div class="checkbox-inline">
+                        <label><input type="checkbox">点我啊</label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <label><input type="checkbox">点我啊</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-5 col-xs-offset-2">
+                    <input type="button" class="btn btn-info btn-lg" value="提交" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">年份：</label>
+                <div class="col-xs-5">
+                    <select class="form-control" multiple>
+                        <option>2015</option>
+                        <option>2016</option>
+                        <option>2017</option>
+                        <option>2018</option>
+                        <option>2015</option>
+                        <option>2016</option>
+                        <option>2017</option>
+                        <option>2018</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-5 col-xs-offset-2">
+                    <div class="radio-inline">
+                        <label>
+                            <input type="radio" ng-model="sex" />男
+                        </label>
+                    </div>
+                    <div class="radio-inline">
+                        <label>
+                            <input type="radio" ng-model="sex" />女
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">身份证号码：</label>
+                <div class="col-xs-5 form-control-static">6666666666666666666666666666666666666</div>
+            </div>
+            <div class="form-group has-feedback has-success">
+                <label class="col-xs-2 control-label">密码：</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" />
+                    <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-10 col-xs-offset-2">
+                    <input type="file" class="" value="上传文件！" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-5 col-xs-offset-2">
+                    <label class="checkbox-inline disabled"><input type="checkbox" disabled />男</label>
+                    <label class="checkbox-inline"><input type="checkbox" />女</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-5 col-xs-offset-2">
+                    <label class="radio-inline"><input type="radio" />男</label>
+                    <label class="radio-inline"><input type="radio" />女</label>
+                    <label class="radio-inline"><input type="radio" />男</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-5 col-xs-offset-2">
+                    <label class="checkbox-inline"><input type="checkbox" />男</label>
+                    <label class="checkbox-inline"><input type="checkbox" />女</label>
+                    <label class="checkbox-inline"><input type="checkbox" />男</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">评论：</label>
+                <div class="col-xs-5">
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">性别：</label>
+                <div class="col-xs-5">
+                    <label class="radio-inline">
+                        <input type="radio" />男
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" />女
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-2">昵称：</label>
+                <div class="col-xs-5">
+                    <div class="form-control-static">艾伦克斯</div>
+                </div>
+            </div>
+            <a href="#" class="btn btn-block btn-info">确认</a>
+            <div class="btn-group">
+                <a href="#" class="btn btn-default">1</a>
+                <a href="#" class="btn btn-default">2</a>
+                <a href="#" class="btn btn-default">3</a>
+                <a href="#" class="btn btn-default">4</a>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+</body>
+</html>

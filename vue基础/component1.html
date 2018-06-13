@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <lwh :aaa="aaa"></lwh>
+        <haha></haha>
+    </div>
+
+
+
+    <script>
+
+        //全局注册组件
+        Vue.component('lwh',{
+            template:'<div>666{{aaa}} {{this.$parent.aaa}}</div>',
+            props:['aaa']
+        });
+
+        //局部注册组件
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                aaa:'aaa'
+            },
+            components:{
+                'haha':{template:'<div>hahaha</div>'}
+            }
+        });
+    </script>
+</body>
+</html>

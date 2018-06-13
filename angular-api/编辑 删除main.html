@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            padding: 50px 0px 0px 100px;
+        }
+
+        * {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        textarea {
+            width: 300px;
+            height: 70px;
+            resize: none;
+        }
+
+        input[type="checkbox"] {
+            vertical-align: 32px;
+        }
+
+        .ml-1 {
+            margin-left: 10px;
+        }
+
+        .mt-1 {
+            margin-top: 10px;
+        }
+
+        .mb-1 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body ng-controller="myctrl">
+<button ng-click="isCheckboxShow=!isCheckboxShow" class="mb-1">批量管理</button>
+<div ng-show="isCheckboxShow"><input ng-checked="ischeckedAll" type="checkbox" ng-click="checkAll()" style="vertical-align:0px;" /> 全选</div>
+
+
+<ul manydelete>
+    <li ng-if="!item.undeleted" ng-repeat="item in data" class="item-zj" ng-init="parsindex=$index">
+        <div>
+            <h2>
+                <input ng-checked="item.ischecked" style="vertical-align:0px;" ng-click="checkItem(item,$index,data)" type="checkbox" ng-show="isCheckboxShow"/>
+                第<span>{{item.zj}}</span>章
+            </h2>
+        </div>
+        <ul class="ks-ul" style="margin-left:10px;">
+            <li ng-if="!itemerzi.undeleted" class="parentitem" ng-repeat="itemerzi in item.zjitem" ng-init="parindex=$index">
+                <div class="mt-1">
+                    <input ng-checked="itemerzi.ischecked" style="vertical-align:0px;" ng-click="checkSubitem(itemerzi,$index,item.zjitem,item)" type="checkbox" ng-show="isCheckboxShow"/>
+                    第{{itemerzi.ks}}课时</div>
+                <ul class="mt-1 item-list" style="margin-left:10px;">
+                    <li class="mt-1" ng-repeat="itemsunzi in itemerzi.info" editdiv ng-if="!itemsunzi.undeleted">
+                        <input ng-model="itemsunzi.ischecked"
+                               ng-click="checkIt(itemerzi.info,$index,itemerzi,item)"
+                               type="checkbox"
+                               ng-checked="itemsunzi.ischecked"
+                               ng-show="isCheckboxShow"/>
+                        <textarea readonly>{{itemsunzi.info}}</textarea>
+                        <a href="javascript:void(0)" class="edit">编辑</a>
+                        <a href="javascript:void(0)" ng-click="delete($index,parindex,parsindex,itemerzi.info,item.zjitem,data)">删除</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<button ng-click="manyDelete()" class="mt-1 many-del">批量删除！</button>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app = angular.module("myapp", []);
+    app.controller("myctrl", function ($scope, $timeout) {
+        $scope.data = [
+            {
+                ischecked:false,
+                totalItem:0,
+                it:0,
+                linshilen:0,
+                arr:[],
+                arr2:[],
+                arr3:[],
+                zj: 1, zjitem: [
+                {
+                    ks: 1.1,
+                    ischecked:false,
+                    arr:[],
+                    arr2:[],
+                    info: [{id: "item1-1-1", ischecked: false, time: "xxx", info: "第1章第1课时第1笔记"}, {
+                        id: "item1-1-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第1章第1第2笔记"
+                    }]
+                },
+                {
+                    ks: 1.2,
+                    ischecked:false,
+                    arr:[],
+                    arr2:[],
+                    info: [{id: "item1-2-1", ischecked: false, time: "xxx", info: "第1章第2课时第1笔记"}, {
+                        id: "item1-2-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第1章第2课时第2笔记"
+                    }]
+                },
+
+                {
+                    ks: 1.3,
+                    ischecked:false,
+                    arr:[],
+                    arr2:[],
+                    info: [{id: "item1-3-1", ischecked: false, time: "xxx", info: "第1章第3课时第1笔记"}, {
+                        id: "item1-3-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第1章第3课时第2笔记"
+                    }]
+                },
+                {
+                    ks: 1.4,
+                    ischecked:false,
+                    arr:[],
+                    arr2:[],
+                    info: [{id: "item1-3-1", ischecked: false, time: "xxx", info: "第1章第3课时第1笔记"}, {
+                        id: "item1-3-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第1章第3课时第2笔记"
+                    },{id: "item1-3-1", ischecked: false, time: "xxx", info: "第1章第3课时第1笔记"}]
+                }
+            ]
+            },
+
+            {
+                ischecked:false,
+                totalItem:0,
+                it:0,
+                linshilen:0,
+                arr:[],
+                arr2:[],
+                arr3:[],
+                zj: 2, zjitem: [
+                {
+                    ks: 2.1,
+                    ischecked:false,
+                    arr:[],
+                    arr2:[],
+                    info: [{id: "item2-1-1", ischecked: false, time: "xxx", info: "第2章第1课时第1笔记"}, {
+                        id: "item2-1-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第2章第1第2笔记"
+                    }]
+                },
+                {
+                    ks: 2.2,
+                    ischecked:false,
+                    arr:[],
+                    arr2:[],
+                    info: [{id: "item2-2-1", ischecked: false, time: "xxx", info: "第2章第2课时第1笔记"}, {
+                        id: "item2-2-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第2章第2课时第2笔记"
+                    }]
+                },
+                {
+                    ks: 2.3,
+                    ischecked:false,
+                    arr:[],
+                    arr2:[],
+                    info: [{id: "item2-3-1", ischecked: false, time: "xxx", info: "第2章第3课时第1笔记"}, {
+                        id: "item2-3-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第2章第3课时第2笔记"
+                    }]
+                }
+            ]
+            },
+
+            {
+                ischecked:false,
+                totalItem:0,
+                it:0,
+                linshilen:0,
+                arr:[],
+                arr2:[],
+                arr3:[],
+                zj: 3, zjitem: [
+                {
+                    ks: 3.1,
+                    ischecked:false,
+                    arr:[],
+                    arr2:[],
+                    info: [{id: "item3-1-1", ischecked: false, time: "xxx", info: "第3章第1课时第1笔记"}, {
+                        id: "item3-1-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第3章第1第2笔记"
+                    }]
+                },
+                {
+                    ks: 3.2,
+                    ischecked:false,
+                    arr:[],
+                    arr2:[],
+                    info: [{id: "item3-2-1", ischecked: false, time: "xxx", info: "第3章第2课时第1笔记"}, {
+                        id: "item3-2-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第3章第2课时第2笔记"
+                    }]
+                },
+                {
+                    ks: 3.3,
+                    ischecked:false,
+                    arr:[],
+                    arr2:[],
+                    info: [{id: "item3-3-1", ischecked: false, time: "xxx", info: "第3章第3课时第1笔记"}, {
+                        id: "item3-3-2",
+                        ischecked: false,
+                        time: "xxx",
+                        info: "第3章第3课时第2笔记"
+                    }]
+                }
+            ]
+            }
+        ];
+        for(var i=0;i<$scope.data.length;i++){ //每个zjitem的总笔记数
+            for(j=0;j<$scope.data[i].zjitem.length;j++){
+                $scope.data[i].totalItem+=$scope.data[i].zjitem[j].info.length;
+            }
+            $scope.data[i].it=Math.floor($scope.data[i].totalItem/$scope.data[i].zjitem.length);//2
+            $scope.data[i].len=Math.floor($scope.data[i].totalItem/$scope.data[i].it);//3 每个zjitem的长度
+
+        }
+
+        $scope.console = function (item) {
+            $timeout(function () {
+                console.log(item);
+            })
+
+        }
+        $scope.delete = function (index,parindex,parsindex,grandItem,subItem,item) {
+            if(grandItem[index].ischecked!==true){
+                subItem[parindex].arr.push("a");
+                item[parsindex].arr2.push("a");
+           }else{
+               /* subItem[parindex].arr.splice(0,1);
+                item[parsindex].arr2.splice(0,1);*/
+
+            }
+            subItem[parindex].arr2.push("a");
+
+
+           /* var aaa=0;
+            for(var i=0;i<$scope.data.length;i++){
+                for(j=0;j<$scope.data[i].zjitem.length;j++){
+                    aaa+=$scope.data[i].zjitem[j].arr.length;
+                }
+            }
+            item[parsindex].arr2.length=aaa;
+            subItem[parindex].arr.length=aaa;
+            console.log(aaa+"hahaha");*/
+            grandItem[index].ischecked=true;
+            grandItem[index].undeleted=true;
+            if(subItem[parindex].arr.length==subItem[parindex].info.length){
+                subItem[parindex].ischecked=true;
+                //subItem[parindex].undeleted=true;
+                item[parsindex].arr.push("a");
+            }
+            if(subItem[parindex].arr2.length==subItem[parindex].info.length){
+                subItem[parindex].ischecked=true;
+                subItem[parindex].undeleted=true;
+                item[parsindex].arr3.push("a");
+            }
+            //console.log(subItem[parindex].arr);
+            //console.log(item[parsindex].arr);
+            //console.log(item[parsindex].arr2);
+            if(item[parsindex].arr.length==item[parsindex].zjitem.length){
+                item[parsindex].ischecked=true;
+                //item[parsindex].undeleted=true;
+            }
+            if(item[parsindex].arr3.length==item[parsindex].zjitem.length){
+                item[parsindex].ischecked=true;
+                item[parsindex].undeleted=true;
+            }
+
+            var cha=99.999999-item[parsindex].arr2.length;
+            item[parsindex].linshilen=item[parsindex].arr2.length<grandItem.length?1:Math.floor(item[parsindex].arr2.length/item[parsindex].it)+cha;//此例中最大为3
+            if(item[parsindex].linshilen==item[parsindex].len){ //孙子全部选中后章节打钩否则去掉沟
+                item[parsindex].ischecked=true;
+            }else{
+                item[parsindex].ischecked=false;
+            }
+
+            console.log(item[parsindex].arr2.length+"delete");
+
+            //item[parsindex].linshilen=item[parsindex].arr2.length<grandItem.length?1:Math.floor(item[parsindex].arr2.length/item[parsindex].it);//此例中最大为3
+
+
+
+
+        }
+
+        $scope.isCheckboxShow = false;//checkbox是否显示
+
+
+
+        $scope.checkIt = function (arr, index ,subArr ,parentarr) { //点击checkbox切换true和false
+            arr[index].ischecked = !arr[index].ischecked;
+            if(arr[index].ischecked==true){
+                subArr.arr.push("a");
+                parentarr.arr2.push("a");
+            }else{
+                subArr.arr.splice(0,1);
+                parentarr.arr2.splice(0,1);
+            }
+
+
+
+
+
+            if(subArr.arr.length==subArr.info.length){//控制每个子项的孙子满后每个课时打钩
+                subArr.ischecked=true;
+
+            }else{
+                subArr.ischecked=false;
+            }
+
+
+            parentarr.linshilen=parentarr.arr2.length<arr.length?1:Math.floor(parentarr.arr2.length/parentarr.it);//此例中最大为3
+
+
+
+            if(parentarr.linshilen==parentarr.len){ //孙子全部选中后章节打钩否则去掉沟
+                parentarr.ischecked=true;
+            }else{
+                parentarr.ischecked=false;
+            }
+
+
+
+        }
+
+        $scope.checkSubitem = function (arr, index ,subarr , parentarr) { //点击checkbox切换true和false
+            subarr[index].ischecked=!subarr[index].ischecked
+            if(subarr[index].ischecked==true){ //防止全选后又取消一个子项全部被删除
+                parentarr.arr.push("a");
+                if(arr.arr.length==0){
+                    for(var i=0;i<arr.info.length;i++){
+                        arr.arr.push("a");
+                        parentarr.arr2.push("a");
+                        arr.info[i].ischecked=true;
+                    }
+                }else{
+                    for(var i=0;i<arr.info.length-arr.arr.length;i++){//长度是info的长度减去被选中的arr的长度
+                        parentarr.arr2.push("a");
+                        arr.arr.push("a");
+                        arr.info[i].ischecked=true;
+                    }
+                }
+
+
+                parentarr.linshilen=parentarr.arr2.length<arr.length?1:Math.floor(parentarr.arr2.length/parentarr.it);
+
+            }else{
+                parentarr.arr.splice(0,1);
+                for(var i=0;i<arr.info.length;i++){
+                    parentarr.arr2.splice(0,1);
+                    arr.arr.splice(0,1);
+                    arr.info[i].ischecked=false;
+                }
+                parentarr.linshilen=parentarr.arr2.length<arr.length?1:Math.floor(parentarr.arr2.length/parentarr.it);
+            }
+
+            if(parentarr.arr.length==parentarr.zjitem.length){//判断课时满后章节是否打钩
+                parentarr.ischecked=true;
+            }else{
+                parentarr.ischecked=false;
+            }
+
+
+        }
+        $scope.checkItem=function(arr,index,data){
+            data[index].ischecked=!data[index].ischecked;
+            if(data[index].ischecked==true){
+
+                var checkedItem=0;
+                for(var k=0;k<arr.zjitem.length;k++){
+                    arr.zjitem[k].ischecked=true;
+                    if(arr.zjitem[k].arr.length==0){
+                        for(var i=0;i<arr.totalItem;i++){
+                            arr.arr2.push("a");
+                        }
+
+                        for(var i=0;i<arr.zjitem.length;i++){
+                            arr.arr.push("a");
+                        }
+
+                        for(var j=0;j<arr.zjitem[k].info.length;j++){
+                            arr.zjitem[k].arr.push("a");
+                        }
+
+                    }else{
+                        checkedItem+=arr.zjitem[k].length;
+                        for(var i=0;i<checkedItem;i++){
+                            arr.arr2.push("a");
+                        }
+                        for(var i=0;i<arr.zjitem.length-arr.arr.length;i++){
+                            arr.arr.push("a");
+                        }
+                        for(var j=0;j<arr.zjitem[k].info.length-arr.zjitem[k].arr.length;j++){
+                            arr.zjitem[k].arr.push("a");
+                        }
+
+                    }
+
+                    for(var j=0;j<arr.zjitem[k].info.length;j++){
+                        arr.zjitem[k].info[j].ischecked=true;
+                    }
+                }
+
+                arr.linshilen=arr.arr2.length<arr.length?1:Math.floor(arr.arr2.length/arr.it);
+
+            }else{
+                for(var k=0;k<arr.zjitem.length;k++){
+                    arr.zjitem[k].ischecked=false;
+                    arr.zjitem[k].arr.length=0;
+                    for(var j=0;j<arr.zjitem[k].info.length;j++){
+                        arr.zjitem[k].info[j].ischecked=false;
+                    }
+                }
+                arr.arr2.length=0;
+                arr.arr.length=0;
+                arr.linshilen=arr.arr2.length<arr.length?1:Math.floor(arr.arr2.length/arr.it);
+
+            }
+
+
+        }
+        $scope.ischeckedAll=false;
+        $scope.checkAll=function(){
+            $scope.ischeckedAll=!$scope.ischeckedAll;
+            console.log($scope.ischeckedAll);
+            if($scope.ischeckedAll==false){
+                angular.forEach($scope.data,function(item){
+                    item.arr2.length=0;
+                    item.arr.length=0;
+                    item.ischecked=false;
+                    angular.forEach(item.zjitem,function(subItem){
+                        subItem.arr.length=0;
+                        subItem.ischecked=false;
+                        angular.forEach(subItem.info,function(grandItem){
+                            grandItem.ischecked=false;
+                        });
+                    });
+                });
+            }else{
+                angular.forEach($scope.data,function(item){
+                    item.arr2.length=item.totalItem;
+                    item.arr.length=item.zjitem.length;
+                    item.ischecked=true;
+                    angular.forEach(item.zjitem,function(subItem){
+                        subItem.arr.length=subItem.info.length;
+                        subItem.ischecked=true;
+                        angular.forEach(subItem.info,function(grandItem){
+                            grandItem.ischecked=true;
+                        });
+                    });
+                });
+            }
+
+
+
+
+        }
+
+
+        $scope.manyDelete = function () { //批量删除选中的
+            angular.forEach($scope.data, function (item) {
+                if(item.arr2.length==item.totalItem){//如果孙子满了把章节删除
+                    item.undeleted=true;
+                    item.ischecked=true;
+                }
+                if(item.arr.length==item.zjitem.length){//如果课时满了把章节删除
+                    item.undeleted=true;
+                    item.ischecked=true;
+                }
+                //item.arr=[];
+                angular.forEach(item.zjitem, function (subItem) {
+
+                    if(subItem.ischecked==true){
+                        item.arr.push(subItem);
+                    }
+
+                    if(subItem.arr.length==subItem.info.length){//临时数组的长度如果和实际数组的长度一样 说明实际数组的ischecked全是true
+                        subItem.undeleted=true;//当ischecked全为true了 触发ng-if
+                        subItem.ischecked=true;
+                    }
+
+                    //subItem.arr=[];
+                    angular.forEach(subItem.info, function (grandItem) {
+                            if (grandItem.ischecked==true) {//如果ischecked等于true,把等于true的子项插入到临时数组
+                                //subItem.arr.push(grandItem);
+                                //item.arr2.push(grandItem);
+                                grandItem.undeleted = true;
+                            }
+                        /*if(item.arr.length==item.zjitem.length){
+                            item.undeleted=true;
+                            item.ischecked=true;
+                        }*/
+
+
+                    })
+                })
+            });
+            console.log($scope.data);
+
+//            $scope.data = $scope.copydata;
+            //console.log($scope.deleteArr);
+            // console.log($scope.data);
+        }
+    });
+
+
+    app.directive("editdiv", function () { //toggle编辑状态  可编辑/不可编辑
+        return {
+            restrict: "A",
+            link: function (scope, ele, attr) {
+                var edit = $(ele);
+                var mark = true;
+                edit.find(".edit").click(function () {
+                    var par = $(this).parent();
+                    //var index=par.index();
+                    var isTrue = par.find("textarea").attr("readonly");
+                    if (mark) {
+                        $(this).html("取消编辑");
+                        if (isTrue) {
+                            par.find("textarea").removeAttr("readonly").focus();
+                            //alert(1);
+                        }
+                        mark = false;
+                    } else {
+                        $(this).html("编辑");
+                        if (!isTrue) {
+                            par.find("textarea").attr("readonly", "readonly").blur();
+                        }
+
+                        mark = true;
+                    }
+
+                });
+            }
+        }
+    });
+
+
+    /*app.directive("manydelete",function(){ //toggle编辑状态  可编辑/不可编辑
+     return {
+     restrict:"A",
+     link:function(scope,ele,attr){
+     $(".many-del").click(function(){
+     var deleteLi=$(ele).find(".item-list").find("li");
+     var deleteErziUl=$(ele).find(".item-list");
+     var deleteZj=$(ele).find(".ks-ul");
+     deleteLi.each(function(){
+     if($(this).attr("ischeck")=='true'){
+     $(this).remove();
+     }
+     });
+     deleteErziUl.each(function(){ //length为0时连带课时也删除
+     if($(this).children().length==0){
+     $(this).parents(".parentitem").remove();
+     }
+     });
+
+     deleteZj.each(function(){//length为0时连带章节也删除
+     if($(this).children().length==0){
+     $(this).parents(".item-zj").remove();
+     }
+     });
+
+
+     });
+     }
+     }
+     });*/
+
+</script>
+</body>
+</html>

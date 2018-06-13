@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script>
+    //var box=/goole/ig;
+
+    //var box=/go?le/ig;//o?  0个或者1个
+    //var box=/go*le/ig;//o*  0个或者多个
+    var box=/go***le/ig;//o+  至少1个
+    //var box=/(g)o(o)le/ig; //圆括号分组
+    var str="this is a Goooole this is a goole";
+
+    alert(str.match(box));
+    box.test(str);
+   // box.test(str);  //要先运行一下  意思是测试一下正则box是否匹配到str
+    //alert(RegExp.leftContext); //返回的是匹配到的原字符串左边的字符
+    //alert(RegExp.rightContext); //返回的是匹配到的原字符串右边的字符
+    //alert(RegExp.input);//或者写RegExp.input RegExp["$_"];或者写成数组形式
+    //alert(RegExp.lastMatch);//如果开启全局返回的是最后一个匹配到的Goole
+    //alert(RegExp.lastParen);//匹配到最后一个括号内的字符
+
+</script>
+</body>
+</html>

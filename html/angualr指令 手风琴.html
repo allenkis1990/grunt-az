@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        .h-tit{background:#eee; height:35px; line-height:35px;}
+        .h-content{padding:10px; background:#ffff00;}
+    </style>
+</head>
+<body ng-controller="mycon">
+<a href="#fuck">11</a>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-5">
+            <outerdiv>
+                <innerdiv ng-repeat="item in arr" heading="item.headcon" content="item.content"></innerdiv>
+            </outerdiv>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div name="fuck">333</div>
+</body>
+
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",function($scope,$location){
+        //console.log(myser.name.a1);
+        console.log($location.protocol());
+        $scope.arr=[
+            {headcon:"个人简介",content:"大家好，我是一名前端工程师，我正在研究AngularJs，欢迎大家与我交流，Email:lvxiaobao_fbi@163.com"},
+            {headcon:"我的爱好",content:"运动类：篮球、足球、乒乓球。  电脑类：前端技术、打DOTA。  其他类：欣赏美女"},
+            {headcon:"性格及工作",content:"追求完美主义的处女座极品男人就是我啦~严重的代码洁癖以及对垃圾代码的零容忍！希望通过自己的努力进入理想的公司工作。"}
+        ];
+
+
+    });
+    app.directive("outerdiv",function(){
+        return {
+            restrict:"E",
+            transclude:true,
+            replace:true,
+            template:"<div class='outer' ng-transclude></div>",
+            controller:function($scope){
+                this.scopearr=[];
+                this.fn=function(e){
+                    angular.forEach(this.scopearr,function(item){
+                        if(e !== item){
+                            item.isfalsed=false;
+                        }
+                    });
+                }
+            },
+            controllerAs:"outerCtrl"
+        }
+    });
+    app.directive("innerdiv",function(){
+        return {
+            restrict:"E",
+            //transclude:true,
+            require:"^outerdiv",
+            replace:true,
+            templateUrl:"innerTemp.html",
+            scope:{
+                h:"=heading",
+                c:"=content"
+            },
+            link:function(scope,ele,attr,outerCtrl){
+                outerCtrl.scopearr.push(scope);
+                scope.isfalsed=false;
+                scope.clickfn=function(){
+                    scope.isfalsed=!scope.isfalsed;
+                    outerCtrl.fn(scope);
+                };
+            }
+        }
+    });
+
+
+
+
+</script>
+<script type="text/ng-template" id="innerTemp.html">
+<div>
+    <div class="h-tit" ng-click="clickfn()">{{h}}</div>
+    <div class="h-content" ng-show="isfalsed">{{c}}</div>
+</div>
+</script>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.dataviz.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.dataviz.default.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.624/styles/kendo.mobile.all.min.css">
+</head>
+<body ng-controller="mycon">
+
+<select kendo-drop-down-list="dropdownlist" k-options="ui.options"></select>
+
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/kendo.js"></script>
+<script>
+    var app=angular.module("myapp",["kendo.directives"],function(){});
+    app.controller("mycon",function($scope){
+
+        /****
+         dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                }
+            }
+           *****/
+
+       $scope.ui={
+         options:{
+             dataTextField: "name",
+             dataValueField: "id",
+             filter: "contains",
+             //index: 2,//默认选中下标
+             minLength: 3,
+             optionLabel:"我是 optionLabel",
+             headerTemplate: '<div><h2>我是大号</h2></div>',
+             //template: '<span><img src="/img/#: id #.png" alt="#: name #" />#: name #</span>',每个options前面加一张图片
+             /**
+              popup: {
+                 appendTo: $("#main")
+             }  加到某个DIV里去
+             **/
+
+            // enable:false,
+             dataSource:{
+                 data:[
+                     {name:"allenkis1",id:"1"},
+                     {name:"allenkis2",id:"2"},
+                     {name:"allenkis3",id:"3"}
+                 ]
+             }
+         }
+
+       };
+
+
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        .orderRed{color:red;}
+        .orderGreen{color:green;}
+    </style>
+</head>
+<body ng-controller="mycon">
+<div ng-include="'home2.html'"></div>
+<!--<div>{{num}}</div>
+<div>{{date}}</div>
+<div>{{date2 | date : 'yyyy-MM-dd hh:mm:ss EEEE'}}</div>-->
+
+<!--<div>{{arr | filter:changeFilter }}</div>-->
+<div ng-repeat="item in arr | filter:changeFilter">{{item.name}}</div>
+
+<div>{{arr | json}}</div>
+<div>{{"allenkis" | limitTo:5}}</div>
+<div>{{["a","b","c","d","e"] | limitTo:3}}</div>
+<!--<div>{{arr | myfilter}}</div>-->
+<div>{{str | myfilter}}</div>
+<div ng-repeat="item in arr | orderBy:['age','name']"> <!--age相同的话就按照name来排序-->
+    <span>{{item.age}}</span>&nbsp&nbsp&nbsp&nbsp
+    <span>{{item.name}}</span>
+    <span ng-if="order=='-'">显示隐藏</span>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-5">
+            <input type="text" class="form-control" ng-model="search" />
+        </div>
+    </div>
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr onselectstart="return false;">
+            <th>姓名<span ng-class={dropup:order==''} ng-click="changeOrder('name')"><span ng-class="{orderRed:orderType=='name',orderGreen:orderType=='power'}" class="caret"></span></span></th>
+            <th>力量<span ng-class={dropup:order==''} ng-click="changeOrder('power')"><span ng-class="{orderRed:orderType=='power'}"  class="caret" ></span></span></th>
+            <th>年龄<span ng-class={dropup:order==''} ng-click="changeOrder('age')"><span ng-class="{orderRed:orderType=='age'}"  class="caret" ></span></span></th>
+            <th>是否选中</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in arr | filter:{name:search} | orderBy:order+orderType">
+            <td>{{item.name}}</td>
+            <td>{{item.power | currency:"凸- -凸"}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.ischecked}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+
+
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script>
+    var app=angular.module("myapp",[],function(){});
+    app.controller("mycon",function($scope,$filter){
+
+        /*$scope.num=$filter("currency")(66666);
+
+        $scope.date=$filter("date")(new Date().toLocaleDateString());
+        $scope.date2=new Date();*/
+        $scope.arr=[
+            {name:"allenkis",age:26,power:99,ischecked:false},
+            {name:"wuye",age:35,power:9999999,ischecked:false},
+            {name:"xinye",age:25,power:98,ischecked:false},
+            {name:"gaoye",age:24,power:97,ischecked:false},
+            {name:"lhh",age:27,power:96,ischecked:true}
+        ];
+
+        $scope.orderType="age";
+        $scope.order="-";
+
+        $scope.changeOrder=function(type){
+            $scope.orderType=type;
+            if($scope.order=="-"){
+                $scope.order="";
+            }else{
+                $scope.order="-";
+            }
+        }
+
+        $scope.str="刘伟恒";
+
+        $scope.changeFilter=function(obj){
+            //console.log(obj.age);
+            return obj.ischecked!=false;
+        }
+
+
+
+
+    });
+
+    /*app.filter("myfilter",function(){
+        return function(arr){ //把旧的数组传进去 需要创建一个newarr并且返回出来
+            var newarr=[];
+            for(var i=0;i<arr.length;i++){
+                if(arr[i].name!="wuye"&& arr[i].name!="gaoye"){
+                    newarr.push(arr[i]);
+                }
+            }
+            return newarr;
+        }
+    });*/
+    app.filter("myfilter",function(){
+        return function(str){ //把旧的数组传进去 需要创建一个newarr并且返回出来
+            var newstr="";
+            newstr=str+"天才";
+            return newstr;
+        }
+    });
+    /*app.filter('odditems',function(){
+        return function(inputArray){
+            var array = [];
+            for(var i=0;i<inputArray.length;i++){
+                if(i%2!==0){
+                    array.push(inputArray[i]);
+                }
+            }
+            return array;
+        }
+    });*/
+</script>
+</html>

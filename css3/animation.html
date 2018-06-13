@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        @keyframes fadeInLeft {
+            from{
+                opacity:0;
+                /*-webkit-transform:translate3d(50px,0,0);*/
+                transform:translate3d(50px,0,0);
+            }
+
+            100%{
+                opacity:1;
+                /*-webkit-transform:none;*/
+                transform:none;
+
+            }
+        }
+        .animate{animation:fadeInLeft 1s .2s ease both;}
+    </style>
+</head>
+<body>
+<div style="width:170px; height:170px; background:red;" class="animate"></div>
+</body>
+</html>

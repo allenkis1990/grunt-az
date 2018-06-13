@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="con">
+
+</div>
+
+
+
+<!--<button>BTN</button>-->
+
+<script src="../js/angular.min2.js"></script>
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    var app=angular.module('app',[],function(heheProvider){
+        heheProvider.setID(8);
+        console.log(heheProvider);
+        //hehe.setID(2);
+        //console.log(hehe);
+    });
+    app.controller('con',function($scope,hehe){
+        $scope.content='aaa';
+
+
+        console.log(hehe.getId());
+        //hehe.setID(2);
+        //console.log(hehe);
+        //angular.extend(haha,{love:'zxg'});
+        //console.log(haha);
+    });
+
+
+
+    //app.constant('haha','222');
+
+    app.provider('hehe',function(){
+        var id = 1;
+        return {
+            setID:function(newID){
+                id = newID
+            },
+            $get:function(){
+                var myname = 'code_bunny';
+                var age = 12;
+                return {
+                    name: myname,
+                    age: age,
+                    getId: function(){
+                        return id
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="fn()">111</button>
+        <button @click="fuck()">{{fuckView}}</button>
+        <div>{{model.name}}</div>
+    </div>
+
+
+
+    <script>
+
+
+
+
+        //全局mixin最早执行
+        //局部mixin第二执行
+        //内部的生命周期最后执行
+        Vue.mixin({
+
+            data:{
+                //全局的mixin里的data会被里面的完全覆盖
+
+            },
+            mounted:function(){
+                //alert('inner');
+                this.fuck=function(){
+                    alert(1111111111111111);
+                }
+            }
+        });
+
+        //局部注册组件
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                fuckView:'fuckfuck',
+                model:{}
+            },
+
+            mounted:function(){
+                //alert('inner');
+                this.fn=function(){
+                    alert('fn');
+                }
+                this.model={
+                    name:'111'
+                };
+            }
+        });
+    </script>
+</body>
+</html>

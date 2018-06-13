@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script>
+   /* var str="allenkis";
+    alert(str.match("s"));
+    alert(str.search("s"));
+    alert(str.replace("s","f")); //直接返回替代后的
+*/
+
+    /*eval("var k=100");
+    alert(k);*/
+
+    /*for(var i=0;i<10;i++){
+        document.write(Math.floor(Math.random()*20)+"<br />");
+    }*/
+
+    /*var k=25.667;
+    alert(k.toFixed(2));*/
+
+    function sel(start,end){   //返回多少到多少开始到结束
+          var total=end-start+1;
+        return Math.floor(Math.random()*total+start);
+    }
+    for(var i=0;i<10;i++){
+        document.write(sel(5,10)+"<br />");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+
+</head>
+<body >
+
+<div id="app">
+
+    <div class="main"></div>
+
+
+
+
+</div>
+
+
+
+<script>
+
+    new Vue({
+        el:'#app',
+        data:{
+            haha:'haha'
+        },
+        methods:{
+
+        }
+    });
+    var dom=Vue.extend({
+        template:'<div @click="fn()">{{haha}}</div>',
+        data:function(){
+            return {
+                haha:'haha'
+            }
+        },
+        mounted:function(){
+            alert('准备就绪！');
+        },
+        methods:{
+            fn:function(){
+                alert(1);
+            }
+        }
+    });
+    //动态添加dom到元素上
+    new dom().$mount('.main');
+    //console.log(v);
+</script>
+</body>
+</html>
