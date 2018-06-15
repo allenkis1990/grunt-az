@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <haha @init-fn="fn" ref="haha"></haha>
+        <button @click="click">click</button>
+    </div>
+
+
+
+    <script>
+
+        //局部注册组件
+        var vm=new Vue({
+            el:'#app',
+            data:{
+            },
+            methods:{
+                fn:function(){
+                    alert('11111');
+                },
+                click:function(){
+                    //调用组件内部方法
+                    this.$refs.haha.innerFn()
+                }
+            },
+            components:{
+                'haha': {
+                    template: '<div>a1</div>',
+                    mounted:function(){
+                        this.$emit('init-fn')
+                    },
+                    methods:{
+                        innerFn:function(){
+                            alert('22222');
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
