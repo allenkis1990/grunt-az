@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<button onclick="clickAction()">click</button>
+<button onclick="changeName()">changeName</button>
+<button onclick="offWatch()">offWatch</button>
+<button onclick="errorParseing()">errorParseing</button>
+<body>
+<script>
+    function Scope(){
+        this.$$watchers=[];
+        this.$$asyncQueue=[];
+        this.$$parseing=null;
+    }
+
+    var $$TTL=10;
+
+
+    Scope.prototype.$beginParse=function(parseName){
+        if(this.$$parseing){
+            throw new Error(this.$$parseing+' already in progress');
+        }
+        this.$$parseing=parseName;
+    }
+    Scope.prototype.$cleanParse=function(){
+        this.$$parseing=null;
+    }
+
+    Scope.prototype.$asyncEval=function(fn){
+        var that=this;
+        var asyncTask={
+            scope:that,
+            fn:fn
+        };
+        this.$$asyncQueue.push(asyncTask);
+    }
+
+    Scope.prototype.$apply=function(fn){
+        try{
+            this.$beginParse('$apply');
+            this.$eval(fn)
+        }finally {
+            this.$cleanParse();
+            this.$digest();
+        }
+    }
+    Scope.prototype.$eval=function(fn){
+        return fn(this);
+    }
+
+    //深拷贝
+    Scope.prototype.deepCopy=function(obj){
+        if (typeof obj === 'object') {
+            var newObj = obj.hasOwnProperty('length') ? [] : {};
+
+            for (var i in obj) {
+                if (typeof obj[i] === 'object') {
+                    newObj[i] = this.deepCopy(obj[i]);
+                } else {
+                    newObj[i] = obj[i];
+                }
+            }
+            //console.log(newObj);
+            return newObj;
+        } else {
+            return;
+        }
+    }
+
+    Scope.prototype.equals=function(nv,ov,deep){
+        if(deep){
+            //如果是对象或者数组的监听是深比较
+            return JSON.stringify(nv)===JSON.stringify(ov);
+        }else{
+            //如果非数组或者对象要判断ov和nv是不是NaN如果都是返回true NaN和NaN比较会是false这边要纠正成true
+            return nv === ov || (typeof nv === 'number' && typeof ov === 'number' &&
+                isNaN(nv) && isNaN(ov));
+        }
+    }
+
+    Scope.prototype.$watch=function(watchWho,listenerFn,deep){
+        var that=this;
+        var watcher={
+            watchWho: watchWho,
+            listenerFn: listenerFn || function(){},
+            deep:!!deep
+        }
+        this.$$watchers.push(watcher);
+        //当作方法调用的时候解除监听
+        return function(){
+            var index =that.$$watchers.indexOf(watcher);
+            if(index>-1){
+                that.$$watchers.splice(index,1);
+            }
+        }
+    }
+
+
+
+    Scope.prototype.$digestOnce=function(){
+        var that=this;
+        var dirty;
+        this.$$watchers.forEach(function(watchItem){
+            var newVlaue=that[watchItem.watchWho];
+            var oldVlaue=watchItem.last;
+            var isDeep=watchItem.deep;
+
+            if(!that.equals(newVlaue,oldVlaue,isDeep)){
+                watchItem.listenerFn(newVlaue,oldVlaue,that);
+                watchItem.last=isDeep?that.deepCopy(newVlaue):newVlaue;
+                dirty=true;
+            }
+        });
+        return dirty;
+    }
+
+    Scope.prototype.$digest=function(){
+        var ttl=$$TTL;//设置$digest里面执行的最大次数
+        var that=this;
+        this.$beginParse('$digest');
+        //如果有异步任务队列里有东西 那么执行完后再往下$digest （会在disget之前运行）
+        while(this.$$asyncQueue.length){
+//            console.log(this.$$asyncQueue.length);
+            //执行了就把这个从队列里删除(从第一个开始)
+            var asyncTask=this.$$asyncQueue.shift();
+            this.$eval(asyncTask.fn);
+        }
+
+        //监听函数自身也修改作用域上的属性。如果这个发生了，另外有个监听器在监控被修改的属性，有可能在同一个digest里面检测不到这个变动：
+        //解决办法：调用两次 第一次调用完马上调用第二次如果发现有变化再更新
+        do {
+            var dirty = that.$digestOnce();
+            //如果超过10次就抛出异常
+            if(dirty&&!(--ttl)){
+                throw new Error('digest里面的执行只能并行最多'+$$TTL+'次');
+            }
+        } while (dirty)
+        this.$cleanParse();
+    }
+
+    var $scope=new Scope();
+    $scope.count=0;
+    $scope.obj={name:'allen'};
+    var countWatch=$scope.$watch('count',function(nv,ov,scope){
+        console.log('新值：'+nv+'，旧值：'+ov,scope);
+        //$scope.count++;
+    })
+
+
+    var objWatch=$scope.$watch('obj',function(nv,ov,scope){
+        console.log('新值：',nv,'旧值：',ov,'作用域',scope);
+        $scope.count++;
+    },true)
+
+
+    function clickAction(){
+        $scope.$apply(function($scope){
+            $scope.count++;
+        });
+    }
+    function changeName(){
+        $scope.$apply(function($scope){
+            $scope.obj={age:Math.random()};
+        });
+    }
+
+    function offWatch(){
+        countWatch();
+    }
+
+    //错误示范:($apply/$digest) already in progress
+    function errorParseing(){
+        $scope.$apply(function(){
+            $scope.count++;
+            $scope.$digest();
+        });
+    }
+
+
+
+    //会在disget之前运行
+    $scope.$asyncEval(function($scope){
+        $scope.count=100;
+    })
+
+    /*setInterval(function(){
+        $scope.$apply(function($scope){
+            $scope.count++;
+        });
+    },1000)*/
+    $scope.$digest();
+</script>
+</body>
+</html>

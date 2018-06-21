@@ -35,6 +35,7 @@
                 return v;
             },
             set: function (nv) {
+                //如果值没有改变不触发fn函数
                 if(v===nv){
                     return nv;
                 }
@@ -42,16 +43,19 @@
                 v=nv;
                 fn(nv,ov);
                 return nv;
-            },
-            configurable:true,
-            enumerable:true
+            }
+//            configurable:true,
+//            enumerable:true
         });
     }
 
-    //console.log(aaa.count);
     setInterval(function(){
         aaa.count++;
     },2000)
+
+    /*for(var i=0;i<10;i++){
+        aaa.count++;
+    }*/
 
 
 
