@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="copyArticle()">复制文字到剪切板</button>
+<div id="copy">http://www.baidu.com</div>
+<script type="text/javascript">
+    //去除换行
+    //去掉字符串两端的空格
+
+        function copyArticle() {
+        var range = document.createRange();
+        var copyContent = document.getElementById('copy');
+        range.selectNode(copyContent);
+        var selection = window.getSelection();
+        if(selection.rangeCount > 0) selection.removeAllRanges();
+        selection.addRange(range);
+        document.execCommand('copy');
+        console.log("复制成功！");
+    }
+</script>
+</body>
+</html>

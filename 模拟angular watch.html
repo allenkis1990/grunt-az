@@ -6,6 +6,7 @@
 </head>
 <button onclick="clickAction()">click</button>
 <button onclick="changeName()">changeName</button>
+<button onclick="changeName2()">changeName2</button>
 <button onclick="offWatch()">offWatch</button>
 <button onclick="errorParseing()">errorParseing</button>
 <body>
@@ -99,14 +100,26 @@
     }
 
 
+    //为了解析'obj.obj'表达式 解析成that["obj"]["obj"]
+    Scope.prototype.$$getEvalStr=function(expression){
+        var evalStr='that';
+        var expression=expression;
+        var expressionArr=expression.split('.');
+        expressionArr.forEach(function(item){
+            evalStr+='["'+item+'"]'
+        });
+        return evalStr;
+    }
 
     Scope.prototype.$digestOnce=function(){
         var that=this;
         var dirty;
         this.$$watchers.forEach(function(watchItem){
-            var newVlaue=that[watchItem.watchWho];
-            var oldVlaue=watchItem.last;
-            var isDeep=watchItem.deep;
+//            var newVlaue=that[watchItem.watchWho];
+            var evalStr=that.$$getEvalStr(watchItem.watchWho),
+                newVlaue=eval(evalStr),
+                oldVlaue=watchItem.last,
+                isDeep=watchItem.deep;
 
             if(!that.equals(newVlaue,oldVlaue,isDeep)){
                 watchItem.listenerFn(newVlaue,oldVlaue,that);
@@ -144,6 +157,7 @@
     var $scope=new Scope();
     $scope.count=0;
     $scope.obj={name:'allen'};
+    $scope.fuck={obj:{name:'haha'}}
     var countWatch=$scope.$watch('count',function(nv,ov,scope){
         console.log('新值：'+nv+'，旧值：'+ov,scope);
         //$scope.count++;
@@ -155,6 +169,10 @@
         $scope.count++;
     },true)
 
+    var bbb=$scope.$watch('fuck.obj',function(nv,ov,scope){
+        console.log('新值：',nv,'旧值：',ov,'作用域',scope);
+    })
+
 
     function clickAction(){
         $scope.$apply(function($scope){
@@ -164,6 +182,11 @@
     function changeName(){
         $scope.$apply(function($scope){
             $scope.obj={age:Math.random()};
+        });
+    }
+    function changeName2(){
+        $scope.$apply(function($scope){
+            $scope.fuck.obj=Math.random();
         });
     }
 
