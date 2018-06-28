@@ -6,22 +6,33 @@
     <title>Title</title>
 </head>
 <body>
-<button onclick="copyArticle()">复制文字到剪切板</button>
-<div id="copy">http://www.baidu.com</div>
+<div id="app">
+    <div id="copy" style="opacity: 0;position:fixed;left:-20000px;top:-20000px"></div>
+    <button @click="copyArticle()">复制文字到剪切板</button>
+</div>
+<script type="text/javascript" src="/vue.min.js"></script>
 <script type="text/javascript">
-    //去除换行
-    //去掉字符串两端的空格
 
-        function copyArticle() {
-        var range = document.createRange();
-        var copyContent = document.getElementById('copy');
-        range.selectNode(copyContent);
-        var selection = window.getSelection();
-        if(selection.rangeCount > 0) selection.removeAllRanges();
-        selection.addRange(range);
-        document.execCommand('copy');
-        console.log("复制成功！");
-    }
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            txt:null
+        },
+        methods:{
+            copyArticle:function(){
+                var range = document.createRange();
+                var copyContent = document.getElementById('copy');
+                copyContent.innerText='www.baidu.com/aaa'
+//                copyContent.innerText=Math.random()
+                range.selectNode(copyContent);
+                var selection = window.getSelection();
+                if (selection.rangeCount > 0) selection.removeAllRanges();
+                selection.addRange(range);
+                document.execCommand('copy');
+                console.log("复制成功！");
+            }
+        }
+    });
 </script>
 </body>
 </html>
