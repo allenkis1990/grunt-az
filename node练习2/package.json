@@ -1,0 +1,25 @@
+{
+  "name": "",
+  "version": "",
+  "devDependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.7",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "formidable": "^1.1.1",
+    "gulp": "^3.9.1",
+    "gulp-awaitable-tasks": "^1.0.0",
+    "gulp-sequence": "^1.0.0",
+    "mime": "^2.2.0",
+    "rimraf": "^2.6.2",
+    "run-sequence": "^2.2.1",
+    "util": "^0.10.3"
+  },
+  "dependencies": {
+    "1.0.1": "^1.0.0",
+    "cnpm": "^5.2.0",
+    "socket.io": "^1.0.2",
+    "webpack-merge": "^4.1.2"
+  }
+}

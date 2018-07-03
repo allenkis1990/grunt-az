@@ -9,6 +9,7 @@
 <div id="app">
     <div id="copy" style="opacity: 0;position:fixed;left:-20000px;top:-20000px"></div>
     <button @click="copyArticle()">复制文字到剪切板</button>
+    <div v-show="show">show</div>
 </div>
 <script type="text/javascript" src="/vue.min.js"></script>
 <script type="text/javascript">
@@ -16,7 +17,8 @@
     var vm=new Vue({
         el:'#app',
         data:{
-            txt:null
+            txt:null,
+            show:false
         },
         methods:{
             copyArticle:function(){

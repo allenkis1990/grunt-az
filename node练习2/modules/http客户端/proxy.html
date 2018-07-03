@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+11
+<script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
+<script>
+    $.ajax({
+        url:'/web/login/login/getLoginParameters.action',
+        method:'get',
+        dataType:'json',
+        success:function(data){
+            console.log(data);
+        }
+    });
+
+    $.ajax({
+        url:'/web/portal/index/getAllSkuPropertyOptionByCode',
+        data:{
+            categoryType:'TRAINING_CLASS_GOODS',
+            code:'trainingType',
+            onlyHasCommodity:true
+        },
+        method:'get',
+        dataType:'json',
+        success:function(data){
+            console.log(data);
+        }
+    });
+    $.ajax({
+        url:'/web/portal/index/listSkuProperty',
+        data:JSON.stringify({
+            categoryType: "TRAINING_CLASS_GOODS",
+            propertyQueries:[{
+                propertyId: "40289979626a2975026652c4d14cdbd4",
+                value: "812b569c015628569c5a77f6a0315018"
+            }]
+        }),
+        method:'post',
+        contentType:'application/json',
+        dataType:'json',
+        success:function(data){
+            console.log(data);
+        }
+    });
+
+
+</script>
+</body>
+</html>

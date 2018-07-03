@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="clock"></div>
+<form name="form" onsubmit="return false">
+    <ul>
+        <li>
+            头像：<input type="file" name="file" />
+        </li>
+
+    </ul>
+    <button onclick="fn()">click</button>
+</form>
+
+<script src="../../js/jquery-1.9.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    function fn(){
+        var formData=new FormData();
+        var file=$('input[type=file]')[0].files[0];
+        formData.append('file',file);
+
+        console.log(formData);
+        $.ajax({
+            url:'/postDo',
+            data:formData,
+            method:'POST',
+            success:function(data){
+
+                alert(data.name);
+                console.log(data);
+            },
+            error:function(err){
+                console.log(err);
+            },
+            processData: false,
+            contentType: false
+        });
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<button class="get">restful--GET</button>
+<button class="post">restful--POST</button>
+<button class="put">restful--PUT数组里的整个ITEM更新</button>
+<button class="patch">restful--PATCH数组里的ITEM的某一个ATTR更新</button>
+<button class="delete">restful--delete</button>
+
+<script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
+<script>
+    $('.get').click(function(){
+        $.ajax({
+            method:'get',
+            url:'/get/1',
+            success:function(){
+
+            }
+        });
+    });
+
+    $('.post').click(function(){
+        $.ajax({
+            method:'post',
+            contentType:'application/json',
+            data:JSON.stringify({"name":"fuck","id":"4"}),
+            url:'/post',
+            success:function(){
+
+            }
+        });
+    });
+
+
+    $('.put').click(function(){
+        $.ajax({
+            method:'put',
+            data:{"name":"fuck",'age':'88',id:1},
+            url:'/put/1',
+            success:function(){
+
+            }
+        });
+    });
+    $('.patch').click(function(){
+        $.ajax({
+            method:'patch',
+            data:{"name":"fuck"},
+            url:'/patch/1',
+            success:function(){
+
+            }
+        });
+    });
+    $('.delete').click(function(){
+        $.ajax({
+            method:'delete',
+            url:'/delete/1',
+            success:function(){
+
+            }
+        });
+    });
+</script>
+</body>
+</html>

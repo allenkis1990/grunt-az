@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="clock"></div>
+<form name="form" onsubmit="return false">
+    <ul>
+        <li>
+            姓名：<input type="text" name="userName" />
+        </li>
+        <li>
+            年龄：<input type="text" name="age" />
+        </li>
+        <li>
+            头像：<input type="file" name="file" />
+        </li>
+
+    </ul>
+    <img src="" alt="" />
+
+    <button onclick="fn()">提交表单</button>
+</form>
+
+<script src="../../js/jquery-1.9.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    function fn(){
+        var formData=new FormData();
+        var file=$('input[type=file]')[0].files[0];
+        var userName=$('input[name=userName]').val();
+        var age=$('input[name=age]').val();
+        formData.append('file',file);
+        formData.append('name',userName);
+        formData.append('age',age);
+        console.log(formData);
+        $.ajax({
+            url:'/postDo',
+            data:formData,
+            method:'POST',
+            success:function(data){
+                //alert('post!!!!');
+                $('img').attr('src','../../images/'+data);
+                console.log(data);
+            },
+            error:function(err){
+                console.log(err);
+            },
+            processData: false,
+            contentType: false
+        });
+    }
+
+</script>
+</body>
+</html>

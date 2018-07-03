@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Scope(){
+        this.name='allen';
+        this.age=18;
+    }
+    Scope.prototype.fuck='fuck';
+    var parent=new Scope();
+    Scope.prototype.$new=function(){
+        function childScope(){}
+        childScope.prototype=this;
+        var child = new childScope();
+        return child;
+    }
+    var child=parent.$new();
+    parent.aaa='parentaaa';
+    child.aaa='childaaa'
+
+    parent.obj={job:'web'};
+
+    child.obj.job='childweb'
+    console.log(parent,'父亲');
+    console.log(child,'儿子 ');
+</script>
+</body>
+</html>
