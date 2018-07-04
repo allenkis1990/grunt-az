@@ -8,6 +8,12 @@ var baseDir = '../..';
 var appDir = '/app';
 var bowerDir = '/bower';
 var gulp = require('gulp');
+var less = require('gulp-less');
+var cssMin = require('gulp-csso');
+var uglify = require('gulp-uglify');
+var imgMin = require('gulp-imagemin');
+var rev = require('gulp-rev');
+var revCollector = require('gulp-rev-collector');
 var runSequence=require('run-sequence');
 
 /**
@@ -18,10 +24,15 @@ var runSequence=require('run-sequence');
  * 然后再复制app里的文件到build 重复的话则app覆盖bower
  */
 
+app.use('/style',express.static(baseDir+'/build/style'));//style用build里的
+app.use('/images',express.static(baseDir+'/build/images'));//images用build里的
+
 app.get('/',function(req,res){
     res.sendFile(indexFilePath);
 });
 
+
+//js不用build里的
 app.get('/*',function(req,res){
     console.log(req.url);
     var relativeAppPath = baseDir+appDir+req.url;
@@ -45,21 +56,87 @@ app.get('/*',function(req,res){
 });
 app.listen('8080','127.0.0.1');
 
+var htmlIndexPath = baseDir+'/html/index.html';
 var appPath = baseDir+'/app';
 var bowerPath = baseDir+'/bower';
 var buildPath = baseDir+'/build';
+var publicPath = baseDir+'/public';
+var aaaPath = baseDir+'/aaa';
 rm(path.join(__dirname,'..','..','build'),function(err){
-    console.log(1);
-    runSequence(['copyAppToBuild']);
+    rm(path.join(__dirname,'..','..','public'),function(){
+        console.log(1);
+        runSequence(
+            ['copyAppJsToBuild'],
+            ['copyAppCssToBuild'],
+            ['copyAppImgToBuild'],
+            //['copyHtmlToBuild'],
+            ['revProject'],
+            ['copyHtmlToBuild'],
+            ['result']
+        );
+    })
+})
+
+//js处理
+gulp.task('copyBowerJsToBuild',function(){
+    var st= gulp.src(bowerPath+'/js/*').pipe(uglify()).pipe(gulp.dest(buildPath+'/js'))
+    return st
+});
+gulp.task('copyAppJsToBuild',['copyBowerJsToBuild'],function(){
+    var st= gulp.src(appPath+'/js/*').pipe(uglify()).pipe(gulp.dest(buildPath+'/js'))
+    return st
+});
+//js处理
+
+
+//CSS处理
+gulp.task('copyAppCssToBuild',function(){
+    var st= gulp.src(appPath+'/style/**/*').pipe(less()).pipe(cssMin()).pipe(gulp.dest(buildPath+'/style'))
+    return st
+});
+//CSS处理
+
+//图片处理
+gulp.task('copyAppImgToBuild',['copyBowerImgToBuild'],function(){
+    var st= gulp.src(appPath+'/images/**/*').pipe(imgMin({progressive: true})).pipe(gulp.dest(buildPath+'/images'))
+    return st
+});
+gulp.task('copyBowerImgToBuild',function(){
+    var st= gulp.src(bowerPath+'/images/**/*').pipe(imgMin({progressive: true})).pipe(gulp.dest(buildPath+'/images'))
+    return st
+});
+//图片处理
+
+//html处理
+gulp.task('copyHtmlToBuild',function(){
+    var st= gulp.src(htmlIndexPath).pipe(gulp.dest(buildPath))
+    return st
+});
+//html处理
+
+
+//给build里的所有做hash处理 完成后生成新的文件夹public
+gulp.task('revProject',function(){
+    var st= gulp.src([buildPath+'/**/*'])
+        .pipe(rev())
+        .pipe(gulp.dest(publicPath))
+        .pipe(rev.manifest())
+        .pipe(gulp.dest(buildPath))
+    return st
+});
+
+//替换文件中引用到的hash css中 js中 html中
+gulp.task('result',function(){
+    gulp.src([buildPath+'/rev-manifest.json',buildPath+'/index.html'])
+        .pipe(revCollector())
+        .pipe(gulp.dest(publicPath))
+    gulp.src([buildPath+'/rev-manifest.json',publicPath+'/style/**/*'])
+        .pipe(revCollector())
+        .pipe(gulp.dest(publicPath+'/style'))
+    gulp.src([buildPath+'/rev-manifest.json',publicPath+'/js/**/*'])
+        .pipe(revCollector())
+        .pipe(gulp.dest(publicPath+'/js'))
 })
 
 
-gulp.task('copyBowerToBuild',function(){
-    var st= gulp.src(bowerPath+'/**/*').pipe(gulp.dest(buildPath))
-    return st
-});
-gulp.task('copyAppToBuild',['copyBowerToBuild'],function(){
-    var st= gulp.src(appPath+'/**/*').pipe(gulp.dest(buildPath))
-    return st
-});
 
