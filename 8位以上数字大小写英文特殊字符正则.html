@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="ipt" />
+<button id="btn">click</button>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script>
+
+
+    var regUpper = /[A-Z]/;
+    var regLower = /[a-z]/;
+    var regNum = /[0-9]/;
+    var regTeShu =new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？+-]");
+
+    $('#btn').click(function(){
+        var val=$('#ipt').val();
+        var complex = 0;
+        if (regLower.test(val)) {
+            ++complex;
+        }
+        if (regUpper.test(val)) {
+            ++complex;
+        }
+        if (regNum.test(val)) {
+            ++complex;
+        }
+        if(regTeShu.test(val)){
+            ++complex;
+        }
+        if (complex < 3 || val.length < 9) {
+            console.log("不通过");
+            return false
+        }else{
+            console.log("通过");
+        }
+
+
+    })
+
+</script>
+</body>
+</html>
