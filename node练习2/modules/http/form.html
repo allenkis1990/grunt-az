@@ -48,7 +48,7 @@
             error:function(err){
                 console.log(err);
             },
-            processData: false,
+            processData: false,//如果注释掉并且data传JSON.stringify({a:1})才能使JSON传到后端否则是a=1&b=2
             contentType: false
         });
     }

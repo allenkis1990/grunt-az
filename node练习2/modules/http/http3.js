@@ -4,7 +4,7 @@ var mime=require('mime');
 var formidable=require('formidable');
 var util=require('util');
 
-//如果是HTML页面上的 /  代表node练习
+//如果是HTML页面上的 /  代表www.xxx.com/
 //如果是node环境下读文件的 / 代表D盘
 fs.readFile('/index.html',function(err,data){
     console.log(data.toString());

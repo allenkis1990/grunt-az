@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{list-style-type: none;}
+        li{margin-bottom:5px;}
+    </style>
+</head>
+<body>
+
+<h1>注册</h1>
+<ul>
+    <li>用户名：<input type="text" class="username" placeholder="请输入用户名" /></li>
+    <li>账号：<input type="text" class="account" placeholder="请输入账号"/></li>
+    <li>密码：<input type="password" class="password" placeholder=" 请输入密码" /></li>
+    <li><button>确认注册</button></li>
+</ul>
+
+
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    var submitAble;
+    $('button').click(function(){
+
+        if(submitAble){
+            return false;
+        }
+
+        var username=$('.username').val(),
+            account=$('.account').val(),
+            password=$('.password').val();
+        if(!$.trim(username)){
+            alert('请输入用户名');
+            return false;
+        }
+        if(!$.trim(account)){
+            alert('请输入账号');
+            return false;
+        }
+        if(!$.trim(password)){
+            alert('请输入密码');
+            return false;
+        }
+
+        submitAble=true;
+        var params={
+            username:username,
+            account:account,
+            password:password
+        };
+
+        $.ajax({
+            method:'post',
+            url:'/web/register',
+            data:JSON.stringify(params),
+            dataType:'json',
+            contentType:'application/json',
+            success:function(data){
+                submitAble=false;
+                if(data.code==='200'){
+                    alert(data.info);
+                    //注册成功后清空表单
+                    $('.username').val('');
+                    $('.account').val('');
+                    $('.password').val('');
+                }else{
+                    alert(data.info);
+                }
+            }
+        });
+
+    });
+</script>
+</body>
+</html>
