@@ -1,4 +1,3 @@
-11/*
 function aaa(){
     console.log(arguments)
 
@@ -9,7 +8,7 @@ function aaa(){
 
 }
 
-aaa(1,2,3);*/
+aaa(1,2,3);
 
 
 //根据Function.prototype.bind改造

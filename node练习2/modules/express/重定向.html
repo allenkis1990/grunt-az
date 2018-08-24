@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>点击我重定向</button>
+<script src="/js/jquery-1.9.1.js"></script>
+<script>
+   $('button').click(function(){
+       $.ajax({
+           url:'/re',
+           method:'get',
+           data:{
+               redirect:'"http://192.168.28.251:8088/home"'
+           }
+       });
+   });
+</script>
+</body>
+</html>
