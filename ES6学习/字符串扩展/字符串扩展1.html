@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //arr里面如果是字符串['a1','a2']+''把数组传出字符串会变成'a1,a2'，arr.map返回处理过的数组
+    var arr=[{name:'allen',age:18},{name:'jack',age:20}];
+    let temp=`<table>
+               ${arr.map(item=>`<tr>${item.name}</tr><tr>${item.age}</tr>`).join('')}
+              </table>
+             `.trim();
+    console.log(temp);
+
+
+    //直接使用字符串模板执行方法1
+//    var a='world';
+//    var str=`return 'hello ${a}'`;//里面直接return就好了
+//    var fn=new Function('aa',str);
+//    console.log(fn());
+
+
+    //直接使用字符串模板执行方法2
+//    var a='world';
+//    var str='()=>`hello ${a}`';//里面是个函数
+//    var fn=eval(str);
+//    console.log(fn());
+
+
+//    function aa(a1,...args){
+//        console.log(a1,args[2]);
+//    }
+//    aa(1,...[2,3,4]);
+
+</script>
+</body>
+</html>

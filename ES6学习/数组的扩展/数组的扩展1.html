@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //把类似数组转成数组 参数1类数组 参数2map函数 参数3 bind的上下文
+//    console.log(Array.from({0: 1, 1: 2, 2: 3,length:3},function(item){
+//        return {age:item+this.name}
+//    },{name:'xx'}));
+
+
+    //更好更精准地生成数组
+//    var arr=Array.of(1,2,3);
+//    console.log(arr);
+
+
+    //找到符合条件的那一项并且返回该项 如果要使用this要传入第二个参数context并且第一个参数不能为箭头函数
+//    var arr=[{id:'111',name:'allen'},{id:'222',name:'jack'},{id:'333',name:'tom'}]
+//    var item=arr.find((item,index,arr)=>{item.id==='222'});
+//    /*var item=arr.find(function (item) {
+//        return item.id===this.id
+//    },{id:'333'});*/
+//    console.log(item);//{id:'222',name:'jack'}
+
+    //找到符合条件的那一项并且返回该项的下标 如果要使用this要传入第二个参数context并且第一个参数不能为箭头函数
+//    var arr=[{id:'111',name:'allen'},{id:'222',name:'jack'},{id:'333',name:'tom'}]
+//    //var item=arr.findIndex((item,index,arr)=>item.id==='222');
+//    /*var item=arr.findIndex(function(item){
+//        return item.id===this.id;
+//    },{id:'333'});*/
+//    console.log(item);//1
+
+//    let arr=[1,2,3];
+//    arr.fill(7);
+//    console.log(arr);
+
+
+//    var arr=[{id:8}];
+//    var index = arr.findIndex(function(item){
+//        return item.id===6;
+//    })
+//    console.log(index);//-1 如果是find则返回undefined
+
+//    var arr = [1,2,3];
+//    arr.fill('fuck',1,2);
+//    console.log(arr);
+
+
+    //循环数组
+    var arr = [{name:"allen"},{name:'jack'}];
+    //console.log(arr.keys());
+    for (let key of arr.keys()) {
+        console.log(key);// 0,1
+    }
+    for (let value of arr.valueOf()) {
+        console.log(value);//{name:"allen"},{name:'jack'}
+    }
+    for (let [key,value] of arr.entries()) {
+        console.log(key,value);//0{name:"allen"} 1{name:'jack'}
+    }
+
+
+    //for of还能直接像这样循环数组用输出a b
+//    for(let key of ['a','b']){
+//        console.log(key);
+//    }
+
+</script>
+</body>
+</html>

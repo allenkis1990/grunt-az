@@ -5,34 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<button onclick="fn(1)">click1</button>
-<button onclick="fn(2)">click2</button>
-<button onclick="fn(3)">click3</button>
+<button onclick="defineProperty()">defineProperty</button>
 <script>
-    function fn(which) {
-        aaa.count=which;
-    }
-
-    var aaa={
-        count:0
-    };
-
-
-    watch(aaa,'count',function(nv,ov){
-        //console.log(nv);
-        console.log('新值：'+nv+' 旧值：'+ov);
-    });
-
-
-
-    function watch(parent,key,fn){
+    function watch(parent,key){
         var v;
         //count.aaa放到外面输出是undefined
         v=parent[key]
-        fn(v);
         Object.defineProperty(parent, key, {
             get: function () {
-                return v;
+                return v+'刘伟恒~';
             },
             set: function (nv) {
                 //如果值没有改变不触发fn函数
@@ -41,28 +22,18 @@
                 }
                 var ov=parent[key];
                 v=nv;
-                fn(nv);
                 return nv;
             }
 //            configurable:true,
 //            enumerable:true
         });
     }
-
-    setInterval(function(){
-        aaa.count++;
-    },2000)
-
-    /*for(var i=0;i<10;i++){
-        aaa.count++;
-    }*/
-
-
-
-
-
-
-
+    function defineProperty(){
+        obj.name = Math.random();
+        console.log(obj.name);
+    }
+    var obj = {name:'allen'}
+    watch(obj,'name');
 </script>
 </body>
 </html>

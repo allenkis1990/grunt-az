@@ -1,3 +1,5 @@
+
+//for in循环会把prototype里的属性一起循环出来
 function Parent(){
     this.name='parent';
     this.age=88;

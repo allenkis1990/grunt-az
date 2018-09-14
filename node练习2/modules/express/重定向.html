@@ -6,6 +6,7 @@
 </head>
 <body>
 <button>点击我重定向</button>
+<div class="aaaa">aaaa</div>
 <script src="/js/jquery-1.9.1.js"></script>
 <script>
    $('button').click(function(){
@@ -14,6 +15,15 @@
            method:'get',
            data:{
                redirect:'"http://192.168.28.251:8088/home"'
+           }
+       });
+   });
+   $('.aaaa').click(function(){
+       $.ajax({
+           url:'/home2',
+           method:'get',
+           headers:{
+               'fuck-type':'aaaa'
            }
        });
    });

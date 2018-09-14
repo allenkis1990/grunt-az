@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //设置一个拦截器如果打印obj里没有的属性会报错
+    //    var obj = {name: 'allen'};
+    //    var proxy = new Proxy(obj, {
+    //        get(target, key) {
+    //            if (key in target) {
+    //                return target[key];
+    //            } else {
+    //                throw new Error(key + ' is not in it');
+    //            }
+    //        }
+    //    })
+    //    console.log(proxy.age);//报错
+    //代理可以通过create继承
+    //    var obj2=Object.create(proxy);
+    //    console.log(obj2.age);//报错
+
+
+//    var pipe = (function () {
+//        return function (value) {
+//            var fnArr = [];
+//            var proxy = new Proxy({}, {
+//                get(target, key) {
+//                    if (key === 'get') {
+//                       //第三个参数proxy指的是一整个proxy实例
+//                        return fnArr.reduce(function (pre, next, proxy) {
+//                            return next(pre);
+//                        }, value);
+//                    } else {
+//                        fnArr.push(window[key]);
+//                    }
+//                    return proxy;
+//                }
+//            });
+//            return proxy;
+//        }
+//    })()
+//    var fn1 = (n) => n * 2;
+//    var fn2 = (n) => n * n;
+//    console.log(pipe(2).fn1.fn2.get);
+
+
+//    var proxy = new Proxy({}, {
+//        set(target, key,value,proxy) {
+//            console.log(value+'~~~','设置');
+//            //有set的时候要手动赋值
+//            target[key]=value+'~~~';
+//            return value;
+//        },
+//        get(target,key){
+//            console.log(target[key],'获取');
+//            return target[key];
+//        }
+//    });
+//    proxy.a=111;//设置
+//    proxy.b=222;//设置
+//    var b = proxy.a;//获取
+
+</script>
+</body>
+</html>

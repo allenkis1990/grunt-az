@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //相当于{a:a,b:b}={a:1,b:2}
+//    let {a,b}={a:1,b:2};
+//    console.log(a, b);
+
+
+    //这个时候解构的是k和 p a和b是属性不被解构
+//    let {a:k,b:p}={a:1,b:2}
+//    console.log(k,p);
+
+
+    //对象也可以设置默认值
+//    let {a=1,b=2}={a:'a'};
+//    console.log(a, b);
+
+
+    //这里的默认值是k和p的
+//    let {a:k=1,b:p=2}={};
+//    console.log(k, p);
+
+
+    //如果haha没有匹配到那么a久等于{haha:'haha',name:'allen',age:18}匹配到了a就少匹配一个haha:'haha'
+//    let {haha,...a}={haha:'haha',name:'allen',age:18};
+//    console.log(a);
+
+
+    //这里的{...obj,c:3}就等于{a:1,b:2,c:3}
+//    function aa({a,b,c}){
+//        console.log(a + b+c);
+//    }
+//    let obj={a:1,b:2};
+//    aa({...obj,c:3})
+
+
+
+    //这里a被声明过的情况下想进行解构一定要套上一个圆括号
+//    let a=1;
+//    ({a}={a:2});
+//    console.log(a);
+
+
+
+    //这里等于Object.prototype.toString.call([]);//[object array]
+//    let {toString:a}={};
+//    console.log(a.call([]));
+
+
+    //默认值优先级1.调用 2.右边 3.左边
+//    function a1({a=0,b=1}={}){
+//        return [a,b]
+//    }
+//    function a2({a,b}={a:0,b:1}){
+//        return [a,b]
+//    }
+//    console.log(a1({a: 2}));//2 1
+//    console.log(a2({a: 2}));//2 undefined
+
+
+</script>
+</body>
+</html>

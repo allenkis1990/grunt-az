@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 在y=2声明前就把y赋值给了x所以报错
+//    function bar(x = y, y = 2) {
+//        return [x, y];
+//    }
+//
+//    bar(); // 报错
+
+
+    //let在同一个块中不能声明两次
+//    function aa(){
+//        var a=1;
+//        let a=2;
+//    }
+//    aa();
+
+
+    //这里打印undefined是因为在块中k在块的打印前又被申明
+//    var k=11;
+//    var bol=false;
+//    function o() {
+//        console.log(k);
+//        if(bol){
+//            var k=1;
+//        }
+//    }
+//    o();
+
+//    if(true){
+//        let a=1;
+//        if(true){
+//            let a=11;
+//            console.log(a);
+//        }
+//        console.log(a);
+//    }
+
+
+    //报错 因为if false相当于f提到前面等于undefined
+    function f() { console.log('I am outside!'); }
+    (function () {
+        if (false) {
+            // 重复声明一次函数f
+            function f() { console.log('I am inside!'); }
+        }
+        f();
+    }());
+
+</script>
+</body>
+</html>

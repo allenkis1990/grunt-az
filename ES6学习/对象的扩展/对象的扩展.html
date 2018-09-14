@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="fn()">111</button>
+<script>
+    //不能比较两个对象 不好用
+    //    var obj1={name:'allen'};
+    //    var obj2={name:'allen'};
+    //    console.log(Object.is(obj1, obj2));
+
+
+    //合并对象 浅拷贝
+    //    var obj1={name:'allen',obj:{age:18}},obj2={age:18,obj:{name:'111'}};
+    //    //var obj={...obj1,...obj2}
+    //    var obj=Object.assign({},obj1,obj2);
+    //    obj2.obj.name='2222222222222'
+    //    console.log(obj);
+
+
+//    var obj1 = {name: 'allen', age: 18,obj:{fuck:111}};
+//    var a=Object.keys(obj1)
+//    console.log(a);
+
+
+//    function fn(){
+//        //obj.name=111
+//        console.log(obj.name);
+//    }
+//    var obj = {name:'allen'};
+//    var v=obj.name;
+//    Object.defineProperty(obj,'name',{
+//        //value : "",
+//        //writable : true,//修改
+//        //enumerable : false,//枚举
+//        //configurable : false,//删除
+//        set (nv) {
+//            //这里不能再给原值赋值否则报错 只能用变量V赋值
+//            v=nv;
+//            console.log(nv);
+//            return nv;
+//        },
+//        get () {
+//            return v
+//        }
+//    })
+//    setInterval(function(){
+//        obj.name=Math.random();
+//    },3000)
+
+
+    //super关键字只有用setPrototypeOf定义了才能打印出来 否则报错
+    //Object.getPrototypeOf获取对象原型的属性
+    //Object.setPrototypeOf用来设置对象的原型
+//    var obj={name:'allen',
+//        fn() {
+//            console.log(this.name,'普通');
+//            console.log(super.name,'原型');
+//        }
+//    }
+//    Object.setPrototypeOf(obj,{name:'super',age:18})
+//    console.log(Object.getPrototypeOf(obj));
+//    obj.fn();
+
+    //循环对象
+//    var obj={name:'allen',age:18};
+//    for(let key of Object.keys(obj)){
+//        console.log(key);//name age
+//    }
+//    for(let value of Object.values(obj)){
+//        console.log(value);//allen 18
+//    }
+//    for(let [key,value] of Object.entries(obj)){
+//        console.log(key,value)
+//    }
+
+
+
+</script>
+</body>
+</html>

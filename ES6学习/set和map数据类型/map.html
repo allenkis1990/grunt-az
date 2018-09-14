@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    /**
+     * 可以把undefined null 对象 数组这些当作key
+     * 有has get set delete size
+     * 可以用Array.from或者[...map]转为数组
+     * 可以用for of循环
+     */
+
+
+    //对象是key的情况下是引用所有事先要用变量存起来 new Map([[mapKey,'ae86']])内部结构是[[a,b],[c,d]] a:b,c:d
+    //    var mapKey={name:'allen'};
+    //    var map = new Map([[mapKey,'ae86']]);
+    //    var v=map.get(mapKey);
+    //    console.log(map);
+    //    console.log(v);
+
+    //用set添加set可以是任何类型
+    //    var map = new Map();
+    //    map.set(1,{name:'allen'});
+    //    map.set(2,null);
+    //    map.set(3,NaN);
+    //    console.log(map);
+
+//    var map = new Map([[{a: 1}, 'ae86'], [777, {b: 2}]]);
+//    for(let [key,val] of map){
+//        console.log(key);
+//    }
+//    map.forEach(function(item,index){
+//        console.log(item, index);
+//    })
+    //console.log([...map]);//[{a: 1}, 'ae86'], [777, {b: 2}]
+
+
+    function* a (){
+        yield 'a'
+        yield 'b'
+        return 'c'
+    }
+    var fn = a();
+    console.log(fn.next());
+    console.log(fn.next());
+    console.log(fn.next());
+    console.log(fn.next());
+
+</script>
+</body>
+</html>

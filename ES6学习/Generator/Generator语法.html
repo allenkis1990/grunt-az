@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //    function* a(){
+    //        yield 'hello';
+    //        yield 'world';
+    //        return '!!!';
+    //    }
+    //    let aa = a();
+    //    do{
+    //        var b=aa.next()
+    //        console.log(b);
+    //    }while(!b.done)
+
+
+//    function* a() {
+//        var result = 1+(yield '22');
+//        console.log(result);//3
+//        yield 'world';
+//        return '!!!';
+//    }
+//    var p=a();
+//    console.log(p.next());
+//    console.log(p.next(2));
+//    console.log(p.next());
+
+//    function* objectEntries(obj) {
+//        let propKeys = Reflect.ownKeys(obj);
+//
+//        for (let propKey of propKeys) {
+//            //变成['name','xx'] ['age','bb']结构 可以进行let of就像map一样
+//            yield [propKey, obj[propKey]];
+//        }
+//    }
+//
+//    let jane = { first: 'Jane', last: 'Doe' };
+//
+//    for (let [key,val] of objectEntries(jane)) {
+//        console.log(key);
+//    }
+
+
+//    function* gen(x) {
+//        var y = yield x + 2;//x+2是一个整体外面没传值进来整体就是undefined 如果是（yield x） + 2整体就是undefined+2
+//        console.log(y);
+//        return y;
+//    }
+//
+//    var g = gen(1);
+//    g.next() // { value: 3, done: false }
+//    console.log(g.next()); // { value: undefined, done: true }
+
+
+//    function* a(){
+//        try{
+//            yield 22;
+//        }catch(e){
+//            console.log(e);
+//        }
+//        try{
+//            yield 33;
+//        }catch(e){
+//            console.log(e);
+//        }
+//    }
+//    var p = a();
+//    p.next();
+//    p.throw(new Error('error'));
+//    p.throw(new Error('error2'));
+
+
+    //yield*的使用
+    let A = (function* a(){
+        yield 'bb'
+    })()
+    let B = function* b(){
+        yield 'aa'
+        yield* A
+        yield 'cc'
+    }
+    var arr = B();
+    for(let key of arr){
+        console.log(key);
+    }
+
+
+</script>
+</body>
+</html>

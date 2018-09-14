@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Parent(){
+        this.name='allen';
+        this.age=18;
+    }
+    Parent.prototype.fn=function(){
+        alert('fn');
+    }
+    function Child(){
+        //继承构造器
+        Parent.call(this);
+    }
+    //继承原型
+    copyPrototype(Parent,Child);
+
+    //Parent.prototype.aaa=2222;
+    //Child.prototype.aaa=6666;
+    //console.log(Parent.prototype,'p');
+    //console.log(Child.prototype,'c');
+
+
+    var c = new Child();
+    console.log(c);
+
+    function copyPrototype(Parent,Child){
+        function Temp(){}
+        Temp.prototype = Parent.prototype;
+        Child.prototype = new Temp();
+        //修复Child的构造函数
+        Child.prototype.constructor = Child;
+    }
+</script>
+</body>
+</html>

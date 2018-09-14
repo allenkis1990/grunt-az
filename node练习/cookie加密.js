@@ -21,7 +21,8 @@ app.get('/cookie',function(req,res){
     console.log(req.signedCookies);
     res.send('cookie');
 });
+function a({a,b}){console.log(a,b)}
+var k={a:1,b:2}
+a(k);
 
-
-
-app.listen(8088,'192.168.28.251');
+app.listen(8087,'192.168.28.251');

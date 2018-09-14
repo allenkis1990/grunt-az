@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //    let obj = {
+    //        name: 'allen',
+    //        age: 18,
+    //        set getStr (a) {
+    //            return this.name=a
+    //        },
+    //        set getAge (a) {
+    //            return this.age=a
+    //        }
+    //    }
+    //    let obj2 = {
+    //        age : 0
+    //    }
+    //    console.log(Reflect.get(obj, 'name'));
+    //    console.log(Reflect.get(obj, 'age'));
+    //    Reflect.set(obj,'getStr','66666');//如果是给对象里的一个方法调用 一定要加上set前缀
+    //    console.log(Reflect.get(obj, 'name'));
+    //    Reflect.set(obj,'getAge',20,obj2);//第四个参数是this的指向 指向了obj2所以obj的age没变
+    //    console.log(obj2.age);
+    //    console.log(obj.age);
+
+
+    var obj = {
+        fn(name) {
+            console.log(this.name + name);
+        },
+        name: 'allen'
+    }
+    //第一个参数fn 第二个参数是obj对象 第三个参数是参数数组
+    Reflect.apply(obj.fn, obj, [666]);
+</script>
+</body>
+</html>

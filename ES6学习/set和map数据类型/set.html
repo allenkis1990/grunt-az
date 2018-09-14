@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    /**
+     * 可以用来去重复
+     * 有add delete clear has size
+     * 可以用Array.from或者[...set]转为数组
+     * 可以用for of循环
+     */
+
+
+    //delete add has clear size
+    //用...把set转成数组就可以调用数组的方法
+//    var set = new Set([{name:'allen'},{name: 'jack'},{name:'tom'}]);
+//    var arr = [...set].filter((item)=>item.name==='allen'||item.name==='tom');
+//    var newSet = new Set(arr);
+//    console.log(newSet);
+
+    //直接用for of循环
+//    var set = new Set([{name:'allen'},{name: 'jack'},{name:'tom'}]);
+//    for(let key of set){
+//        console.log(key);
+//    }
+
+    //可用于去除重复
+//    var arr = [1,1,1,2,2,3];
+//    var set = new Set(arr);
+//    var newArr = Array.from(set);
+//    console.log(newArr);
+
+
+    //和数组的forEach不一样 set输出的item和index都是item
+//    var set = new Set([{name:'allen'},{name: 'jack'},{name:'tom'}]);
+//    set.forEach(function(item,index){
+//        console.log(item,index);
+//    })
+
+
+    //想到删除对象 只能删除声明好的
+//    var set = new Set([{name:'allen'}]);
+//    var item = {name:'jack'};
+//    set.add(item);
+//    console.log(set,'删除前');
+//    set.delete(item);//删除成功返回true
+//    console.log(set,'删除后');
+
+
+    var item = {name:'allen'}
+    let set = new Set([item,{name:'jack'}]);
+    var bol = set.has(item);
+    console.log(bol);//true
+</script>
+</body>
+</html>

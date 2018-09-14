@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //    async function aa(){
+    //        var timer1 = await new Promise((resolve,reject)=>{
+    //            setTimeout(()=>{
+    //                resolve({name:'allen'});
+    //            },3000)
+    //        })
+    //        var timer2 = await new Promise((resolve,reject)=>{
+    //            setTimeout(()=>{
+    //                resolve({age:18});
+    //            },2000)
+    //        })
+    //        console.log(timer1.name+'|'+timer2.age);
+    //    }
+    //    aa();
+
+
+    //async function aa(){
+    //    var timer1 = await new Promise((resolve,reject)=>{
+    //        setTimeout(()=>{
+    //            resolve({name:'allen'});
+    //        },3000)
+    //    })
+    //    var timer2 = await new Promise((resolve,reject)=>{
+    //        setTimeout(()=>{
+    //            resolve({age:18});
+    //        },2000)
+    //    })
+    //    //console.log(timer1);
+    //    //console.log(2);//在timer1返回后才执行
+    //    return {
+    //        obj1:timer1,
+    //        obj2:timer2
+    //    }
+    //}
+    //aa().then((result=>{
+    //    console.log(result);
+    //}));
+
+
+    //    var events = {
+    //        async aa(){
+    //            try {
+    //                var p=await this.getData();
+    //            } catch (e) {
+    //                console.log(e);
+    //            }
+    //            //只要写在await后面的操作都是要等await完成后再执行
+    //            console.log(6666);
+    //            return p;
+    //        },
+    //        getData(){
+    //            return new Promise((resolve,reject)=>{
+    //                setTimeout(()=>{
+    //                    reject('err');
+    //                },2000)
+    //            })
+    //        }
+    //    }
+    //    events.aa().then(data=>{
+    //        console.log(data);//undefined 因为catch到错误了所以跳出了没有return 到P
+    //    });
+
+
+//    var events = {
+//        //把两个相互依赖的异步操作都放在try里只要其中出错就会catch到
+//        async aa() {
+//            try {
+//                var p2 = await this.getData2();
+//                console.log(222);
+//                var p1 = await this.getData1();
+//                console.log(p1+p2);
+//            } catch (e) {
+//                console.log(e);
+//            }
+//        },
+//        getData1() {
+//            return new Promise((resolve, reject) => {
+//                setTimeout(() => {
+//                    reject('err');
+//                }, 2000)
+//            })
+//        },
+//        getData2() {
+//            return new Promise((resolve, reject) => {
+//                setTimeout(() => {
+//                    resolve('success');
+//                }, 3000)
+//            })
+//        },
+//        fn(){
+//            console.log(888888888888);
+//        }
+//    }
+//    events.aa();
+//    events.fn();
+
+
+//    var events = {
+//        async aa() {
+//            var p1 = await this.getData1();
+//            var p2 = await this.getData2();
+//            return p1+p2;
+//        },
+//        getData1() {
+//            return new Promise((resolve, reject) => {
+//                setTimeout(() => {
+//                    reject('err');
+//                }, 2000)
+//            })
+//        },
+//        getData2() {
+//            return new Promise((resolve, reject) => {
+//                setTimeout(() => {
+//                    resolve('success');
+//                }, 3000)
+//            })
+//        }
+//    }
+//    events.aa().then(data=>{
+//        console.log(data);
+//    }).catch(e=>{
+//        console.log(e);
+//    });
+
+
+
+</script>
+</body>
+</html>

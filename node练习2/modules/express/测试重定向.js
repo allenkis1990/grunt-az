@@ -34,6 +34,10 @@ app.get('/re',function(req,res){
 app.get('/home',function(req,res){
     res.send('home');
 });
+app.get('/home2',function(req,res){
+    res.setHeader('fuck-type','aaa');
+    res.send('home');
+});
 
 
 app.listen(8088,'192.168.28.251');

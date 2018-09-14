@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="create()">create</button>
+<script>
+    var obj = {}
+    var a1=obj.a1;
+    //第一个参数是要作为原型的对象
+    obj = Object.create({},{
+        a1:{
+            get (){
+                return a1+'22222'
+            },
+            set (nv){
+                a1=nv;
+                return nv;
+            }
+        }
+    });
+    obj.a1='lwh';
+    console.log(obj.a1);
+
+    function create(){
+        obj.a1=Math.random();
+        console.log(obj.a1);
+    }
+    //obj.a1=2;
+</script>
+</body>
+</html>

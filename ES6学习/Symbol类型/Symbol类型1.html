@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //    let name = Symbol('name');
+    //    let name2 = Symbol('name');
+    //    let obj = {
+    //        [name]:'allen',
+    //        [name2]:'allen2'
+    //    };
+    //    console.log(name);//打印出来是Symbol类型
+    //    console.log(name.toString());//打印出来是字符串Symbol('name')
+    //    console.log(name2===name);//false Symbol是唯一描述一样也不相等
+
+
+//    let obj = {
+//        symbolType1: Symbol('symbolType1'),
+//        symbolType2: Symbol('symbolType2')
+//    }
+//    function fn(type) {
+//        switch (type) {
+//            case obj.symbolType1:
+//                console.log(obj.symbolType1);
+//                break;
+//            case obj.symbolType2:
+//                console.log(obj.symbolType2);
+//                break;
+//        }
+//    }
+//
+//    fn(obj.symbolType1);
+
+    var str = 'hello';
+    for(let [k,v] of str){
+        console.log(k,v);
+    }
+</script>
+</body>
+</html>

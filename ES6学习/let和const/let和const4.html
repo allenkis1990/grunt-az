@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    //const不能重复声明 不能改变内存地址(const a={} a={name:'allen'}) 可以在对象上加属性
+//    const a={};
+//    a.name='allen';
+
+
+    //var 声明出来的是window对象const let出来的全局变量不再是window对象
+    var a=11;
+    console.log(window.a);
+    let b=22;
+    console.log(window.b);
+
+</script>
+</body>
+</html>
