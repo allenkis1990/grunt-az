@@ -34,8 +34,14 @@
 
 
     //匹配必须是字母但是不包含x或者o
-    var str = 'abcdey';
-    var reg = /^(?![a-z]*?(x|o))[a-z]*?$/ig;
+//    var str = 'abcdey';
+//    var reg = /^(?![a-z]*?(x|o))[a-z]*?$/ig;
+//    console.log(str.match(reg));
+
+
+    //匹配格式要是href=""中间不能是portal
+    var str = 'aaaaaahref="center" href="admin" href="a"bbb';
+    var reg = /href=("((?!.*?portal).*?)")/ig;
     console.log(str.match(reg));
 </script>
 </body>
