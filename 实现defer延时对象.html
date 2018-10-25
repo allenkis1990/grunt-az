@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var $defer=function(){
+        return {
+            promise:{
+                resolve:null,
+                then:function(callback){
+                    this.resolve = callback;
+                    console.log(this.resolve);
+                }
+            }
+        }
+    }
+    function fn(){
+        var defer = $defer();
+        setTimeout(function(){
+            defer.promise.resolve();
+        },3000);
+        //console.log(defer.promise.then);
+        return defer.promise;
+    }
+    function fn2(){
+        var defer = $defer();
+        setTimeout(function(){
+            defer.promise.resolve();
+        },1000);
+        //console.log(defer.promise.then);
+        return defer.promise;
+    }
+    fn().then(function(){
+        alert(88888);
+    });
+    fn2().then(function(){
+        alert(9999);
+    });
+</script>
+</body>
+</html>

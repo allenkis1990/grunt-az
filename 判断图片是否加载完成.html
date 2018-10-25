@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src="images/afei.jpg" />
+<script src="js/jquery-1.9.1.min.js"></script>
+<script>
+    setTimeout(function(){
+        $('img').load(function(){
+            alert(1);
+        });
+        $('img').error(function(){
+            alert(2);
+        });
+    },500)
+
+</script>
+</body>
+</html>

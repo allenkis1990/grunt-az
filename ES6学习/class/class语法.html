@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //    class A{
+    //        constructor(name,age){
+    //            this.name = name;
+    //            this.age = age;
+    //        }
+    //        fn(){
+    //            console.log(this.name,this.age);
+    //        }
+    //    }
+    //    //A.prototype.aaa='aaa';
+    //    var a = new A('allen',18)
+    //    console.log(a);
+
+
+    //用symbol作为内部的私有变量外部访问不到
+    //    let fn = Symbol('fn');
+    //    class A {
+    //        constructor(name, age) {
+    //            this.name = name;
+    //            this.age = age;
+    //        }
+    //        [fn]() {
+    //            console.log(this.name, this.age);
+    //        }
+    //    }
+    //    //A.prototype.aaa='aaa';
+    //    var a = new A('allen', 18)
+    //    console.log(a);
+    //    a[fn]();
+
+
+//    class A {
+//        //私有方法(静态方法)
+//        static staticFn() {
+//            console.log('staticFn');
+//        }
+//
+//        //static aa =1;//私有属性 目前浏览器不支持 (静态属性)
+//        constructor(name, age) {
+//            this.name = name;
+//            this.age = age;
+//        }
+//    }
+//    //私有属性 (静态属性)
+//    A.prop = 666;
+//    //私有方法 （在类里定义也可以） (静态方法)
+//    A.staticFn = function(){console.log(this.prop,'prop')}//这里this打印的是静态的属性
+//    //A.prototype.aaa='aaa';
+//    var a = new A('allen', 18)
+//    //私有方法直接访问
+//    A.staticFn();
+//    console.log(A.prop);
+
+
+    //set的时候一定要拿一个变量接val
+//    class A {
+//        constructor() {
+//
+//        }
+//        get fuck(){
+//            return this._o;
+//        }
+//        set fuck(val){
+//            this._o = val;
+//            console.log('setter:'+val);
+//            return true;
+//        }
+//    }
+//    var a = new A()
+//    a.fuck = 'lwh'
+//    a.fuck = 'lwh22'
+//    console.log(a.fuck)
+
+//    class Parent{
+//        constructor(name,age){
+//            this.name = name;
+//            this.age = age;
+//            this.haha = 'haha';
+//        }
+//        fn(){
+//            console.log('fn');
+//        }
+//    }
+//    class Child extends Parent{
+//        constructor(name,age){
+//            //继承的时候u一定要super一下父亲否则报错
+//            super(name,age);
+//            this.job='web';
+//        }
+//        fuck(){
+//            //都可以 但是super.attr不行
+//            this.fn();
+//            super.fn();
+//        }
+//    }
+//    var p = new Parent('parent',28);
+//    var c = new Child('child',18);
+//    console.log(p,'parent');
+//    console.log(c,'child');
+//
+//    c.fuck();
+
+
+</script>
+</body>
+</html>
