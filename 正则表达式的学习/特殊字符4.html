@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //a后面是b或者c
+//    var str = 'aac';
+//    var reg = /a(b|c)/ig;
+//    var reg2 = /a[bc]/ig;
+//    var reg3 = /a(ab|ac)/ig;
+//    console.log(str.match(reg));
+//    console.log(str.match(reg2));
+//    console.log(str.match(reg3));
+
+//    var str = 'ab-c';
+//    var reg = /ab[a\-b]c/ig;
+//    console.log(str.match(reg));
+
+    //var reg =/[^0][^5][^9][^1]/;//不能是按这个顺序0591 true
+    //var reg =/[^0591]/;//不能是0591里的其中一个 false
+    //var reg =/[^0591]{4}/;//不能是0591里的其中一个并且要是4位 false
+    var reg =/[^0591]{4}/;
+    var str = '5019';
+    console.log(reg.test(str));
+
+
+</script>
+</body>
+</html>

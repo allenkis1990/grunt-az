@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //找出所有的lwh
+    //如果有小括号匹配出第一个是全匹配 第二个是括号的匹配['lwh','h']
+    var reg=/lw(h)/ig;
+    var str='abcdlwhsasdlwhsadlwh';
+
+
+//    function a(){
+//        var e=reg.exec(str);
+//        if(e){
+//            console.log(e);
+//            a();
+//        }
+//    }
+//    a();
+
+
+
+    var e=reg.exec(str);
+    while(e){
+        console.log(e);
+        e=reg.exec(str);
+    }
+
+
+
+
+</script>
+</body>
+</html>

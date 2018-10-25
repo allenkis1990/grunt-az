@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //从开头开始匹配2009-07-08不在
+//    var reg = /^(?!2009-07-08).*?$/ig;
+//    var str = '2009-07-09 04:38:44 127.0.0.1 GET /';
+//    console.log(str.match(reg));
+
+//    var reg = /^.*?$/ig;
+//    var str = 'abc';
+//    console.log(str.match(reg));
+
+    //错误
+//    var reg = /^(.*?)(?!robots\.txt)(.*?)$/;
+//    var str = '2009-07-07 04:38:44 127.0.0.1 GET /robots.txt';
+//    console.log(str.match(reg));
+
+
+    //匹配不包含l(1到2个任意)h
+    //前一个.*?要放不匹配里面  后一个.*?放外面
+    //一定要加上^$符号否则变成非贪婪
+//    var str1 = 'fuck you lwh haha~~';
+//    var str2 = 'fuck you lwoh haha~~';
+//    var str3 = 'fuck you ooo haha~~';
+//    var reg =/^(?!.*?l.{1,2}h).*?$/ig;
+//    console.log(str1.match(reg));
+//    console.log(str2.match(reg));
+//    console.log(str3.match(reg));
+
+
+    //匹配必须是字母但是不包含x或者o
+    var str = 'abcdey';
+    var reg = /^(?![a-z]*?(x|o))[a-z]*?$/ig;
+    console.log(str.match(reg));
+</script>
+</body>
+</html>
