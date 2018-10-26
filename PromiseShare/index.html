@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/tomorrow-night-blue.css" rel="stylesheet"/>
+    <script src="js/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<!--<pre><code class="javascript">function aa(){alert(1);}</code></pre>-->
+<div id="content"></div>
+<script src="js/marked.min.js"></script>
+<script src="js/jquery-1.9.1.min.js"></script>
+
+<script>
+    //var markdownString = '```java console.log("hello");```';
+
+    marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false,
+        highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+        }
+    });
+    $.get('md/test.md').success(function(data){
+        console.log(data);
+        $('#content').html(marked(data));
+        $('code').addClass('hljs');
+        $('code').addClass('javascript');
+    });
+
+</script>
+</body>
+</html>
