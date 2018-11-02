@@ -1,0 +1,28 @@
+{
+  "info":[
+    {
+      "name":"Promise是什么",
+      "path":"/"
+    },
+    {
+      "name":"Promise的兼容情况",
+      "path":"/compatible"
+    },
+    {
+      "name":"Promise基本的规范",
+      "path":"/standard"
+    },
+    {
+      "name":"ES6 Promise的API",
+      "path":"/api"
+    },
+    {
+      "name":"then",
+      "path":"/then"
+    },
+    {
+      "name":"catch",
+      "path":"/catch"
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link href="css/tomorrow-night-blue.css" rel="stylesheet"/>
+    <link rel="icon" type="image/ico" href="favicon.ico"/>
+    <style>
+        html,body{
+            width:100%;height:100%;
+        }
+        img{width:100%;height:700px;}
+    </style>
+    <script src="js/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<!--<pre><code class="javascript">function aa(){alert(1);}</code></pre>-->
+<div class="container-fluid" style="height:100%;">
+    <div class="row" style="height:100%;">
+        <div class="col-md-2" style="height:100%;">
+            <div class="list-group" style="height:100%;border:1px solid #ddd;margin-bottom:0">
+
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div id="content"></div>
+            <div>
+                <h2>运行结果：</h2>
+                <button type="button"
+                        onclick="clickfn('resolve')"
+                        class="btn btn-primary">resolve</button>
+                <button type="button"
+                        onclick="clickfn('reject')"
+                        class="btn btn-primary">reject</button>
+                <button type="button"
+                        onclick="ls1()"
+                        class="btn btn-primary">链式调用1</button>
+                <button type="button"
+                        onclick="ls2()"
+                        class="btn btn-primary">链式调用2</button>
+                <button type="button"
+                        onclick="demo('data/thenDemo1.json')"
+                        class="btn btn-primary">demo1</button>
+                <button type="button"
+                        onclick="demo('data/thenDemo2.json')"
+                        class="btn btn-primary">demo2</button>
+                <button type="button"
+                        onclick="demo('data/thenDemo3.json')"
+                        class="btn btn-primary">demo3</button>
+                <button type="button"
+                        onclick="demo('data/thenDemo4.json')"
+                        class="btn btn-primary">demo4</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/marked.min.js"></script>
+<script src="js/jquery-1.9.1.min.js"></script>
+
+<script>
+    $.get('data/menuCode.js').success(function(data){});
+
+    marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false,
+        highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+        }
+    });
+    $.get('md/then.md').success(function(data){
+        //console.log(data);
+        $('#content').html(marked(data));
+        $('code').addClass('hljs');
+        $('code').addClass('javascript');
+    });
+
+    function fn(type){
+        return new Promise(function(resolve,reject){
+            if(type==='resolve'){
+                resolve('resolve!!!');
+            }else{
+                reject('reject!!!');
+            }
+        })
+    }
+    function clickfn(type){
+        fn(type).then(function(resolveData){
+            console.log(resolveData);
+        },function(rejectData){
+            console.log(rejectData);
+        })
+    }
+
+
+    function ls1(){
+        function fn2(){
+            return new Promise(function(resolve){
+                resolve('data1');
+            })
+        }
+        fn2()
+            .then(function(data){
+                console.log(data);//data1
+                return 'data2';
+            })
+            .then(function(data){
+                console.log(data);//data2
+                return 'data3';
+            })
+            .then(function(data){
+                console.log(data);//data3
+            });
+    }
+
+    function ls2(){
+        function fn3(){
+            return new Promise(function(resolve){
+                resolve('data1');
+            })
+        }
+        fn3()
+            .then(function(data){
+                console.log(data);//data1
+                return new Promise(function(resolve){
+                    setTimeout(function(){
+                        resolve('data2');
+                    },3000)
+
+                });
+            })
+            .then(function(data){
+                console.log(data);//data2
+                return new Promise(function(resolve){
+                    setTimeout(function(){
+                        resolve('data3');
+                    },3000)
+                });
+            })
+            .then(function(data){
+                console.log(data);//data3
+            });
+
+    }
+
+
+    function getData(url){
+        return new Promise(function(resolve,reject){
+            $.get(url).success(function(data){
+                if(data.status){
+                    if(data.info.length){
+                        resolve({info:data.info});
+                    }else{
+                        reject({message:'暂无数据'});
+                    }
+                }else{
+                    reject({message:'暂无数据'});
+                }}).error(function(){
+                reject({message:'服务调用失败'});
+            });
+        });
+
+    }
+
+
+    function demo(url){
+        getData(url)
+            .then(function (data) {
+                console.log(data.info);
+            }, function (data) {
+                console.log(data.message);
+            });
+    }
+
+
+</script>
+</body>
+</html>
