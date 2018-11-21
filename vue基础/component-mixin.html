@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+
+</head>
+<body>
+
+    <div id="app">
+        <button @click="aa()">click</button>
+        <button @click="bb()">click2</button>
+    </div>
+
+
+
+    <script>
+        Vue.mixin({
+            methods:{
+                go(){
+                    alert(1);
+                }
+            }
+        });
+        //局部注册组件
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                aaa:'22222'
+            },
+            components:{
+
+            },
+            methods:{
+                aa(){
+                    this.go();
+                    //console.log(this);
+                },
+                bb(){
+                    this.go2();
+                }
+            },
+            mixins:[{methods:{go2(){alert(222222222)}}}]
+        });
+    </script>
+</body>
+</html>

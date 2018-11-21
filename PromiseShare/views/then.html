@@ -11,6 +11,23 @@
             width:100%;height:100%;
         }
         img{width:100%;height:700px;}
+        .changeWindowBtn {
+            position: absolute;
+            left: -13px;
+            top: 0;
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            border-radius:3px;
+            background-color: #337ab7;
+            color: #fff;
+            cursor:pointer;
+        }
+        .left1{left:1px;}
+        .ml16pre{margin-left:-16.66666667%}
+        .width100Pre{width:100%;}
+        .leftContent{transition:all 0.5s;}
+        .rightContent{position:relative;transition:all 0.5s;}
     </style>
     <script src="js/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -19,12 +36,13 @@
 <!--<pre><code class="javascript">function aa(){alert(1);}</code></pre>-->
 <div class="container-fluid" style="height:100%;">
     <div class="row" style="height:100%;">
-        <div class="col-md-2" style="height:100%;">
+        <div class="col-md-2 leftContent" style="height:100%;">
             <div class="list-group" style="height:100%;border:1px solid #ddd;margin-bottom:0">
 
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-10 rightContent">
+            <span class="changeWindowBtn"><img style="width:25px;height:25px;" src="images/Category.png" /></span>
             <div id="content"></div>
             <div>
                 <h2>运行结果：</h2>

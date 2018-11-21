@@ -22,4 +22,20 @@ $.get('data/menu.json').success(function(data){
     $(window).resize(function(){
         initMenuH();
     });
+    let toggBtnBol = false;
+    $('.changeWindowBtn').click(function(){
+        let leftMain = $('.leftContent');
+        let rightMain = $('.rightContent');
+        if(!toggBtnBol){
+            leftMain.addClass('ml16pre');
+            rightMain.addClass('width100Pre');
+            $(this).addClass('left1');
+            toggBtnBol = true;
+        }else{
+            leftMain.removeClass('ml16pre');
+            rightMain.removeClass('width100Pre');
+            $(this).removeClass('left1');
+            toggBtnBol = false;
+        }
+    });
 });

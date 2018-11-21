@@ -26,5 +26,17 @@ app.get('/then',(req,res)=>{
 app.get('/catch',(req,res)=>{
     res.sendFile(path.resolve(__dirname,'views/catch.html'));
 });
+app.get('/all',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'views/all.html'));
+});
+app.get('/race',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'views/race.html'));
+});
+app.get('/resolve&reject',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'views/resolve&reject.html'));
+});
+app.get('/easyThen',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'views/easyThen.html'));
+});
 
-app.listen('8887','192.168.28.251');
+app.listen('8888','192.168.28.250');

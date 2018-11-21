@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+
+</head>
+<body>
+
+    <div id="app">
+        <button @click="viewComponent()">页面事件</button>
+        <lwh :list="list" ref="lwh"></lwh>
+        <div>{{oo}}</div>
+    </div>
+
+
+
+    <script>
+
+        /**
+         * 只要组件或者页面任意的data更新了都会调用他们各自的update钩子
+         */
+        //全局注册组件
+        Vue.component('lwh',{
+            //template:'<div>{{value}}<button @click="fn(1)">click</button><button @click="fn(2)">click</button></div>',
+            template:'<div><div v-for="item in list">{{item.name}}<span @click="componentEvent()">组件事件</span>{{lwh}}</div><button @click="changeObj()">chObj</button></div>',
+            props:{
+                //value:'String',
+                list:{
+                    type:'Array'
+                }
+            },
+            data:function(){
+                return {
+                    //value:''
+                    lwh:'lwh',
+                    obj:{name:'allen'}
+                }
+            },
+            updated(){
+                console.log('组件更新');
+            },
+            methods:{
+                fn(){
+                    this.lwh = 'lwh1'
+                },
+                componentEvent(){
+                    this.lwh='lwh1'
+                    //this.list.push({name:'fuck'});
+                },
+                changeObj(){
+                    this.obj.name=Math.random();
+                }
+            },
+            mounted(){
+                this.$watch('obj',function(nv){
+                    console.log(nv);
+                },{deep:true});
+            }
+
+        });
+
+        //局部注册组件
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                list:[{name:'allen'},{name:'jack'}],
+                oo:'haha',
+                obj:{name:'allen'}
+            },
+            components:{
+
+            },
+//            beforeUpdate(){
+//                console.log(222);
+//            },
+            updated(){
+                console.log('页面更新');
+            },
+            methods:{
+                viewComponent(){
+                    this.oo='oo';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

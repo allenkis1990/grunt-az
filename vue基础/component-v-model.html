@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+
+</head>
+<body>
+
+    <div id="app">
+        <lwh class="red" v-model="aaa"></lwh>
+        {{aaa}}
+    </div>
+
+
+
+    <script>
+
+        //自定义组件的v-model 是由input 和 value组成
+        //全局注册组件
+        Vue.component('lwh',{
+            //template:'<div>{{value}}<button @click="fn(1)">click</button><button @click="fn(2)">click</button></div>',
+            template:'<div>{{result}}<button @click="fn(1)">click1</button><button @click="fn(2)">click2</button></div>',
+            props:{
+                //value:'String',
+                result:'String'
+            },
+            //v-model生成原来是@input和默认绑定的值是value 这里可以修改
+            model:{
+                prop:'result',
+                event:'dj'
+            },
+            data:function(){
+                return {
+                    //value:''
+                }
+            },
+            methods:{
+                fn:function(type){
+                    //this.$emit('input',type);
+                    this.$emit('dj',type);
+                }
+            },
+            watch:{
+                result:function(nv){
+                    console.log(nv,88);
+                }
+            }
+
+        });
+
+        //局部注册组件
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                aaa:'22222'
+            },
+            components:{
+
+            },
+            methods:{
+
+            }
+        });
+    </script>
+</body>
+</html>

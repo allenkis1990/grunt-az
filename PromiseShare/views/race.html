@@ -44,12 +44,12 @@
         <div class="col-md-10 rightContent">
             <span class="changeWindowBtn"><img style="width:25px;height:25px;" src="images/Category.png" /></span>
             <div id="content"></div>
-            <div>
-                <h2>运行结果：</h2>
-                <button type="button"
-                        onclick="fn()"
-                        class="btn btn-primary">运行结果</button>
-            </div>
+            <button type="button"
+                    onclick="race1()"
+                    class="btn btn-primary">race1</button>
+            <button type="button"
+                    onclick="demo()"
+                    class="btn btn-primary">demo</button>
         </div>
     </div>
 </div>
@@ -73,22 +73,53 @@
             return hljs.highlightAuto(code).value;
         }
     });
-    $.get('md/api.md').success(function(data){
+    $.get('md/race.md').success(function(data){
         //console.log(data);
         $('#content').html(marked(data));
         $('code').addClass('hljs');
         $('code').addClass('javascript');
     });
 
-
-    function fn(){
-        let p = new Promise(function(resolve,reject){
-            resolve('hahaha');
+    function race1(){
+        let p1 = new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve('p1');
+            },1000)
         })
-        p.then(function(data){
+        let p2 = new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve('p2');
+            },2000)
+        })
+        let p3 = new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve('p3');
+            },3000)
+        })
+        Promise.race([p1,p2,p3]).then(function(data){
             console.log(data);
         })
     }
+
+    function demo(){
+        let getData = new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve('data!!!!!');
+            },10000)
+        })
+        let timeoutHandler = new Promise(function(resolve,reject){
+            setTimeout(function(){
+                reject('超时!!!!!');
+            },5000)
+        })
+        Promise.race([getData,timeoutHandler]).then(function(data){
+            console.log(data);
+        }).catch(function(e){
+            console.log(e);//超时
+        });
+    }
+
+
 </script>
 </body>
 </html>

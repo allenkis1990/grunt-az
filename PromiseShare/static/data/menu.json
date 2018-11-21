@@ -23,6 +23,22 @@
     {
       "name":"catch",
       "path":"/catch"
+    },
+    {
+      "name":"all",
+      "path":"/all"
+    },
+    {
+      "name":"race",
+      "path":"/race"
+    },
+    {
+      "name":"resolve&reject",
+      "path":"/resolve&reject"
+    },
+    {
+      "name":"easyThen",
+      "path":"/easyThen"
     }
   ]
 }

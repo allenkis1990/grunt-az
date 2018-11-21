@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link href="css/tomorrow-night-blue.css" rel="stylesheet"/>
+    <link rel="icon" type="image/ico" href="favicon.ico"/>
+    <style>
+        html,body{
+            width:100%;height:100%;
+        }
+        img{width:100%;height:700px;}
+        .changeWindowBtn {
+            position: absolute;
+            left: -13px;
+            top: 0;
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            border-radius:3px;
+            background-color: #337ab7;
+            color: #fff;
+            cursor:pointer;
+        }
+        .left1{left:1px;}
+        .ml16pre{margin-left:-16.66666667%}
+        .width100Pre{width:100%;}
+        .leftContent{transition:all 0.5s;}
+        .rightContent{position:relative;transition:all 0.5s;}
+    </style>
+    <script src="js/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<!--<pre><code class="javascript">function aa(){alert(1);}</code></pre>-->
+<div class="container-fluid" style="height:100%;">
+    <div class="row" style="height:100%;">
+        <div class="col-md-2 leftContent" style="height:100%;">
+            <div class="list-group" style="height:100%;border:1px solid #ddd;margin-bottom:0">
+
+            </div>
+        </div>
+        <div class="col-md-10 rightContent">
+            <div id="content"></div>
+            <span class="changeWindowBtn"><img style="width:25px;height:25px;" src="images/Category.png" /></span>
+            <button type="button"
+                    onclick="all1()"
+                    class="btn btn-primary">all1</button>
+            <button type="button"
+                    onclick="all2()"
+                    class="btn btn-primary">all2</button>
+            <button type="button"
+                    onclick="demo1()"
+                    class="btn btn-primary">demo1</button>
+            <button type="button"
+                    onclick="demo2()"
+                    class="btn btn-primary">demo2</button>
+            <button type="button"
+                    onclick="demo3()"
+                    class="btn btn-primary">demo3</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/marked.min.js"></script>
+<script src="js/jquery-1.9.1.min.js"></script>
+
+<script>
+    $.get('data/menuCode.js').success(function(data){});
+
+    marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false,
+        highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+        }
+    });
+    $.get('md/all.md').success(function(data){
+        //console.log(data);
+        $('#content').html(marked(data));
+        $('code').addClass('hljs');
+        $('code').addClass('javascript');
+    });
+
+    function all1(){
+        let p1 = new Promise(function(resolve,reject){
+            resolve(1);
+        });
+        let p2 = new Promise(function(resolve,reject){
+            resolve(2);
+        });
+        let p3 = new Promise(function(resolve,reject){
+            resolve(3);
+        });
+        Promise.all([p1,p2,p3]).then(function(data){
+            console.log(data);
+        });
+    }
+
+    function all2(){
+        let p1 = new Promise(function(resolve,reject){
+            resolve(1);
+        });
+        let p2 = new Promise(function(resolve,reject){
+            reject(2);
+        });
+        let p3 = new Promise(function(resolve,reject){
+            resolve(3);
+        });
+        Promise.all([p1,p2,p3]).then(function(data){
+            console.log(data);//报错
+        }).catch(function(e){
+            console.log(e);//2
+        });
+    }
+
+    function demo1(){
+        let beginTime = new Date().getTime();
+        let a1 = new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve(['a1']);
+            },2000)
+        });
+        a1.then(function(list){
+            return new Promise(function(resolve,reject){
+                setTimeout(function(){
+                    list.push('a2');
+                    resolve(list);
+                },2000)
+            });
+        }).then(function(list){
+            return new Promise(function(resolve,reject){
+                setTimeout(function(){
+                    list.push('a3');
+                    resolve(list);
+                },2000)
+            });
+        }).then(function(data){
+            let useTime = new Date().getTime()-beginTime;
+            console.log(data);
+            console.log('请求共花费了:'+(useTime/1000)+'s');
+        })
+    }
+
+    function demo2(){
+        let list = [];
+        let beginTime = 0;
+        var watchObj={
+            count:0
+        };
+        function watch(parent,key,fn){
+            var v;
+            //count.aaa放到外面输出是undefined
+            v=parent[key]
+            fn(v);
+            Object.defineProperty(parent, key, {
+                get: function () {
+                    return v;
+                },
+                set: function (nv) {
+                    //如果值没有改变不触发fn函数
+                    if(v===nv){
+                        return nv;
+                    }
+                    var ov=parent[key];
+                    v=nv;
+                    fn(nv,ov);
+                    return nv;
+                }
+            });
+        }
+        watch(watchObj,'count',function(nv,ov){
+            //console.log(nv);
+            if(nv===3){
+                let useTime = new Date().getTime()-beginTime;
+                console.log(list);
+                console.log('请求共花费了:'+(useTime/1000)+'s');
+            }
+        });
+
+
+        function counter(){
+            beginTime = new Date().getTime();
+            setTimeout(function(){
+                list.push('a1');
+                watchObj.count++;
+            },2000);
+            setTimeout(function(){
+                list.push('a2');
+                watchObj.count++;
+            },2000);
+            setTimeout(function(){
+                list.push('a3');
+                watchObj.count++;
+            },2000);
+        }
+        counter();
+    }
+
+    function demo3(){
+        let a1 = new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve('a1');
+            },2000)
+        });
+        let a2 = new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve('a2');
+            },2000)
+        });
+        let a3 = new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve('a3');
+            },2000)
+        });
+        let beginTime = new Date().getTime();
+        Promise.all([a1,a2,a3]).then(function(list){
+            let useTime = new Date().getTime()-beginTime;
+            console.log(list);
+            console.log('请求共花费了:'+(useTime/1000)+'s');
+        });
+    }
+
+</script>
+</body>
+</html>

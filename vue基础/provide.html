@@ -5,28 +5,21 @@
     <title>Title</title>
     <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="js/vue.min.js"></script>
-    <style>
-        .red{color:red;}
-    </style>
 </head>
 <body>
 
     <div id="app">
-        <lwh class="red" :aaa="aaa" tt="1"></lwh>
-        <haha></haha>
+        <lwh></lwh>
     </div>
 
 
 
     <script>
 
-        //全局注册组件
-        Vue.component('lwh',{
-            inheritAttrs: false,
-            template:'<div v-bind="$attrs">666{{aaa}} {{this.$parent.aaa}}</div>',
-            props:['aaa']
-        });
 
+        /**
+         * 祖先提供provide提供给孙子用只要inject一下
+         */
         //局部注册组件
         var vm=new Vue({
             el:'#app',
@@ -34,8 +27,17 @@
                 aaa:'aaa'
             },
             components:{
-                'haha':{template:'<div>hahaha</div>'}
-            }
+                lwh:{
+                    template:'<button @click="fn()">click</button>',
+                    methods:{
+                        fn(){
+                            this.haha();
+                        }
+                    },
+                    inject:['a','haha']
+                }
+            },
+            provide:{a:3,haha:function(){alert(3)}}
         });
     </script>
 </body>

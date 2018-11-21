@@ -44,12 +44,12 @@
         <div class="col-md-10 rightContent">
             <span class="changeWindowBtn"><img style="width:25px;height:25px;" src="images/Category.png" /></span>
             <div id="content"></div>
-            <div>
-                <h2>运行结果：</h2>
-                <button type="button"
-                        onclick="fn()"
-                        class="btn btn-primary">运行结果</button>
-            </div>
+            <button type="button"
+                    onclick="fn('resolve')"
+                    class="btn btn-primary">resolve</button>
+            <button type="button"
+                    onclick="fn('reject')"
+                    class="btn btn-primary">reject</button>
         </div>
     </div>
 </div>
@@ -73,22 +73,55 @@
             return hljs.highlightAuto(code).value;
         }
     });
-    $.get('md/api.md').success(function(data){
+    $.get('md/easyThen.md').success(function(data){
         //console.log(data);
         $('#content').html(marked(data));
         $('code').addClass('hljs');
         $('code').addClass('javascript');
     });
 
+    function EasyPromise(promiseFn){
+        this.promiseFn = promiseFn;
+    }
+    EasyPromise.prototype.then = function(resolveCallback,rejectCallback){
+        let resolveFn=function(){};
+        let rejectFn=function(){};
+        this.status='pending';
+        if(resolveCallback&&this.status==='pending'){
+            resolveFn=resolveCallback;
+            this.status='fulfilled';//已完成
+        }
+        if(rejectCallback&&this.status==='pending'){
+            rejectFn = rejectCallback;
+            this.status='rejected';//已拒绝
+        }
+        this.promiseFn(resolveFn,rejectFn)
+    }
 
-    function fn(){
-        let p = new Promise(function(resolve,reject){
-            resolve('hahaha');
-        })
-        p.then(function(data){
+
+
+    function p (type){
+        return new EasyPromise(function(resolve,reject){
+            setTimeout(function(){
+                if(type==='resolve'){
+                    resolve('resolve!!!');
+                }
+                if(type==='reject'){
+                    resolve('reject!!!');
+                }
+            },2000)
+        });
+    }
+
+    function fn(type){
+        p(type).then(function(data){
             console.log(data);
+        },function(e){
+            console.log(e);
         })
     }
+
+
 </script>
 </body>
 </html>

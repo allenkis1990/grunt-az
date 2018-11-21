@@ -45,11 +45,26 @@
             <span class="changeWindowBtn"><img style="width:25px;height:25px;" src="images/Category.png" /></span>
             <div id="content"></div>
             <button type="button"
-                    onclick="demo1()"
-                    class="btn btn-primary">demo1</button>
+                    onclick="resolve1()"
+                    class="btn btn-primary">resolve1</button>
             <button type="button"
-                    onclick="demo2()"
-                    class="btn btn-primary">demo2</button>
+                    onclick="resolve2()"
+                    class="btn btn-primary">resolve2</button>
+            <button type="button"
+                    onclick="resolve3()"
+                    class="btn btn-primary">resolve3</button>
+            <button type="button"
+                    onclick="resolve4()"
+                    class="btn btn-primary">resolve4</button>
+            <button type="button"
+                    onclick="resolve5()"
+                    class="btn btn-primary">resolve5</button>
+            <button type="button"
+                    onclick="reject1()"
+                    class="btn btn-primary">reject1</button>
+            <button type="button"
+                    onclick="reject2()"
+                    class="btn btn-primary">reject2</button>
         </div>
     </div>
 </div>
@@ -73,42 +88,74 @@
             return hljs.highlightAuto(code).value;
         }
     });
-    $.get('md/catch.md').success(function(data){
+    $.get('md/resolve&reject.md').success(function(data){
         //console.log(data);
         $('#content').html(marked(data));
         $('code').addClass('hljs');
         $('code').addClass('javascript');
     });
 
-    function demo1(){
-        function fn() {
-            return new Promise(function (resolve, reject) {
-                reject('reject!!!');
-            });
-        }
 
-        fn().catch(function (e) {
+    function resolve1(){
+        let getData = $.ajax('data/menu.json');
+        let p=Promise.resolve(getData);
+        p.then(function(data){
+            console.log(data);
+        })
+    }
+
+    function resolve2(){
+        let pObj = new Promise(function(resolve,reject){
+            resolve('resolve!!!');
+        })
+        let p=Promise.resolve(pObj);
+        p.then(function(data){
+            console.log(data);//resolve!!!
+        })
+    }
+
+    function resolve3(){
+        let thenable = {
+            then:function(resolve,reject){
+                resolve('11111');
+            }
+        }
+        let p=Promise.resolve(thenable);
+        p.then(function(data){
+            console.log(data);//111111
+        })
+    }
+    function resolve4(){
+        let str = 'abc';
+        let p=Promise.resolve(str);
+        p.then(function(data){
+            console.log(data);//abc
+        })
+    }
+    function resolve5(){
+        let p=Promise.resolve();
+        p.then(function(data){
+            console.log(data);//undefined
+        })
+    }
+
+    function reject1(){
+        let p=Promise.reject('出错了');
+        p.catch(function(e){
             console.log(e);
         })
     }
-
-    function demo2(){
-        function fn(){
-            return new Promise(function(resolve,reject){
-                console.log(a);
-                resolve('resolve!!!');
-            });
+    function reject2(){
+        let thenable = {
+            then:function(resolve,reject){
+                reject('reject!!!');
+            }
         }
-        fn().then(function(){
-
-        },function(data){
-            console.log(data);//运行抛出的错误这里接收不到
-        }).catch(function(e){
-            console.log(e);//ReferenceError: a is not defined
+        let p=Promise.resolve(thenable);
+        p.catch(function(e){
+            console.log(e);//reject!!!
         })
     }
-
-
 </script>
 </body>
 </html>
