@@ -60,5 +60,5 @@ app.get('/shit',function(req,res){
 });
 
 
-app.listen(8080,'192.168.0.109');
+app.listen(8080,'192.168.28.250');
 

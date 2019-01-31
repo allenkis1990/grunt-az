@@ -8,28 +8,14 @@
 
 
 <script>
-    function accAdd(arr){
-        var obj={};
-        var m;
-        for(var i=0;i<arr.length;i++){
-            obj['a'+i]=arr[i];
-            try{obj['a'+i]=arr[i].toString().split(".")[1].length}catch(e){obj['a'+i]=0}
-        }
-
-        Array.prototype.max = function () {
-            return Math.max.apply(Math,
-                    this);
-        }
-
-        m=Math.pow(10,arr.max());
-        var result=null;
-        for(var j=0;j<arr.length;j++){
-            result+=arr[j]*m;
-        }
-        return result/m;
+    var script = document.createElement('script')
+    script.src='js/jquery-1.9.1.min.js';
+    script.type = 'text/javascript';
+    document.documentElement.appendChild(script)
+    script.onload = function () {
+        alert($);
     }
-
-    /*alert(accAdd([0.01, 0.01,5, 0.01,0.01,0.01,0.02]));*/
+    document.head.appendChild(script)
 
 </script>
 </body>

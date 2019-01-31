@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="fn('http://www.baidu.com')">百度</button>
+<button onclick="fn('http://www.163.com')">163</button>
+<script>
+    let windowArr = []
+    function fn(url){
+        var popup = window.open('about:blank', '_blank');  //先发起弹窗（因为是用户触发，所以不会被拦截）
+        popup.document.write('<h2>加载中...</h2>');
+        popup.location = url
+        if(windowArr.length){
+            windowArr.shift().close()
+        }
+        setTimeout(function(){
+            windowArr.push(popup)
+        })
+    }
+</script>
+</body>
+</html>

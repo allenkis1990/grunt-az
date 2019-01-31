@@ -2284,7 +2284,7 @@
                 // 只压缩 jpeg 图片格式。
                 // gif 可能会丢失针
                 // bmp png 基本上尺寸都不大，且压缩比比较小。
-                if ( !opts || !~'image/jpeg,image/jpg'.indexOf( file.type ) ||
+                if ( !opts || !~'image/jpeg,image/jpg,image/png,image/bmp'.indexOf( file.type ) ||
                         file.size < compressSize ||
                         file._compressed ) {
                     return;

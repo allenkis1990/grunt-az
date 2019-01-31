@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html{font-size:100px;}
+        body{font-size:50px;}
+    </style>
+</head>
+<body>
+<div style="height:1rem;width:100%;background:blue"></div>
+<script>
+let str =  `123<lwhView>
+                <button class="lwhView">lwhLoaderView!!!</button>
+            </lwhView>`
+//let str = '<lwhView>77777</lwhView>'
+//let viewReg = /<\/?lwhView.+?>/g
+var viewReg=/<\/?lwhView[^>]*>/g;
+let c = getTagContent('lwhView',str)
+console.log(c,1111);
+
+function getTagContent(tagName,source){
+    let reg = new RegExp('</?'+tagName+'[^>]*>','ig')
+    let cur;
+//console.log(str.match(viewReg));
+    let resultArr = []
+    while(cur=reg.exec(source)){
+        resultArr.push({execArr:cur,execLastIndex:reg.lastIndex})
+    }
+    console.log(source);
+    console.log(resultArr);
+    if(resultArr.length){
+        if(resultArr.length>2){
+            throw new Error(tagName+'标签只能有一对')
+        }
+        let sliceStart = resultArr[0].execLastIndex
+        let sliceEnd = resultArr[1].execArr.index
+//    console.log(sliceEnd);
+        let content = source.slice(sliceStart,sliceEnd)
+        return content.trim()
+//        console.log(content.trim());
+    } else{
+        throw new Error('必须创建一对'+tagName+'标签')
+    }
+}
+
+</script>
+</body>
+</html>

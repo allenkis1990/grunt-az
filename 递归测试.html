@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let obj = {
+        value:1,
+        obj:{
+            value:2,
+            obj:{
+                value:3,
+                obj:{
+                    value:4
+                }
+            }
+        }
+    }
+    var sum = 0
+    function dg(obj){
+        sum+=obj.value
+        if(obj.obj){
+            dg(obj.obj)
+        }
+    }
+    dg(obj);
+    console.log(sum);
+
+
+    var mReg = /\s\d{2}:\d{2}:\d{2}$/ig
+    console.log('2019-01-01 20:20:20'.match(mReg),99);
+    console.log('2019-01-01 20:20:20'.replace(mReg,''));
+</script>
+</body>
+</html>

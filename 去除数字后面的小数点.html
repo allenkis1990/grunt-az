@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function clearZero(num) {
+        let numArr = num.split('.')//[16,02330]
+        if (numArr.length&&numArr.length === 2) {
+            let reg = /0+$/
+            let integeNum = numArr[0]
+            let floatNum = numArr[1]
+            floatNum = floatNum.replace(reg, '')
+            if(floatNum){
+                return integeNum+'.'+floatNum
+            } else {
+                return integeNum
+            }
+        }else if(numArr.length&&numArr.length === 1){
+            return num
+        } else {
+            return 0
+        }
+    }
+    let num = clearZero('16.0001')
+    console.log(num);
+
+</script>
+</body>
+</html>

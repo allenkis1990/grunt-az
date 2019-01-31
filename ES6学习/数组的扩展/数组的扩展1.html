@@ -50,17 +50,17 @@
 
 
     //循环数组
-    var arr = [{name:"allen"},{name:'jack'}];
-    //console.log(arr.keys());
-    for (let key of arr.keys()) {
-        console.log(key);// 0,1
-    }
-    for (let value of arr.valueOf()) {
-        console.log(value);//{name:"allen"},{name:'jack'}
-    }
-    for (let [key,value] of arr.entries()) {
-        console.log(key,value);//0{name:"allen"} 1{name:'jack'}
-    }
+//    var arr = [{name:"allen"},{name:'jack'}];
+//    //console.log(arr.keys());
+//    for (let key of arr.keys()) {
+//        console.log(key);// 0,1
+//    }
+//    for (let value of arr.valueOf()) {
+//        console.log(value);//{name:"allen"},{name:'jack'}
+//    }
+//    for (let [key,value] of arr.entries()) {
+//        console.log(key,value);//0{name:"allen"} 1{name:'jack'}
+//    }
 
 
     //for of还能直接像这样循环数组用输出a b
@@ -68,6 +68,11 @@
 //        console.log(key);
 //    }
 
+    let arr= [{name:'allen'}]
+    let item = arr.find((item)=>{
+        return item.name==='allen'
+    })
+    console.log(item);
 </script>
 </body>
 </html>

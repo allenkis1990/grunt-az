@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let factories = {};
+    function define(modName, dependencies, factory) {
+        //b的依赖a
+        factory.dependencies = dependencies;
+        //b:function
+        factories[modName] = factory;
+    }
+    function require(modNames, callback) {
+        let loadedModNames = modNames.map(function (modName) {
+            let factory = factories[modName];//function b
+            let dependencies = factory.dependencies;//b的依赖['a']
+            //第一次是undefined
+            let exports;
+            //['a']
+            require(dependencies, function (...dependencyMods) {
+                //递归里面处理require(['a'])的返回值传给require(['b'])
+//                console.log(dependencyMods);
+                exports = factory.apply(null, dependencyMods);//dependencyMods = ['a'] exports = return a+'b';
+//                console.log(exports);
+            });
+            return exports;
+        })
+        console.log(loadedModNames);
+//        //loadedModNames = ['ab']
+        callback.apply(null, loadedModNames);
+    }
+
+    define('a', [], function () {
+        return 'a';
+    });
+    define('b', ['a'], function (a) {
+        return a+'b';
+    });
+//    执行三次 第一次找b 第二次找d的依赖['a'] 第三次找a的依赖[]
+    require(['b'], function (b) {
+//        console.log(b);
+    });
+</script>
+</body>
+</html>

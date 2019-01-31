@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="format-detection" content="telephone=yes"/>
     <title>Title</title>
 </head>
 <body>
 111111
+<button onclick="fn('968823')">click</button>
 <script src="../../js/jquery-1.9.1.js">
 
 </script>
@@ -18,6 +19,24 @@
 
         }
     });
+
+    function fn(telNum){
+        if(!document.getElementById("telTag")){
+            let telTag = document.createElement('a')
+            telTag.href = 'tel:'+telNum
+            telTag.id = 'telTag'
+            telTag.style = 'display: none'
+            document.documentElement.appendChild(telTag)
+            let e = document.createEvent("MouseEvents");
+            e.initEvent("click", true, true);　　　　　　　　　　　　　　//这里的click可以换成你想触发的行为
+            document.getElementById("telTag").dispatchEvent(e);　　　//这里的clickME可以换成你想触发行为的DOM结点
+        } else {
+            let e = document.createEvent("MouseEvents");
+            e.initEvent("click", true, true);　　　　　　　　　　　　　　//这里的click可以换成你想触发的行为
+            document.getElementById("telTag").dispatchEvent(e);　　　//这里的clickME可以换成你想触发行为的DOM结点
+        }
+    }
+
 </script>
 </body>
 </html>

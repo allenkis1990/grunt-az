@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let modules = {
+        rules:[
+            {
+                test:/\.less$/,
+                use:[
+                    {
+                        loader:'css-loader',
+                        fn(content){
+                            return content+1;
+                        }
+                    },
+                    {
+                        loader:'less-loader',
+                        fn(content){
+                            return content;
+                        }
+                    }
+                ]
+            },
+            {
+                test:/\.sass/,
+                use:[
+                    {
+                        loader:'css-loader',
+                        fn(content){
+                            return content+1;
+                        }
+                    },
+                    {
+                        loader:'sass-loader',
+                        fn(content){
+                            return content;
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    for(let i = 0;i<modules.rules.length;i++){
+        let reg = modules.rules[i].test
+        let rule = modules.rules[i].use
+        let len = rule.length-1
+        let fnReturn
+        function digui(){
+            let fn = rule[len--]
+            if(fnReturn){
+                fnReturn = fn.fn(fnReturn)
+            } else {
+                fnReturn = fn.fn('haha')
+            }
+            console.log(fnReturn);
+            if(len>=0){
+                digui()
+            }
+        }
+        digui()
+    }
+</script>
+</body>
+</html>

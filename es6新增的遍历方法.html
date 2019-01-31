@@ -29,11 +29,11 @@
     filter();//[1,2,3]
 
 
-    //前后两两相加 最后输出最后结果
+    //前后两两相加 最后输出最后结果 第二个参数2为初始值
     function reduce(){
         var result=arr.reduce(function(result,item,index,arr){
             return result+item;
-        });
+        },2);
         console.log(result);
     }
     reduce();
@@ -78,6 +78,7 @@
 
     }
     objectAssign();
+
 
 
 </script>

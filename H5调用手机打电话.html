@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="format-detection" content="telephone=yes"/>
+    <title>Title</title>
+</head>
+<body>
+<a style="display: none" href="tel:1234" id="clickMe">1234</a>
+<button onclick="fn()">click</button>
+<script>
+    function fn(){
+        var e = document.createEvent("MouseEvents");
+        e.initEvent("click", true, true);　　　　　　　　　　　　　　//这里的click可以换成你想触发的行为
+        document.getElementById("clickMe").dispatchEvent(e);　　　//这里的clickME可以换成你想触发行为的DOM结点
+    }
+</script>
+</body>
+</html>

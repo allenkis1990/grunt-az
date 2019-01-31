@@ -13,10 +13,20 @@
 
 <script src="../../js/jquery-1.9.1.js" type="text/javascript"></script>
 <script type="text/javascript">
-
+    function mainBase64(file){
+        var fileReader, imgData;
+        fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = function () {
+            imgData = this.result; //base64数据
+            console.log(imgData,'base64');
+        }
+    }
     function fn(){
         var formData=new FormData();
         var file=$('input[type=file]')[0].files[0];
+        mainBase64(file);
+        console.log(file);
         formData.append('file',file);
         formData.append('name','allen');
         formData.append('age',18);
@@ -42,6 +52,22 @@
             }
         });
     },10000);
+
+
+//    $http({
+//        url:"/aaaa",
+//        method:'POST',
+//        headers:{
+//            'Content-Type':undefined
+//        },
+//        transformRequest: function () {
+//            var formData=new FormData();
+//
+//            formData.append('name','allen');
+//            formData.append('age',18);
+//            return formData;
+//        }
+//    })
 </script>
 </body>
 </html>
