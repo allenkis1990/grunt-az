@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="password"
+       ng-required="true"
+       name="psw"
+       ng-pattern="/^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z\\W_!@#$%^&*`~()-+=]+$)(?![a-z0-9]+$)(?![a-z\\W_!@#$%^&*`~()-+=]+$)(?![0-9\\W_!@#$%^&*`~()-+=]+$)[a-zA-Z0-9\\W_!@#$%^&*`~()-+=]{9,}$/"
+       ng-model="model.registInfo.psw"
+       class="ui-ipt iptform"
+       placeholder="密码应大于8位数至少包含三种：数字、大小写英文、特殊符号">
+<input type="password" ng-required="true" name="password"
+       ng-pattern="/^(?!^\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]{6,18}$/"
+       ng-model="model.registInfo.password"
+       class="ui-ipt iptform" placeholder="请输入6~18位由字母、数字组合的登录密码">
+<input type="text"
+       ng-required="true"
+       name="idNum"
+       ng-pattern="/(^\d{6}(19|20)(\d{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])\d{3}([0-9]|X|x)$)/"
+       ng-model="model.registInfo.idNum" class="ui-ipt iptform"
+       placeholder="请填写18位身份证号">
+</body>
+</html>

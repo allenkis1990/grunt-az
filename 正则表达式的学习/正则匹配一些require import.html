@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let requireReg = /require.*?\(.*?\)/g
+    let requireStr = `require('jquery');require('../js/aa.js')`
+    console.log(requireStr.match(requireReg));
+
+
+    let importReg = /import.*?from.*?('|").*?('|")/g
+//    let importReg = /import.*?\n.*?/g
+    let importStr = `import xx from 'kkkk'aasas   import xx from "jquery"`
+    console.log(importStr.match(importReg));
+</script>
+</body>
+</html>

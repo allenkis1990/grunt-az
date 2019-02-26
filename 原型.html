@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    //一旦构造函数return一个对象出去了外面就拿不到构造函数里面的this和prototype了只能拿到这个对象的构造函数和属性
+    function Fn(){
+        return this.init()
+    }
+    Fn.prototype.init=function(){
+        return {
+            name:this.a
+        }
+    }
+    Fn.prototype.a =1
+    let obj = new Fn()
+    console.log(obj);
+</script>
+</body>
+</html>
