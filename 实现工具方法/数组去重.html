@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+//    arr.reduce方法
+    function reduce(arr,fn,init){
+        if(!arr.length){
+            return []
+        }
+        //如果init有那么数组就取下标0到结尾（完整）  如果init没有那么数组就取下标1到结尾
+        let pre = init!==undefined?init: arr[0]
+        let oArr = init!==undefined?arr.slice(0,arr.length):arr.slice(1,arr.length)
+        let result
+        oArr.forEach((next)=>{
+            result = fn(pre,next);
+            pre = result;
+        })
+        return result
+    }
+    let res = reduce([1,2,3,3,4],function(pre,next){
+        pre.indexOf(next)===-1&&pre.push(next)
+        return pre
+//        return Math.max(pre,next);
+    },[])
+    console.log(res);
+
+</script>
+</body>
+</html>
