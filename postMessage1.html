@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--我是父窗口-->
+<div class="parent" >
+    <iframe src="http://localhost:63342/grunt-az/postMessage2.html?_ijt=inc3pk3on13rri2uimuamr3bju" id="iframe"></iframe>
+</div>
+<script>
+    //监听子窗口信息
+    window.addEventListener('message',function(event){
+
+    })
+    //父窗口给子窗口发消息，
+    setTimeout(function(){
+        document.getElementById('iframe').contentWindow.postMessage('msg','http://localhost:63342/grunt-az/postMessage2.html?_ijt=inc3pk3on13rri2uimuamr3bju');
+    },2000)
+
+</script>
+</body>
+</html>

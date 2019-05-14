@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Vue(options){
+        this.data = options.data;
+        Object.keys(this.data).forEach((key)=>{
+            this.proxyKeys(key);
+        })
+    }
+    Vue.prototype.proxyKeys=function(key){
+        let _this = this;
+        Object.defineProperty(this, key, {
+            //初始化的时候把this.data里的所有key都代理到this上面
+                get: function () {
+                    return _this.data[key];
+                },
+                set: function (nv) {
+                    _this.data[key] = nv;
+                }
+        //            configurable:true,
+        //            enumerable:true
+            });
+    }
+    var vm = new Vue({
+        data:{
+            a:'a',
+            b:'b'
+        }
+    });
+    //改变了this的a this.data.a也跟着改变
+    vm.a='ccc'
+    console.log(vm);
+</script>
+</body>
+</html>

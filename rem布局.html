@@ -19,10 +19,13 @@
 
 
 
-        .aaa{width:1rem;height:100px;background:red;}
+        /*.aaa{width:1rem;height:100px;background:red;}*/
     </style>
     <script>
         document.documentElement.style.fontSize=(document.documentElement.clientWidth/750)*100+'px';
+        window.addEventListener('resize',function(){
+            document.documentElement.style.fontSize=(document.documentElement.clientWidth/750)*100+'px';
+        })
         console.log(document.documentElement.style.fontSize);
     </script>
 </head>
@@ -35,7 +38,7 @@
 </section>
 
 
-<div class="aaa"></div>
+<!--<div class="aaa"></div>-->
 
 </body>
 </html>

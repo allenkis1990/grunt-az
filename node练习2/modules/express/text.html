@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="format-detection" content="telephone=yes"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="/text.css">
+</head>
+<body onload="fn()">
+<img src="/a1.png">
+<script src="../../js/jquery-1.9.1.js">
+
+</script>
+<script>
+    function  fn() {
+        console.log('bodyLoad');
+    }
+    document.addEventListener('DOMContentLoaded',function(){
+        console.log('DOMLoad');
+    })
+
+    window.onload=function(){
+        console.log('windowLoad');
+    }
+    $(function(){
+        console.log('ready');
+    })
+
+</script>
+</body>
+</html>

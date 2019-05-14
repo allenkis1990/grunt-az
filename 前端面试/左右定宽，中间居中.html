@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+/*
+        写一个左中右布局占满屏幕，其中左右两块是固定宽度200 ，中间自适应宽，要求先加载中间块，请写出结构及样式：
+*/
+        html,body {
+            margin: 0px;
+            width: 100%;
+        }
+        h3 {
+            height: 100px;
+            margin:20px 0 0;
+        }
+        #left,#right {
+            width: 200px;
+            height: 200px;
+            background-color: #ffe6b8;
+            position: absolute;
+            top: 170px;
+        }    
+        #left{
+            left:0px;
+        }
+        #right {
+            right:0px;
+        }
+        #center {
+            margin:2px 210px;
+            background-color: #eee;
+            height: 200px;
+        }
+
+          
+    </style>
+</head>
+ 
+<body>  
+
+<h3>实现三列宽度自适应布局</h3>  
+
+        
+<div id="left">我是左边</div>  
+
+        
+<div id="right">我是右边</div>  
+
+        
+<div id="center">我是中间</div>  
+
+</body>
+  
+
+</html>

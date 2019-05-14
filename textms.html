@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*function mo(){
+        var x = 0,y=1;
+        return function(){
+            x++;
+            y++;
+            console.log(x*y)
+        }
+    }
+    var a = mo();
+    var b = mo();
+    a();
+    a();*/
+
+//    var arr = [{name:'allen'},[{name:'jack'},[{name:'tom'}]]]
+//
+//    function dg(pre,cur){
+//        if(Array.isArray(cur)){
+//            cur.forEach(function(item){
+//                dg(pre,item)
+//            })
+//        } else {
+//            pre.push(cur);
+//        }
+//        return pre;
+//    }
+//    var newArr = arr.reduce(dg,[])
+//    console.log(newArr);
+
+//    console.log(Array.prototype);
+
+
+    var obj = {
+        name:'allen',
+        fn(){
+            this.a = '1'
+            console.log(this)
+        }
+    }
+    obj.fn();
+
+</script>
+</body>
+</html>

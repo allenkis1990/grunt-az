@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var obj = {name:'allen',age:18}
+    Object.keys(obj).forEach((key)=>{
+        var o={};
+        Object.defineProperty(obj,key,{
+            enumerable:true,
+            configurable:false,
+            get(){
+                debugger
+                return o[key]
+            },
+            set(nv){
+                if(o[key]!==nv){
+                    debugger
+                    o[key] = nv;
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>

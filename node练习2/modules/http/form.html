@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+
 <div id="clock"></div>
 <form name="form" onsubmit="return false">
     <ul>
@@ -32,9 +33,13 @@
         var file=$('input[type=file]')[0].files[0];
         var userName=$('input[name=userName]').val();
         var age=$('input[name=age]').val();
+        console.log(file);
         formData.append('file',file);
-        formData.append('name',userName);
-        formData.append('age',age);
+        formData.append('size',file.size);
+        formData.append('name',file.name);
+        formData.append('type',file.type);
+//        formData.append('name',userName);
+//        formData.append('age',age);
         console.log(formData);
         $.ajax({
             url:'/postDo',

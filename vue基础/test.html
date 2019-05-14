@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body >
+
+<div id="app">
+    <test :list="arr"></test>
+
+     <hr>
+    <fuck :list="arr"></fuck>
+</div>
+
+
+
+<script>
+    new Vue({
+        el:'#app',
+        created(){
+            setTimeout(()=>{
+                this.arr = [{name:'allen'},{name:'jack'},{name:'tom'}]
+            })
+//            import(/* webpackChunkName: "portal/chunk/test3" */'@portal/views/test3/test3.vue')
+        },
+        data:{
+            arr:[]
+        },
+        methods:{
+            fn:function(){
+            }
+        },
+        components:{
+            test:{
+                data(){
+                    return {
+                        innerList:[]
+                    }
+                },
+                template:'<div><div v-for="(item,index) in innerList" v-text="item.name"></div><button @click="pop()">pop</button></div>',
+                props:{
+                    list:{
+                        type:Array
+                    }
+                },
+                methods:{
+                    pop:function(){
+                        this.innerList.pop()
+                        console.log(this.list,123);
+                    }
+                },
+                watch:{
+                    list:{
+                        handler:function(nv,ov){
+                            if(nv&&nv.length){
+                                this.innerList = nv;
+                                console.log(nv);
+                            }
+                        },
+                        deep:true,
+                        immediate:true
+                    }
+                },
+                mounted(){
+//                    console.log(this.list);
+                }
+            },
+            fuck:{
+                data(){
+                    return {
+                    }
+                },
+                template:'<div><div v-for="(item,index) in list" v-text="item.name"></div></div>',
+                props:{
+                    list:{
+                        type:Array
+                    }
+                },
+                methods:{
+                }
+            }
+        }
+    });
+    //console.log(v);
+</script>
+</body>
+</html>

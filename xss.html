@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<textarea class="te"></textarea>
+<button onclick="fn()">发送</button>
+<div class="box"></div>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script>
+    function fn(){
+        var value = $('.te').val();
+        $('.box').html(value)
+    }
+</script>
+</body>
+</html>

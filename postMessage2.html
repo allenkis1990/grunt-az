@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--我是子窗口-->
+<div class="child">11111111111</div>
+<script>
+    //子窗口给父窗口发消息
+//    try {//放到trycatch里面，解决有些手机卡住报错问题
+//        window.top.postMessage(msg,'父窗口源');
+//        //嵌套一层使用window.top(parent),多层window.frameElement
+//        //使用top而不是window，top指向iframe最顶层窗口
+//    } catch (error) {
+//
+//    }
+
+    //监听父窗口信息
+    window.addEventListener('message',function(event){
+        setTimeout(function(){
+            document.write(2)
+            console.log(event)
+        },2000)
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form name="a">
+    <select name="a" size="1" id='obj'>
+        <option value="a">哈哈</option>
+        <option value="b">呵呵</option>
+        <option value="c">嘿嘿</option>
+    </select>
+</form>
+<script>
+    var select = document.getElementById('obj');
+//    console.log(select.selectedIndex=2);
+    console.log(select.options[select.selectedIndex].text);
+    console.log(select.options[select.selectedIndex].value);
+</script>
+</body>
+</html>

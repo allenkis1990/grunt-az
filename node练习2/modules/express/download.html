@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+hello world
+
+<button onclick="download()">下载html</button>
+<button onclick="preview()">预览</button>
+<script>
+    function download(){
+        window.open('/loadFile?loadType=download')
+    }
+    function preview(){
+        window.open('/loadFile?loadType=preview')
+    }
+</script>
+</body>
+</html>

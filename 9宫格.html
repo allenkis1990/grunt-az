@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html *{margin:0;padding:0;box-sizing:border-box;}
+    </style>
+</head>
+<body>
+
+<section class="flex">
+    <style>
+        .flex .art{display:flex;width:300px;margin:30px auto;flex-wrap: wrap;}
+        .flex .row {
+            width: 100px;
+            height: 100px;
+            border: 4px solid #666;
+            text-align: center;
+            line-height: 100px;
+            margin-left:-4px;
+            margin-top:-4px;
+        }
+        .flex .row:nth-child(1),.flex .row:nth-child(2),.flex .row:nth-child(3){margin-top:0;}
+        .flex .row:nth-child(3n+1){margin-left:0;}
+        .flex .row:hover{border:4px solid red;z-index:1;}
+    </style>
+    <article class="art">
+        <div class="row">1</div>
+        <div class="row">2</div>
+        <div class="row">3</div>
+        <div class="row">4</div>
+        <div class="row">5</div>
+        <div class="row">6</div>
+        <div class="row">7</div>
+        <div class="row">8</div>
+        <div class="row">9</div>
+    </article>
+</section>
+
+<section class="gird">
+    <style>
+        .gird .art{display:table;width:300px;margin:30px auto;}
+        .gird .column{display:table-row;height:100px;}
+        .gird .row{display:table-cell;width:100px;border:1px solid red;}
+    </style>
+    <article class="art">
+        <div class="column">
+            <div class="row">1</div>
+            <div class="row">2</div>
+            <div class="row">3</div>
+        </div>
+        <div class="column">
+            <div class="row">4</div>
+            <div class="row">5</div>
+            <div class="row">6</div>
+        </div>
+        <div class="column">
+            <div class="row">7</div>
+            <div class="row">8</div>
+            <div class="row">9</div>
+        </div>
+    </article>
+</section>
+<script>
+
+    var arr = Array.from(document.querySelector('.flex').attributes)
+    console.log(arr);
+    console.log(document.querySelector('.flex').attributes);
+
+
+    function A(){
+        this.fav='study'
+        this.name = 'A'
+    }
+
+    A.prototype.hahah= '1111'
+
+    function B(parentFn){
+        parentFn.call(this)
+        this.name='B'
+    }
+
+    function extentPrototype(parentFn,childFn){
+        function Temp(){
+
+        }
+        Temp.prototype = parentFn.prototype
+        childFn.prototype = new Temp()
+        childFn.constructor = childFn
+    }
+
+    extentPrototype(A,B)
+
+
+    B.prototype.fuck=121212
+
+    var b = new B(A)
+    console.log(b);
+
+    var a = new A()
+    console.log(a);
+
+</script>
+</body>
+</html>

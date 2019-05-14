@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*清除浮动：
+        1.父元素设置zoom:1;overflow:hidden; 无缺点
+        2.也可在父元素上设置:after clear:both;缺点：不兼容ie8
+        3.给父元素加固定的高 缺点：麻烦，死板
+        4.在浮动元素的下面加一个div然后设置clear:both;缺点：空白div太多麻烦*/
+        .left,.right{
+            height:200px;
+            width:300px;
+            background:red;
+        }
+        .left{float:left;}
+        .right{float:right;}
+        .clear{zoom: 1;overflow:hidden;}
+        /*.clear:after{
+            content:'';
+            height:0;
+            display:block;
+            clear: both;
+            overflow:hidden;
+            visibility:hidden;
+        }*/
+    </style>
+</head>
+<body>
+<div class="clear">
+    <div class="left">left</div>
+    <div class="right">right</div>
+</div>
+<div>content!!</div>
+</body>
+</html>

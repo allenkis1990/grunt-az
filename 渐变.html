@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html *{margin:0;padding:0;}
+        em{display:inline-block;height:100%;transition: all 1s;}
+        .progress{width:600px;height:30px;border:1px solid #ddd;margin:400px auto;}
+        em{background:-webkit-linear-gradient(50deg,#00ff00 25%, #00ff00 25%, #00ffff 50%, #00ffff 50%,  #00ff00 75%, #00ff00 75%);
+           background-size:30px 30px;
+            animation: loadingMove 1s linear infinite both;
+        }
+        @keyframes loadingMove {
+            0%{background-position: 0 30px}
+            100%{background-position: 0 0}
+        }
+    </style>
+</head>
+<body>
+<div class="progress">
+    <em class="progressEm" style="width:0%;"></em>
+</div>
+<script>
+    window.addEventListener('load',function(){
+        document.querySelector('.progressEm').style.width = '100%';
+    })
+</script>
+</body>
+</html>
