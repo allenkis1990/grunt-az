@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li class="a1">1</li>
+    <li class="a2">2</li>
+    <li class="a3">3</li>
+</ul>
+<script>
+    var div = document.createElement('div')
+    var div2 = document.createElement('div')
+    div.appendChild(div2)
+    div2.outerHTML = '<li class="a4">4</li><li class="a5">5</li><li class="a6">6</li>'
+    var ul = document.querySelector('ul')
+    console.log(div.childNodes);
+    Array.from(div.childNodes).forEach(function(i){
+        console.log(i);
+        ul.appendChild(i)
+    })
+    //    div.outerHTML = '<div>123</div>'
+</script>
+</body>
+</html>

@@ -34,7 +34,7 @@ app.get('/',function(req,res){
 var server=http.createServer(app);
 var io=require('socket.io')(server);
 
-server.listen('8888','192.168.0.109');
+server.listen('8888','192.168.28.248');
 
 //所有进入聊天室的用户存在这个数组里
 var clientsArr=[];

@@ -12,6 +12,11 @@
         var e = document.createEvent("MouseEvents");
         e.initEvent("click", true, true);　　　　　　　　　　　　　　//这里的click可以换成你想触发的行为
         document.getElementById("clickMe").dispatchEvent(e);　　　//这里的clickME可以换成你想触发行为的DOM结点
+
+
+
+//        var e = new Event('click', {bubbles:false, cancelable:true})
+//        document.getElementById("clickMe").dispatchEvent(e)
     }
 </script>
 </body>
