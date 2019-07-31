@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{padding:0;margin:0;list-style-type: none;}
+        .list{padding:10px 0 0 10px;}
+        .list li{margin-bottom:10px;}
+    </style>
+</head>
+<body>
+<ul class="list">
+    <li>姓名：<input type="text"></li>
+    <li>年龄：<input type="number"></li>
+    <li>性别：<input type="radio" name="sex">男  <input type="radio" name="sex">女</li>
+    <li>头像：<input type="file" id="file"></li>
+    <li>爱好：<input type="text"></li>
+    <li><button id="print">打印PDF</button></li>
+    <li style="color:red;" id="errorTip"></li>
+</ul>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    var btn = document.getElementById('print')
+    var errTip = document.getElementById('errorTip')
+    btn.addEventListener('click',function() {
+        var file = document.getElementById('file')
+        if (!file.files.length) {
+            errTip.innerHTML = '请上传头像'
+            return false
+        }
+        var curFile = file.files[0]
+        if (curFile.size / 1024 > 100) {
+            errTip.innerHTML = '请上传小于100KB的图片'
+            return false
+        }
+        var fileNameArr = curFile.name.split('.')
+        if (fileNameArr.length > 1) {
+            var fileExt = fileNameArr[fileNameArr.length - 1]
+            if (!/^(jpg|png|jepg)$/ig.test(fileExt)) {
+                errTip.innerHTML = '请上传jpg,png格式的图片'
+                return false
+            }
+        } else {
+            errTip.innerHTML = '请上传jpg,png格式的图片'
+            return false
+        }
+        console.log('ok')
+        console.log(file.files[0]);
+        errTip.innerHTML = ''
+
+        var params = new FormData()
+        params.append('file', file.files[0])
+        params.append('a', 'a')
+        $.ajax({
+            url:"/print",
+            type:"POST",
+            data:params,
+            processData:false,
+            contentType:false,
+            success:function (data) {
+
+            }
+        })
+    })
+</script>
+</body>
+</html>
