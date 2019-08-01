@@ -26,27 +26,16 @@ function onData(req,cb) {
     });
     form.parse(req);
 }
-function getImgBase64(filePath,mt){
+function getFileBase64(filePath,mt){
     let data = fs.readFileSync(filePath);
     data = new Buffer(data).toString('base64');
     let base64 = 'data:' + (mt?mt:mineType.lookup(filePath)) + ';base64,' + data;
     return base64
 }
 
-var tempStr = template(tempPath,{
-    data:{name:'art-template'},
-    list:[
-        {name:'allen',age:18,red:true},
-        {name:'jack',age:20,red:false},
-        {name:'tom',age:22,red:false}
-    ],
-    imgPath:getImgBase64('static/images/bg1.jpg')
-})
 
-
-
-var staticPath = path.resolve(__dirname,'static')
-app.use(express.static(staticPath));
+// var staticPath = path.resolve(__dirname,'static')
+// app.use(express.static(staticPath));
 
 
 var indexPath = path.resolve(__dirname,'./index.html')
@@ -54,23 +43,38 @@ app.get('/',function(req,res){
     res.sendFile(indexPath)
 })
 
+app.get('/preview/*',function(req,res){
+    // console.log(req.url);
+    var pathArr = req.url.split('/')
+    var fileName =decodeURI(pathArr[pathArr.length-1])
+    console.log(fileName,'fileName');
+    fs.readFile('./'+fileName,function(err,data){
+        res.setHeader('Content-Type', 'application/pdf')
+        res.send(data)
+    })
+})
+
 app.post('/print',function(req,res){
     // console.log(req);
     onData(req,function(obj){
         // console.log(obj.data);
-        console.log(JSON.stringify(obj.files.file));
-        var u = getImgBase64(obj.files.file.path,obj.files.file.type)
-        res.send({name:u})
+        // console.log(JSON.stringify(obj.files.imgPath));
+        var imgBase64 = getFileBase64(obj.files.imgPath.path,obj.files.imgPath.type)
+        var userInfo = Object.assign({imgBase64:imgBase64},obj.data)
+
+        var tempStr = template(tempPath,{userInfo})
+
+        var pdfDestPath = decodeURI(userInfo.userName+'.pdf')
+        // console.log(pdfDestPath,'pdfDestPath');
+        htmlPdf.create(tempStr, {}).toFile('./'+pdfDestPath, function (err, r) {
+            if (err) {
+                console.log(err);
+                return
+            }
+            console.log('生成pdf成功');
+            res.send({code:'200',message:'生成pdf成功',pdfPath:pdfDestPath})
+        });
     })
 })
 
-// htmlPdf.create(d, {}).toFile('./test.pdf', function(err, res) {
-//     if (err) {
-//         console.log(err);
-//         return
-//     }
-//     console.log(res);
-// });
-
-
-app.listen('9900')
+app.listen('9900','192.168.28.248')

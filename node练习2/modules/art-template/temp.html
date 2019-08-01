@@ -5,22 +5,23 @@
     <title>Title</title>
     <style>
         .red{display:inline-block;width:30px;height:30px;background:red;vertical-align:-8px;}
+        *{margin:0;padding:0;list-style-type: none;}
+        .list{padding:10px 0 0 10px;}
+        .list li{margin-bottom:10px;color:red;}
     </style>
 </head>
 <body>
 <div>
-    {{data.name}}
+    <h1>人员信息：</h1>
 </div>
 <div>
-    {{each list item index}}
-    <p>姓名：{{item.name}}，年龄：{{item.age}}
-        {{if item.red}}
-        <span class="red"></span></p>
-        {{/if}}
-    {{/each}}
-</div>
-<div>
-    <img src="{{imgPath}}" width="100" height="100" alt="">
+    <ul class="list">
+        <li>姓名：{{userInfo.userName}}</li>
+        <li>年龄：{{userInfo.age}}</li>
+        <li>性别：{{userInfo.sex==='1'?'男':'女'}}</li>
+        <li>头像：<img src="{{userInfo.imgBase64}}" width="100" height="100" alt=""></li>
+        <li>爱好：{{userInfo.hobby}}</li>
+    </ul>
 </div>
 </body>
 </html>
