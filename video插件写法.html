@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    (function(){
+
+        function LwhVd(cb){
+            this.name='allen'
+            this.age='18'
+            this.init(cb)
+        }
+        LwhVd.prototype.fn = function(){
+            console.log(this.name+this.age)
+        }
+
+        LwhVd.prototype.init = function(cb){
+            var _this = this
+            setTimeout(function(){
+                cb.call(_this)
+            },3000)
+        }
+
+
+
+        //寄放在全局变量上
+        window.vd = function(cb){
+            return new LwhVd(cb)
+        }
+    })()
+
+    var p = vd(function(){
+        this.fn()
+        console.log('加载完毕')
+    })
+//    console.log(p);
+
+
+</script>
+</body>
+</html>

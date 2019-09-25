@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
-        body{overflow: hidden;}
+        body{overflow: hidden;background:#000}
     </style>
 </head>
 <body>
@@ -13,10 +13,23 @@
 
 <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
 <script>
+    var colorMap = {
+        0:'red',
+        1:'blue',
+        3:'pink',
+        4:'yellow',
+        5:'green',
+        6:'deepskyblue',
+        7:'greenyellow',
+        8:'rosybrown',
+        9:'aquamarine'
+    }
+
     $(document).click(function(e){
         var x= e.clientX;
         var y= e.clientY;
         var docheight=$(document).height();
+        console.log(docheight);
         var docwidth=$(document).width();
         var odiv=$("<div></div>");
         odiv.css({"width":"10px","height":"65px","backgroundColor":"red","position":"absolute","top":docheight,"left":x});
@@ -25,8 +38,11 @@
             odiv.remove();
             var arr=[];
             for(var i=0;i<20;i++){
+                var randomNum = Math.round(Math.random()*9)
+                var curColor = colorMap[randomNum]
+//                console.log(randomNum);
                 arr[i]=$("<div></div>");
-                arr[i].css({"width":"5px","height":"5px","backgroundColor":"blue","left":x,"top":y,"position":"absolute"})
+                arr[i].css({"width":"5px","height":"5px","backgroundColor":curColor,"left":x,"top":y,"position":"absolute"})
                 $("body").append(arr[i]);
                 arr[i].speedX=parseInt(Math.random()*20-10);
                 arr[i].speedY=parseInt(Math.random()*20-10);
