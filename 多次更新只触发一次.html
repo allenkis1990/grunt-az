@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+   var obj = {
+       name:'',
+       age:''
+   }
+
+   function log(val,ojj){
+       ojj.arr.push(val)
+       var timer = setTimeout(function(){
+           ojj.count++
+           if(ojj.count===ojj.arr.length){
+               console.log(ojj.arr.pop());
+               ojj.count = 0
+               ojj.arr = []
+           }
+           window.clearTimeout(timer)
+       })
+   }
+
+   function de(key){
+       var value = obj[key]
+       //ojj是每个监听对象独有的事件监听对象
+       var ojj = {
+           count:0,
+           arr:[]
+       }
+       Object.defineProperty(obj,key,{
+           set(nv){
+               value = nv
+               log(nv,ojj)
+           },
+           get(){
+//               console.log(value);
+               return value
+           }
+       })
+   }
+
+   de('name')
+   de('age')
+
+  obj.name='allen'
+  obj.name='allen2'
+  obj.name='allen3'
+
+
+  obj.age='18'
+  obj.age='19'
+  obj.age='20'
+
+
+</script>
+</body>
+</html>
