@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+
+</head>
+<body >
+
+<div id="app">
+    <table>
+        <tbody v-for="(item,index) in arr">
+        <tr><td>{{item.name}}</td></tr>
+        <tr v-for="(subItem,subIndex) in item.sub" style="text-indent: 2em"><td>{{subItem.name}}</td></tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<script>
+    //数组模式下的class可以使用三元表达式
+    new Vue({
+        el:'#app',
+        data:{
+            arr:[
+                {id:'xxxa1',name:'a1',sub:[{name:'suba11'},{name:'suba12'}]},
+                {id:'xxxa2',name:'a2',sub:[{name:'suba21'},{name:'suba22'}]},
+                {id:'xxxa3',name:'a3',sub:[{name:'suba31'},{name:'suba32'}]}
+            ]
+        },
+        methods:{
+
+        },
+        mounted(){
+
+        }
+    });
+</script>
+</body>
+</html>
