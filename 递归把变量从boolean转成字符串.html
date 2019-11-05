@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //递归把变量是布尔类型改成字符串类型 true改成'true'
+    function parseBoolean(obj,objStr){
+        if(typeof obj==='object'){
+            for(var key in obj){
+                if(obj.hasOwnProperty(key)){
+                    var str =  objStr+'["'+key+'"]'
+                    // console.log(str);
+                    parseBoolean(obj[key],str)
+                }
+            }
+        }else{
+            if(typeof obj==='boolean'){
+                var evalStr = objStr + '=' + ('"'+obj+'"')
+                console.log(evalStr);
+                eval(evalStr)
+            }
+        }
+    }
+
+
+    var lwh = {
+        haha:false,
+        a1:{haha:true},
+        a2:[
+            {haha:false},
+            {hehe:[{haha:true}]}
+        ]
+    }
+
+    parseBoolean(lwh,'lwh')
+    console.log(lwh);
+</script>
+</body>
+</html>
