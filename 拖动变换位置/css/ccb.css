@@ -1,0 +1,506 @@
+/*common start*/
+html,
+body{
+	width:100%;
+	height:100%;
+	font-family:'Microsoft Yahei','Arial';
+}
+body,
+p,
+ul,
+dl{
+	margin:0px;
+	padding:0px;
+}
+a{
+	text-decoration:none;
+}
+ul{
+	list-style:none;
+}
+.btn{
+	display: inline-block;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	cursor:pointer;
+	background: #0066B3;
+}
+.btn:hover{
+	text-decoration: none;
+	color: #fff;
+	background: #2A83C7;
+}
+/*common end*/
+
+/*scroll style start*/
+	div.scroll{
+		width:100%;
+		height:100%;
+		position:relative;
+	}
+	div.scroll em.bar{
+		width:8px;
+		height:100%;
+		background-color:#bbb;
+		border-radius:4px;
+		position:absolute;
+		top:0px;
+		right:0px;
+		opacity:.7;
+		cursor:pointer;
+	}
+	div.scroll em.bar:hover{
+		opacity:1;
+	}
+	div.scroll div.panel{
+		width:100%;
+		height:100%;
+		overflow:hidden;
+	}
+/*scroll style end*/
+
+/*component tabs start*/
+ul.tabs{
+	height:31px;
+	width:100%;
+	border-bottom:1px #ddd solid;
+}
+ul.tabs li{
+	float:left;
+	height:30px;
+	font-size:14px;
+	line-height:30px;
+	text-align:center;
+}
+ul.tabs li a{
+	color:#000;
+}
+ul.tabs li.on{
+	font-weight:bold;
+	border-bottom:2px solid #0066b3;
+}
+ul.tabs li.on a{
+	color:#0066b3;
+}
+div.pages{
+	width:100%;
+	position:relative;
+}
+div.pages div.page{
+	position:absolute;
+	width:100%;
+	left:0px;
+	top:0px;
+	display:none;
+}
+div.pages div.on{
+	display:block;
+}
+/*component tabs end*/
+
+/*component pagebar start*/
+div.pagebar{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	position:relative;
+}
+div.pagebar ul.content{
+	width:5000%;
+	height:100%;
+	position:relative;
+	display:none;
+}
+div.pagebar ul.content li{
+	height:100%;
+	float:left;
+	text-align:center;
+}
+div.pagebar a.bar{
+	width:26px;
+	height:39px;
+	background-image:url("../images/focus_arrow.png");
+	background-position:0px 0px;
+	position:absolute;
+	top:50%;
+	margin-top:-20px;
+}
+div.pagebar a.prev{
+	left:0px;
+}
+div.pagebar a.prev:hover{
+	background-position:0px -40px;
+}
+div.pagebar a.next{
+	right:0px;
+	background-position:-3px -80px;
+}
+div.pagebar a.next:hover{
+	background-position:-3px -120px;
+}
+/*component pagebar end*/
+
+/*component select start*/
+div.select{
+	width:100%;
+	position:relative;
+	cursor:pointer;
+}
+div.select em.slide,
+div.select strong.slide{
+	position:absolute;
+	right:0px;
+	top:50%;
+	margin-top:-15px;
+	width:28px;
+	height:28px;
+	border:1px solid #0066B3;
+}
+div.select em.slide{
+	background-image:url("../images/icon_down.png");
+}
+div.select strong.slide{
+	background-color:#DBEBF8;
+	text-align:center;
+	line-height:28px;
+	color:#0066B3;
+	font-size:12px;
+	font-weight:normal;
+}
+div.select ul.options,
+div.select div.options{
+	position:absolute;
+	left:0px;
+	top:29px;
+	border:1px solid #0066B3;
+	z-index:1;
+	display:none;
+}
+div.select ul.options li{
+	padding:4px 9px;
+	height:20px;
+	line-height:20px;
+	width:170px;
+	font-size:12px;
+	background-color:#fff;
+}
+div.select ul.options li:hover{
+	background-color:#ddd;
+}
+/*component select end*/
+
+/*transaction block start*/
+div.transaction{
+	width:220px;
+	height:auto;
+	padding:15px 0px 20px 0px;
+	border:1px #ddd solid;
+}
+div.transaction div.content{
+	width:190px;
+	height:285px;
+	margin:auto;
+}
+div.transaction div.content h3{
+	font-size:16px;
+	font-weight:bold;
+	margin-bottom:10px;
+}
+div.transaction div.content ul.tabs li{
+	width:50%;
+}
+div.transaction div.content div.pages div.page{
+	height:210px;
+	background-color:#fff;
+}
+#transform form{
+	margin:20px 0px;
+}
+#transform form input{
+	width:188px;
+	height:20px;
+	padding:4px 0px;
+	font-size:12px;
+	text-indent:10px;
+	border:1px #0066B3 solid;
+}
+#transform form > *{
+	margin:5px 0px;
+}
+#transform form div.select div.select_card{
+	position:absolute;
+	left:100%;
+	width:310px;
+	top:0px;
+	border:1px solid #0066B3;
+	background-color:#fff;
+	display:none;
+}
+#transform form div.select div.select_card div.title{
+	width:100%;
+	height:36px;
+	background-color:#0066b3;
+	color:#fff;
+	line-height:36px;
+	text-indent:10px;
+}
+#transform form div.select div.select_card div.content{
+	width:95%;
+	height:203px;
+	margin:10px auto;
+}
+#transform form div.select div.select_card div.content input{
+	width:99%;
+	background-image:url("../images/icon_search.png");
+	background-repeat:no-repeat;
+	background-position:97% center;
+}
+#transform form div.select div.select_card div.content div.scroll{
+	height:165px;
+	margin-top:10px;
+}
+#transform form div.select div.select_card div.content ul li{
+	width:100%;
+	height:40px;
+	line-height:40px;
+	border-top:1px solid #bbb;
+}
+#transform form div.select div.select_card div.content ul li i{
+	float:left;
+	margin-top:5px;
+	margin-right:5px;
+	width:30px;
+	height:30px;
+	border:1px solid #ccc;
+	background-image:url("../images/icon_user_unselect.png");
+	background-position:center center;
+}
+#transform form div.select div.select_card div.content ul li span{
+	font-size:12px;
+	color:#3f3f3f;
+}
+#transform form div.select div.select_card div.content ul li.select{
+	background-color:#E6E6E6;
+}
+#transform form div.select div.select_card div.content ul li.select i{
+	background-image:url("../images/icon_user_select.png");
+}
+/*transaction block end*/
+
+/*user detail block start*/
+div.user_detail{
+	width:100%;
+	height:302px;
+	background-image:url("../images/theme b_0.png");
+	background-position:center center;
+	position:relative;
+}
+div.user_detail div.custom_func{
+	padding:10px 15px;
+	width:680px;
+	height:125px;
+	border-radius:4px;
+	background-image:url("../images/bg_white_3.png");
+	position:absolute;
+	right:5px;
+	bottom:20px;
+}
+div.user_detail div.custom_func h3{
+	margin:0px;
+	color:#fff;
+}
+div.user_detail div.custom_func span.select{
+	display: block;
+	width: 54px;
+	height: 26px;
+	line-height: 26px;
+	color:#fff;
+	font-size:13px;
+	text-align: center;
+	cursor: pointer;
+	background: url("../images/bg_white_3.png") repeat;
+	border-radius: 4px;
+	position: absolute;
+	right: 15px;
+	top: 10px;
+}
+div.user_detail div.custom_func ul.menu_list{
+	width:100%;
+	padding-top:15px;
+	display: block;
+	text-align: justify;
+}
+div.user_detail div.custom_func ul.menu_list:after{
+	content: '';
+	display: inline-block;
+	width: 100%;
+}
+div.user_detail div.custom_func ul.menu_list li{
+	width:65px;
+	display: inline-block;
+	text-align:center;
+	height:100%;
+	float:left;
+	width:16.6%;
+}
+div.user_detail div.custom_func ul.menu_list li i{
+	width:65px;
+	height:65px;
+	display:block;
+	margin:auto;
+	background-image:url("../images/menus/icon_65_aask.png");
+	background-position:0px -65px;
+}
+div.user_detail div.custom_func ul.menu_list li p{
+	font-size:14px;
+	color:#fff;
+	text-align:center;
+	margin-top:5px;
+}
+div.mask{
+	background-color:rgba(0,0,0,.7);
+	position:fixed;
+	top:0px;
+	left:0px;
+	bottom:0px;
+	right:0px;
+	display:none;
+}
+div.mask div.select_dialog{
+	width:700px;
+	height:520px;
+	position:fixed;
+	text-align:center;
+	top:50%;
+	left:50%;
+	margin-left:-350px;
+	margin-top:-260px;
+	background-color:#fff;
+}
+div.mask div.select_dialog p.title{
+	color:#fff;
+	height:40px;
+	line-height:40px;
+	text-indent:20px;
+	text-align:left;
+	background-color:#0066b3;
+}
+div.mask div.select_dialog p.text{
+	margin:20px 20px 5px 20px;
+	text-align:right;
+}
+div.mask div.select_dialog a.close{
+	width:24px;
+	height:24px;
+	background-image:url("../images/icon_24_close.png");
+	position:absolute;
+	right:10px;
+	top:10px;
+}
+div.mask div.select_dialog a.close:hover{
+	background-position:0px -24px;
+}
+div.mask div.select_dialog>div{
+	width:660px;
+	margin:auto;
+	padding:10px 0px;
+	background-color:#ddd;
+}
+div.mask div.select_dialog div.selected{
+	height:20px;
+	line-height:20px;
+	text-align:left;
+	text-indent:10px;
+}
+div.mask div.select_dialog div.menu_list{
+	margin:2px 20px 16px 20px;
+	padding:0px;
+	height:330px;
+}
+div.mask div.select_dialog div.menu_list ul{
+	width:100%;
+	float:left;
+}
+div.mask div.select_dialog div.menu_list ul li{
+	width:16.6%;
+	float:left;
+	height:110px;
+	position:relative;
+}
+div.mask div.select_dialog div.menu_list ul li input{
+	position:absolute;
+	left:10px;
+	top:85px;
+}
+div.mask div.select_dialog div.menu_list ul li i{
+	width:65px;
+	height:65px;
+	display:block;
+	margin:10px auto;
+}
+div.mask div.select_dialog div.menu_list ul li p{
+	font-size:12px;
+	display:inline;
+}
+div.mask div.select_dialog div.menu_list ul li input:checked + i{
+	background-position:0px -65px;
+}
+
+div.mask div.select_dialog button.btn{
+	width:200px;
+}
+#types{
+	width:710px;
+	height:170px;
+}
+#types div.card{
+	width:215px;
+	height:130px;
+	border:1px solid #bbb;
+	margin:20px auto 0px auto;
+	border-radius:3px;
+}
+div.theme{
+	width:100%;
+	height:170px;
+	background-image:url("../images/bg_set_theme.png");
+}
+#themes{
+	width:960px;
+	height:100%;
+	margin:auto;
+}
+#themes a.bar{
+	background-image:url("../images/icon_set_theme_arrow.png");
+}
+#themes a.bar{
+	width:25px;
+	height:56px;
+	background-image:url("../images/icon_set_theme_arrow.png");
+	background-position:0px 0px;
+	position:absolute;
+	top:50%;
+	margin-top:-28px;
+}
+#themes a.prev:hover{
+	background-position:0px -56px;
+}
+#themes a.next{
+	background-position:0px -112px;
+}
+#themes a.next:hover{
+	background-position:0px -168px;
+}
+#themes div.set_theme_item{
+	width:192px;
+	height:142px;
+	margin:auto;
+	margin-top:20px;
+}
+/*user detail block end*/
+

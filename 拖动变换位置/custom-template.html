@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <!--link rel="stylesheet" href="css/ccb.css"-->
+  <style>
+      /*------clear float------*/
+      .clear{clear:both;_zoom:1;}
+      .clear:after,.clear:before{display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden;}
+	div.template{
+		width:960px;
+		position:relative;
+		margin:auto;
+	}
+	div.template.define{
+		
+	}
+	div.template div.module{
+		position:relative;
+	}
+	div.template div.module div.block{
+		font-size:0px;
+		border:1px solid #ccc;
+	}
+	div.template.define div.module div.block{
+		
+	}
+	div.template.define div.module div.block > *{
+		cursor:move;
+	}
+	div.template.define div.module div.block.drag{
+		background-color:#eee;
+		border:1px dashed #000;
+	}
+	div.template.define div.module div.block.drag > *{
+		position:relative;
+		z-index:999;
+		opacity:.9;
+	}
+	div.template div.silder{
+		width:220px;
+		float:left;
+	}
+	div.template div.silder div.block{
+		margin-top:-1px;
+	}
+	div.template div.main{
+		width:730px;
+		float:right;
+	}
+	div.template div.main div.block{
+		margin-bottom:15px;
+	}
+	#define{
+		width:32px;
+		height:61px;
+		background-image:url("images/btn_dzsy.png");
+		position:absolute;
+		top:0px;
+		left:-40px;
+	}
+	#mask{
+		position:fixed;
+		top:0px;
+		bottom:0px;
+		left:0px;
+		right:0px;
+		background-color:#000;
+		opacity:.7;
+		display:none;
+	}
+      .drag-item{width:730px; height:264px; background:#abcdef;}
+      .inner-smitem{width:145px; height:107px; background:red; position:relative;}
+      .position-block .block{float:left; margin-right:27px;}
+      .position-block{padding-top:10px; padding-left:30px;}
+       .close{cursor:pointer; right:2px; top:5px; width:15px; height:12px; display:inline-block; position:absolute; background:url(../images/close.png) no-repeat;}
+      .add-btn{cursor:pointer; top:80px; left:-63px; position:absolute; width:60px; height:35px; color:#fff; text-align:center; line-height:35px; background:darkcyan; display:inline-block;}
+      .add-btn:active{background:cornflowerblue;}
+  </style>
+ </head>
+ <body>
+
+	<div id="mask"></div>
+	<div class="template">
+        <span class="add-btn"></span>
+		<a id="define" href="##"></a>
+
+		<div class="module main">
+			<div class="">
+				<div class="drag-item item">
+                    <div class="module clear position-block">
+                        <div class="block">
+                            <div class="inner-smitem item" style="background:#000">
+                                <span class="close"></span>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <div class="inner-smitem item" style="background:blue">
+                                <span class="close"></span>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <div class="inner-smitem item" style="background:green">
+                                <span class="close"></span>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <div class="inner-smitem item" style="background:gray">
+                                <span class="close"></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+	<script>
+		$(function(){
+            var $drag,$this,$body,$parent,appendDom;
+
+            function getRandomColor(){
+                return "#"+("00000"+((Math.random()*16777215+0.5)>>0).toString(16)).slice(-6);
+            }
+
+            document.body.ondragstart = function(){return false;};
+			var $mask = $("#mask");//遮挡层
+			var $temp = $("div.template");//模板容器
+			var $block = $("div.module div.block",$temp);//模板中每个块
+			$drag = $(".position-block .block .item");//每个块中能拖拽的子元素
+            $(".add-btn").click(function(){
+                appendDom = $('<div class="block"> <div class="inner-smitem item" style="background:'+getRandomColor()+'"> <span class="close"></span> </div> </div>');
+                $(".position-block").append(appendDom);
+                //$drag=$(".position-block .block .item");
+                //$(".block").data("a1",$drag);
+                //console.log($drag);
+                appendDom.find(".item").find(".close").click(function(){
+                    $(this).parent().parent().remove();
+                });
+                appendDom.find(".item").mousedown(function(e){
+                    e.stopPropagation();
+                    $this1 = $(this);
+                    //console.log($drag.parent().length);
+                    $body1 = $(document.body);
+                    $parent1 = $(this).parent();
+                    var offsetY1 = e.offsetY;
+                    var offsetX1 = e.offsetX;
+                    $parent1.addClass("drag");
+                    //console.log(1);
+                    $this1.parents(".position-block").mousemove(function(e){
+                        //alert(1);
+                        e.stopPropagation();
+                        var clientX1 = e.pageX;
+                        var clientY1 = e.pageY;
+                        $this1.css({top:clientY1-offsetY1-$parent1.offset().top,left:clientX1-offsetX1-$parent1.offset().left});
+                        $parent1.siblings().each(function(){
+                            var $curr = $(this);
+                            //判断当前鼠标位置是不是在this这个block区域
+                            //console.log(clientX+":"+clientY);
+                            if(clientX1>$curr.offset().left&&clientX1<$curr.offset().left+$curr.width()&&clientY1>$curr.offset().top&&clientY1<$curr.offset().top+$curr.height()){
+                                //console.log($curr.find(":first").get(0));
+                                //替换元素
+                                if($parent1.index()>$curr.index()){
+                                    $parent1.after($curr);
+                                }else{
+                                    $curr.after($parent1);
+                                }
+                                $this1.css({top:clientY1-offsetY1-$parent1.offset().top,left:clientX1-offsetX1-$parent1.offset().left});
+                                return false;
+                            }
+                        });
+                    }).mouseup(function(e){
+                        e.stopPropagation();
+                        $(this).unbind("mousemove");
+                        $this1.css({top:0,left:0});
+                        $parent1.removeClass("drag").siblings();
+                    });
+                });
+            });
+
+            $drag.find(".close").click(function(){
+                $(this).parent().parent().remove();
+            });
+            //$drag = $(".position-block .block .item");
+            console.log($drag.length);
+            //当点击首页定制的时候，应该打开一个遮罩层
+            $mask.fadeToggle(200);
+
+
+
+
+
+
+            $drag.mousedown(function(e){
+                e.stopPropagation();
+                $this = $(this);
+                //console.log($drag.parent().length);
+                $body = $(document.body);
+                $parent = $(this).parent();
+                var offsetY = e.offsetY;
+                var offsetX = e.offsetX;
+                $parent.addClass("drag");
+                //console.log(1);
+                $(".position-block").mousemove(function(e){
+                    e.stopPropagation();
+                    var clientX = e.pageX;
+                    var clientY = e.pageY;
+                    $this.css({top:clientY-offsetY-$parent.offset().top,left:clientX-offsetX-$parent.offset().left});
+                    $parent.siblings().each(function(){
+                        var $curr = $(this);
+                        //判断当前鼠标位置是不是在this这个block区域
+                        //console.log(clientX+":"+clientY);
+                        if(clientX>$curr.offset().left&&clientX<$curr.offset().left+$curr.width()&&clientY>$curr.offset().top&&clientY<$curr.offset().top+$curr.height()){
+                            //console.log($curr.find(":first").get(0));
+                            //替换元素
+                            if($parent.index()>$curr.index()){
+                                $parent.after($curr);
+                            }else{
+                                $curr.after($parent);
+                            }
+                            $this.css({top:clientY-offsetY-$parent.offset().top,left:clientX-offsetX-$parent.offset().left});
+                            return false;
+                        }
+                    });
+                }).mouseup(function(e){
+                    e.stopPropagation();
+                    $(this).unbind("mousemove");
+                    $this.css({top:0,left:0});
+                    $parent.removeClass("drag").siblings();
+                });
+            });
+            $(".position-block").mouseup(function(){
+                $(this).unbind("mousemove");
+            });
+
+		});
+	</script>
+ </body>
+</html>
