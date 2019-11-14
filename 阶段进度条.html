@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0;padding:0}
+        li{list-style-type: none}
+        .list{width:1000px;margin:50px auto;display:table}
+        .list li{width:280px;text-align:center;display:table-cell;}
+        .list .ball{display:inline-block;width:80px;height:80px;z-index:1;position:relative;
+            border-radius:40px;background:blue;color:#fff;font-size:20px;text-align: center;line-height:80px;}
+        .item.ed:after{content:'';position:absolute;width:100%;height:10px;background:blue;left:50%;top:36px;}
+        .item{position:relative;}
+    </style>
+</head>
+<body>
+<ul class="list">
+    <li>
+        <div class="item ed">
+            <div class="ball">1</div>
+            <p>阶段1</p>
+            <p>2019-12-12 17:23</p>
+        </div>
+    </li>
+    <li>
+        <div class="item ed">
+            <div class="ball">1</div>
+            <p>阶段1</p>
+            <p>2019-12-12 17:23</p>
+        </div>
+    </li>
+    <li>
+        <div class="item ed">
+            <div class="ball">1</div>
+            <p>阶段1</p>
+            <p>2019-12-12 17:23</p>
+        </div>
+    </li>
+    <li>
+        <div class="item">
+            <div class="ball">1</div>
+            <p>阶段1</p>
+            <p>2019-12-12 17:23</p>
+        </div>
+    </li>
+</ul>
+</body>
+</html>
