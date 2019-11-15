@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function getStrLen(str){
+        var reg = /[^\x00-\xff]/g//匹配全角字符和中文
+        var res = str.replace(reg,'**')
+        return res.length
+    }
+
+    var len = getStrLen('我啊1？？')
+    console.log(len);
+</script>
+</body>
+</html>
