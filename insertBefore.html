@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .main{
+        height:0;
+        width:0;
+        border-left:50px solid transparent;
+        border-right:50px solid transparent;
+        border-top:50px solid red;
+    }
+</style>
+<body>
+
+<div class="main"></div>
+<div id="con">content</div>
+
+<script>
+    let root = document.getElementsByTagName('body')[0]
+    let con = document.getElementById('con')
+    let div = document.createElement('div')
+    div.innerHTML = 'insert'
+    root.insertBefore(div,con)//调用者是父亲  参数1为要被插入到前面的元素，参数2为被插队的元素
+</script>
+</body>
+</html>

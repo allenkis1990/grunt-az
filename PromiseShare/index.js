@@ -39,4 +39,4 @@ app.get('/easyThen',(req,res)=>{
     res.sendFile(path.resolve(__dirname,'views/easyThen.html'));
 });
 
-app.listen('8888','192.168.28.250');
+app.listen('8686');
