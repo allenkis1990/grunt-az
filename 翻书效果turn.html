@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            width: 280px;
+            height: 350px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .item {
+            width: 100%;
+            height: 100%;
+            background: red;
+            position: absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+<div class="main" id="flipbook">
+    <div class="item" style="background:red"></div>
+    <div class="item" style="background: green"></div>
+</div>
+<button class="btn1">next</button>
+<button class="btn2">prev</button>
+<script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/turn.js/3/turn.min.js"></script>
+<script>
+    let isInit = true
+    $(window).ready(function () {
+        $('#flipbook').turn({
+            acceleration: true,
+            elevation: 50,
+            display: 'single',
+            when: {
+                turned(){
+                    if(!isInit){
+                        console.log(333333)
+                    }
+                    isInit = false
+                }
+            }
+        });
+    })
+
+    $('.btn1').on('click',function(){
+        $('#flipbook').turn('next');
+    })
+    $('.btn2').on('click',function(){
+        $('#flipbook').turn('previous');
+    })
+
+</script>
+</body>
+</html>

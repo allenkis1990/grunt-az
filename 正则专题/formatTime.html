@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let str = '2021-09-07 06:06:06'
+    let str2 = '2021-09-07'
+    function formatTime(str){
+      let reg = /\d+/ig
+      let match = str.match(reg)
+//      console.log(match);
+      let template = '{0}年{1}月{2}日{3}时{4}分{5}秒'
+      template = template.replace(/\{(\d+)\}/ig,function(word,$1){
+        let time = match[$1] || '00'
+        return time
+      })
+      return template
+    }
+
+    let t = formatTime(str)
+    let t2 = formatTime(str2)
+
+
+    console.log(t);
+    console.log(t2);
+
+</script>
+</body>
+</html>

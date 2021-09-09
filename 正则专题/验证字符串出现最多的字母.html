@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*let str = '刘伟恒lwh666yydslsphahahalollol'
+    let reg = /[a-zA-Z]/g
+    let match = str.match(reg)
+    let obj = {}
+    match.forEach((item)=>{
+      if(obj[item] === undefined){
+        obj[item] = 1
+      }else{
+        obj[item] += 1
+      }
+    })
+    let cur = {
+      curBigger:null,
+      curBiggerLetter:null
+    }
+    for(let key in obj){
+      let num = obj[key]
+      if(cur.curBigger == null){
+        cur.curBigger = num
+        cur.curBiggerLetter = key
+      }else{
+        if(cur.curBigger < num){
+          cur.curBigger = num
+          cur.curBiggerLetter = key
+        }
+      }
+    }
+    console.log(cur);*/
+
+    let str = '刘伟恒lwh666yydslsphahahalollolzzzzzz'
+    let reg = /[a-zA-Z]/g
+    let onlyLetters = str.match(reg)
+    let onlyLetter = onlyLetters.sort((a,b)=>{
+      return a.localeCompare(b)
+    }).join('')
+    console.log(onlyLetter);
+    let res = ''
+    for(let i=onlyLetter.length;i>0;i--){
+      let reg2 = new RegExp(`([a-zA-Z])\\1{${i-1}}`,'g')
+      let match = onlyLetter.match(reg2)
+      if(match && match.length){
+        console.log(match,reg2);
+        match.forEach((item)=>{
+          res += `${item.substring(0,1)},出现了${item.length}次\n`
+        })
+        console.log(res);
+        break
+      }
+    }
+//    console.log(onlyLetter);
+</script>
+</body>
+</html>

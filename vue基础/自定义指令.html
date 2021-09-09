@@ -8,61 +8,66 @@
 
 
 </head>
-<body >
+<body>
 
 <div id="app">
 
     <div v-lwh.haha="color">{{num}}</div>
     <button @click="fn">click</button>
+    <!--<div v-html="con | filternByReg"></div>-->
+    <div v-html="$options.filters.filternByReg(con)"></div>
 </div>
 
 
-
 <script>
-    Vue.directive('lwh',{
+  Vue.directive('lwh', {
 
-        bind:function(ele,binding){
-            console.log('bind');
-            $(ele).click(function(){
-                alert(111);
-            });
-            console.log(binding);
-            $(ele).css({color:binding.value});
-        },
+    bind: function (ele, binding) {
+      console.log('bind');
+      $(ele).click(function () {
+        alert(111);
+      });
+      console.log(binding);
+      $(ele).css({color: binding.value});
+    },
 
-        inserted:function(){
-            console.log('inserted');
-        },
+    inserted: function () {
+      console.log('inserted');
+    },
 
-        update:function(){
-            console.log(arguments);
-            console.log('update');
-        },
+    update: function () {
+      console.log(arguments);
+      console.log('update');
+    },
 
-        componentUpdated:function(){
-            console.log('componentUpdated');
-        },
-        unbind:function(){
-            console.log('unbind');
-        }
+    componentUpdated: function () {
+      console.log('componentUpdated');
+    },
+    unbind: function () {
+      console.log('unbind');
+    }
 
 
-    });
-
-    new Vue({
-        el:'#app',
-        data:{
-            aaa:1,
-            color:'red',
-            num:0
-        },
-        methods:{
-            fn:function(){
-                this.num++;
-            }
-        }
-    });
-    //console.log(v);
+  });
+  Vue.filter('filternByReg',function(val){
+    return val.replace(/\n/ig,'<br>')
+  })
+  new Vue({
+    el: '#app',
+    data: {
+      aaa: 1,
+      color: 'red',
+      num: 0,
+      con: '换行\n换行\n1\n2\n2\n3',
+      reg: /\n/ig
+    },
+    methods: {
+      fn: function () {
+        this.num++;
+      }
+    }
+  });
+  //console.log(v);
 </script>
 </body>
 </html>

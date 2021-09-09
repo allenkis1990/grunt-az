@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  let reg = /2.\\3/
+  '2.\3'
+    const ncname = `[a-zA-Z_][\\-\\.0-9_a-zA-Z]*`
+    const qnameCapture = `((?:${ncname}\\:)?${ncname})`
+    const startTagOpen = new RegExp(`^<${qnameCapture}`) //<div
+    const endTag = new RegExp(`^<\\/${qnameCapture}[^>]*>`) //</div>
+    const attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/
+    const startTagClose = /^\s*(\/?)>/ //匹配标签结束的 >
+    const defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g //{{xx}}
+
+    let html = `<div id="app">
+                    <div id="main">
+                        hello  <span class="bold">world</span>
+                    </div>
+                </div>`
+    let html2 = `>`
+    console.log(html2.match(startTagClose));
+
+
+</script>
+</body>
+</html>

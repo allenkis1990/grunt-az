@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            box-sizing: border-box;
+        }
+
+        .box{
+            width: 800px;
+            margin:100px auto;
+        }
+        .step-list{
+            width:100%;
+            display:flex;
+        }
+        .step-item{
+            width:25%;
+            text-align:center;
+        }
+        .step-item-head{
+            width:100%;
+            position:relative;
+        }
+        .step-item-line{
+            position:absolute;
+            border:2px solid #ddd;
+            width:100%;
+            right:-50%;
+            top:8px;
+        }
+
+        .step-item:last-child .step-item-line{
+            display:none;
+        }
+
+        .num{
+            display:inline-block;
+            width:15px;
+            height:15px;
+            border-radius: 50%;
+            background:#ddd;
+            position:relative;
+            z-index:10;
+        }
+        .step-item.ed .step-item-line,.step-item.current .step-item-line{
+            border:2px solid orange;
+        }
+
+        .step-item.ed .num,.step-item.current .num{
+            width:30px;
+            height:30px;
+            margin-top: -6px;
+        }
+        .step-item.ed .num{
+            background:red;
+        }
+        .step-item.current .num{
+            background:orange;
+        }
+
+        a.cha{ display: inline-block; width: 20px;height:5px; background: red;line-height: 0;font-size:0;vertical-align: middle;-webkit-transform: rotate(45deg);}
+        a.cha:after{content:'/';display:block;width: 20px;height:5px; background: red;-webkit-transform: rotate(-90deg);}
+        a.gou{ display: inline-block; width: 8px;height:3px; background: red;line-height: 0;font-size:0;vertical-align: middle;-webkit-transform: rotate(45deg);}
+        a.gou:after{content:'/';display:block;width: 16px;height:3px; background: red;-webkit-transform: rotate(-90deg) translateY(-50%) translateX(50%);}
+    </style>
+</head>
+<body>
+<!--<div class="el-step is-horizontal is-center" style="flex-basis: 25%; margin-right: 0px;">
+    <div class="el-step__head is-finish">
+        <div class="el-step__line" style="margin-right: 0px;">
+            <i class="el-step__line-inner"
+             style="transition-delay: 0ms; border-width: 1px; width: 100%;"></i>
+        </div>
+        <div class="el-step__icon is-text">
+            <div class="el-step__icon-inner">1</div>
+        </div>
+    </div>
+</div>-->
+<div class="box">
+    <div class="step-list">
+        <div class="step-item ed">
+            <div class="step-item-head">
+                <span class="num"></span>
+                <div class="step-item-line"></div>
+            </div>
+            <div class="step-item-content">
+                步骤一
+            </div>
+        </div>
+        <div class="step-item current">
+            <div class="step-item-head">
+                <span class="num"></span>
+                <div class="step-item-line"></div>
+            </div>
+            <div class="step-item-content">
+                步骤二
+            </div>
+        </div>
+        <div class="step-item">
+            <div class="step-item-head">
+                <span class="num"></span>
+                <div class="step-item-line"></div>
+            </div>
+            <div class="step-item-content">
+                步骤三
+            </div>
+        </div>
+        <div class="step-item">
+            <div class="step-item-head">
+                <span class="num"></span>
+                <div class="step-item-line"></div>
+            </div>
+            <div class="step-item-content">
+                步骤四
+            </div>
+        </div>
+    </div>
+</div>
+<a class="cha"></a>
+<a class="gou"></a>
+
+
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let str = 'lwh2019lwh2020lwh2021'
+    let reg = /lwh(\d+)/ig
+    function execAll(str,reg){
+      let result = []
+      let exec = null
+      while(exec = reg.exec(str)){
+        if(exec && exec.length){
+          result.push(exec)
+        }
+      }
+      return result
+    }
+    let res = execAll(str,reg)
+    console.log(res);
+</script>
+</body>
+</html>

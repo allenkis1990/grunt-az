@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let str = '2021-09-07'
+    let reg = /(\d+)-(\d+)-(\d+)/g
+    let r = str.replace(reg,'$1年$2月$3日')
+    console.log(r);
+
+    /*let str2 = 'good good study day day up'
+    let reg2 = /[a-zA-Z]+/g
+    let r2 = str2.replace(reg2,function(...arg){
+      let arr = arg[0].split('')
+      arr[0] = arr[0].toUpperCase()
+      return arr.join('')
+    })*/
+
+    let str2 = 'good good study day day up'
+    let reg2 = /\b([a-zA-Z])[a-zA-Z]+\b/g
+    let r2 = str2.replace(reg2,function(big,...arg){
+      let [arg1] = arg
+      return arg1.toUpperCase() + big.substring(1)
+    })
+    console.log(r2);
+
+</script>
+</body>
+</html>

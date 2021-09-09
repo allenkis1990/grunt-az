@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style scoped lang="postcss">
+    .report-bg {
+        width: 100%;
+        background: red;
+        position: relative;
+    }
+
+    .report-header {
+          margin: 0 auto;
+          height: 0.35rem;
+          display:flex;
+          justify-content: space-between;}
+    .left-content {
+          position: relative;
+    }
+    img {
+        width: 0.35rem;
+        height: 0.35rem;
+    }
+    .header-title {
+          height: 0.3rem;
+          font-size: 0.21rem;
+          font-family: PingFang-SC-Medium, PingFang-SC;
+          font-weight: 500;
+          color: #FFFFFF;
+          line-height: 0.3rem;
+      }
+    .right-content {
+          width: 0.77rem;
+          height: 0.34rem;
+          background: #A66CFC;
+          border-radius: 0.22rem;
+          opacity: 0.37;
+      }
+
+    .report-content {
+          margin: 0 auto;
+          background-color: #ffffff;
+          width:5.42rem;
+          height: 11.33rem;
+      }
+
+</style>
+<body>
+<div class="report-bg">
+    <div class="report-header">
+      <span class="left-content">
+        <img src="./images/afei.jpg">
+      </span>
+        <span class="header-title">U1L1 My School Learning Report</span>
+        <span class="right-content"></span>
+    </div>
+    <div class="report-content"></div>
+</div>
+<script>
+    /*//动态设置html的font-size ----start
+    let designWidth = 750;
+    let baseNum = 100;
+    function setRootFontSize() {
+        let winWidth = document.documentElement.clientWidth || document.body.clientWidth;
+        let winHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        let html = document.getElementsByTagName('html')[0];
+        let frameBili
+        if(winWidth>winHeight){
+            frameBili = 4/3
+        }else{
+            frameBili = 3/4.5
+        }
+        let b = frameBili/(winWidth/winHeight)
+        let realW = parseInt(winWidth * b)
+        // console.log(realW,3333333333333);
+
+
+        html.style.fontSize = (realW / designWidth) * baseNum + 'px';
+        console.log(html.style.fontSize);
+    }
+    setRootFontSize();
+    window.addEventListener('resize',(e)=>{
+        setRootFontSize();
+    })
+    //动态设置html的font-size ----end*/
+    let designWidth = 750;
+    let baseNum = 100;
+    function setRootFontSize() {
+        let winWidth = document.documentElement.clientWidth || document.body.clientWidth;
+        let html = document.getElementsByTagName('html')[0];
+        html.style.fontSize = (winWidth / designWidth) * baseNum + 'px';
+        console.log(html.style.fontSize);
+    }
+    setRootFontSize();
+
+    window.addEventListener('resize',(e)=>{
+        setRootFontSize();
+    })
+</script>
+</body>
+</html>

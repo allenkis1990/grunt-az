@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let str1 = 'look'
+    let str2 = 'l00k'
+    let reg1 = /[a-zA-Z]([a-zA-Z])\1[a-zA-Z]/i //\1代表第1个分组
+    let reg2 = /([a-zA-Z])(\d+)\2[a-zA-Z]/i//\2代表第1个分组
+    console.log(str1.match(reg1));
+    console.log(str2.match(reg2));
+</script>
+</body>
+</html>

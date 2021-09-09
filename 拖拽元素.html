@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .main{width: 500px;height: 500px;background: red}
+    </style>
+</head>
+<body>
+<div class="main"></div>
+<script>
+
+    //禁止浏览器打开图片行为
+    //必须先禁止浏览器默认行为
+    document.addEventListener("drop", function (e) {  //拖离
+        e.preventDefault();
+    })
+    document.addEventListener("dragleave", function (e) {  //拖后放
+        e.preventDefault();
+    })
+    document.addEventListener("dragenter", function (e) {  //拖进
+        e.preventDefault();
+    });
+    document.addEventListener("dragover", function (e) {  //拖来拖去
+        e.preventDefault();
+    })
+
+    let box = document.querySelector('.main')
+    box.addEventListener('drop',(e)=>{
+        console.log(111);
+    })
+
+</script>
+</body>
+</html>
